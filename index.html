@@ -685,7 +685,7 @@
       background: #F8FAFC;
     }
 
-    /* Modern Soft Inputs & Textareas */
+    /* Modern Soft Inputs & Textareas (13.5px Unified Font Size with Placeholders) */
     textarea.kpi-input {
       width: 100%;
       min-height: 52px;
@@ -694,7 +694,8 @@
       border-radius: 8px;
       color: #0F172A;
       font-family: inherit;
-      font-size: 15px;
+      font-size: 13.5px;
+      font-weight: 500;
       line-height: 1.55;
       padding: 10px 14px;
       resize: vertical;
@@ -722,7 +723,8 @@
       border-radius: 8px;
       color: #0F172A;
       font-family: inherit;
-      font-size: 15px;
+      font-size: 13.5px;
+      font-weight: 500;
       line-height: 1.55;
       padding: 8px 14px;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -743,10 +745,10 @@
 
     textarea.kpi-input::placeholder {
       color: #94A3B8;
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 400;
       font-style: normal;
-      line-height: 1.45;
+      line-height: 1.55;
       white-space: pre-wrap;
       opacity: 0.75;
       transition: opacity 0.2s ease;
@@ -754,9 +756,10 @@
 
     input.kpi-input::placeholder {
       color: #94A3B8;
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 400;
       font-style: normal;
+      line-height: 1.55;
       opacity: 0.75;
       transition: opacity 0.2s ease;
     }
@@ -4077,25 +4080,8 @@
     let appState = loadState();
 
     function loadState() {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      let parsed = null;
-      if (saved) {
-        try {
-          parsed = JSON.parse(saved);
-        } catch (e) {
-          console.error("Failed to parse saved state", e);
-        }
-      }
-      if (!parsed) {
-        return createInitialState();
-      }
-      // Ensure all teams structure exist without forcing presets into empty inputs
-      Object.keys(TEAM_METADATA).forEach(tId => {
-        if (!parsed.teams[tId]) {
-          parsed.teams[tId] = createInitialState().teams[tId];
-        }
-      });
-      return parsed;
+      // User requirement: 항상 빈값 초기화를 눌렀을 때 상태(모든 입력창이 빈값이고 흐릿한 예시가 보이는 상태)에서 시작
+      return createInitialState();
     }
 
     function saveState() {
@@ -4904,91 +4890,21 @@
         if (!res.ok) throw new Error(`Airtable fetch failed: ${res.status}`);
         const data = await res.json();
 
+        // Register team record IDs for subsequent saves, but preserve clean empty initial state
         (data.records || []).forEach(record => {
           const tId = record.fields['조직 코드 (Team ID)'];
-          if (tId && appState.teams[tId]) {
+          if (tId) {
             AIRTABLE_CONFIG.teamRecordMap[tId] = record.id;
-            const rawJson = record.fields['전체 데이터 (Raw JSON)'];
-            if (rawJson) {
-              try {
-                const parsed = JSON.parse(rawJson);
-                appState.teams[tId] = { ...appState.teams[tId], ...parsed };
-              } catch(e) { console.error('Raw JSON parse failed', e); }
-            } else {
-              const isSaved = (record.fields['작성 상태 (Status)'] === '저장 완료');
-              appState.teams[tId].isSaved = isSaved;
-              appState.teams[tId].savedAt = record.fields['최종 저장 일시 (Saved At)'] || '';
-              if (record.fields['핵심 미션 (Leader Role)']) appState.teams[tId].leaderRole = record.fields['핵심 미션 (Leader Role)'];
-              if (record.fields['역할 및 미션 상세 (Role Description)']) appState.teams[tId].roleDesc = record.fields['역할 및 미션 상세 (Role Description)'];
-              if (record.fields['결과지표 항목명 (Result Metric)']) appState.teams[tId].resultKpi.name = record.fields['결과지표 항목명 (Result Metric)'];
-              if (record.fields['결과지표 목표치 (Result Target)']) appState.teams[tId].resultKpi.target = record.fields['결과지표 목표치 (Result Target)'];
-              if (record.fields['결과지표 단위 (Result Unit)']) appState.teams[tId].resultKpi.unit = record.fields['결과지표 단위 (Result Unit)'];
-              if (record.fields['결과지표 선정 이유 (Result Reason)']) appState.teams[tId].resultKpi.reason = record.fields['결과지표 선정 이유 (Result Reason)'];
-              if (record.fields['결과지표 달성 기준 (Result Criteria)']) appState.teams[tId].resultKpi.desc = record.fields['결과지표 달성 기준 (Result Criteria)'];
-            }
-
-            // Do not force presets on empty inputs so faint placeholders remain visible!
-            // Only normalize legacy unit if already filled
-            const curUnit = appState.teams[tId].resultKpi.unit;
-            const defaultPreset = TEAM_METADATA[tId].preset.result;
-            if (appState.teams[tId].resultKpi.name && (curUnit === "%" || curUnit === "억원")) {
-              appState.teams[tId].resultKpi.unit = defaultPreset.unit;
-              appState.teams[tId].resultKpi.target = defaultPreset.target;
-            }
           }
-        });
-
-        saveState(false);
-        renderSummary();
-
-        // Update active inputs if present
-        Object.keys(TEAM_METADATA).forEach(tId => {
-          const tData = appState.teams[tId];
-          const roleLeaderEl = document.getElementById(`role-leader-${tId}`);
-          if (roleLeaderEl && tData.leaderRole) roleLeaderEl.value = tData.leaderRole;
-          const roleDescEl = document.getElementById(`role-desc-${tId}`);
-          if (roleDescEl && tData.roleDesc) roleDescEl.value = tData.roleDesc;
-
-          const resNameEl = document.getElementById(`res-name-${tId}`);
-          if (resNameEl && tData.resultKpi.name) resNameEl.value = tData.resultKpi.name;
-          const resTargetEl = document.getElementById(`res-target-${tId}`);
-          if (resTargetEl && tData.resultKpi.target) resTargetEl.value = tData.resultKpi.target;
-          const resUnitEl = document.getElementById(`res-unit-${tId}`);
-          if (resUnitEl && tData.resultKpi.unit) resUnitEl.value = tData.resultKpi.unit;
-          const resReasonEl = document.getElementById(`res-reason-${tId}`);
-          if (resReasonEl && tData.resultKpi.reason) resReasonEl.value = tData.resultKpi.reason;
-          const resDescEl = document.getElementById(`res-desc-${tId}`);
-          if (resDescEl && tData.resultKpi.desc) resDescEl.value = tData.resultKpi.desc;
-
-          if (tData.isSaved) {
-            const btnSave = document.getElementById(`btn-save-${tId}`);
-            if (btnSave) btnSave.style.display = 'none';
-            const btnEdit = document.getElementById(`btn-edit-${tId}`);
-            if (btnEdit) btnEdit.style.display = 'inline-flex';
-            const statusBadge = document.getElementById(`status-badge-${tId}`);
-            if (statusBadge) {
-              statusBadge.className = 'status-badge saved';
-              statusBadge.innerText = `저장 완료 (${tData.savedAt || '저장됨'})`;
-            }
-            const sec = document.getElementById(`page-${tId}`);
-            if (sec) {
-              sec.classList.remove('mode-editing');
-              sec.classList.add('mode-saved');
-              sec.querySelectorAll('textarea.kpi-input, input.kpi-input').forEach(inp => inp.setAttribute('readonly', 'true'));
-            }
-          }
-          renderProcess1Rows(tId);
-          renderProcess2Rows(tId);
-          updateWeightTotalsUI(tId);
         });
 
         if (statusEl && textEl) {
           statusEl.classList.add('synced');
-          textEl.innerText = 'Airtable 동기화 완료 (실시간)';
+          textEl.innerText = 'Airtable 연동 준비 완료';
         }
       } catch (err) {
         console.error('fetchStateFromAirtable error:', err);
-        if (textEl) textEl.innerText = 'Airtable 캐시 모드';
+        if (textEl) textEl.innerText = 'Airtable 오프라인 모드';
       }
     }
 
