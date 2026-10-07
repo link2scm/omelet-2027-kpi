@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2027 오믈렛 전사 KPI 성과관리 체계 — 팀장 자율 세팅 및 종합 대시보드 (v12)</title>
+  <title>2027 오믈렛 전사 KPI 성과관리 체계 — 팀리더 자율 세팅 및 종합 대시보드 (v12)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -3525,23 +3525,7 @@
             <div class="chain-badge-role bm-role">Talent & Operations</div>
           </div>
 
-          <!-- CLOSED-LOOP RETURN SUMMARY BAR (서로가 묶여서 돌아가는 순환 피드백 고리) -->
-          <div class="chain-loop-bar" id="chain-node-loop">
-            <div class="loop-badge">
-              <span class="loop-icon">🔄</span>
-              <span>Closed-Loop Flywheel Architecture</span>
-            </div>
-            <div class="loop-items-wrap">
-              <div class="loop-item loop-to-rd">
-                <span class="loop-target">PB ➔ R&D Feedback:</span>
-                <span class="loop-desc">Operational field telemetry & edge-case data return to <b>continuously refine Core Solver & OCP specifications</b> (Asset Accumulation)</span>
-              </div>
-              <div class="loop-item loop-to-bd">
-                <span class="loop-target">PB ➔ BD Growth Loop:</span>
-                <span class="loop-desc">Proven customer operational benchmarks drive <b>annual SaaS renewals & cross-vertical enterprise pipeline expansion</b></span>
-              </div>
-            </div>
-          </div>
+
         </div>
       </div>
 
@@ -4365,7 +4349,7 @@
        4. RENDER TEAM DETAIL PAGES (Pages 2 ~ 6) - ACCORDION SYSTEM (0~3번)
        ------------------------------------------------------------- */
     const NARRATIVE_TEXTS = {
-      0: (tId) => "오믈렛의 2027 전사 전략 방향(Operational Intelligence Alignment)에 입각하여, 우리 팀이 올해 반드시 완수해야 할 핵심 미션과 구체적인 역할 범위를 팀장이 1줄 요약과 세부 내용으로 명확히 정의합니다.",
+      0: (tId) => "오믈렛의 2027 전사 전략 방향(Operational Intelligence Alignment)에 입각하여, 우리 팀이 올해 반드시 완수해야 할 핵심 미션과 구체적인 역할 범위를 팀리더가 1줄 요약과 세부 내용으로 명확히 정의합니다.",
       1: (tId) => "결과지표는 팀 전원이 원팀으로 긴밀히 협업하여 만들어내는 연간 최상위 사업 결실(50점 고정)로, 달성 결과는 팀원 전원에게 100% 균등하게 귀속됩니다. 단순한 매출액 숫자는 배제하며, 실제 현장 가치를 입증하는 유효 프로젝트 건수(BD 50건, PS 25건, PB 12건, BM 50건, R&D 10건)를 최우선 목표치로 설정합니다. 평가는 연간 목표 대비 100% 초과(S), 90% 이상(A), 70% 이상(B), 50% 이상(C), 50% 미만(D)의 절대평가 척도로 확정됩니다.",
       2: (tId) => "성과지표 I은 결과지표 달성을 위한 정량적 목표 설정(20점 고정)입니다. 결과지표와 직접 이어지는 일상 실무의 정량 선행 행동량을 5개 지표(각 4점, 총 20점)로 구체화하여 공정하게 평가합니다.",
       3: (tId) => "성과지표 II는 결과지표 달성을 위한 정성적 역량 설정(30점 고정)입니다. 주도적 업무태도, 전문 소통, 타 부서 협업, 업무 완결성, 조직 기여도의 5대 핵심 역량을 5개 영역(각 6점, 총 30점)으로 객관적으로 평가합니다."
@@ -4533,7 +4517,7 @@
               <div class="accordion-title-left">
                 <span class="accordion-step-num">0</span>
                 <span class="accordion-title-text">조직 핵심 미션 및 역할 범위</span>
-                <span class="accordion-score-badge">팀장 직접 작성</span>
+                <span class="accordion-score-badge">팀리더 직접 작성</span>
               </div>
               <div class="accordion-toggle-right">
                 <span id="accordion-toggle-txt-${tId}-0">펼치기</span>
@@ -5559,9 +5543,8 @@
       const bd = document.getElementById('chain-node-bd');
       const ps = document.getElementById('chain-node-ps');
       const pb = document.getElementById('chain-node-pb');
-      const loopBar = document.getElementById('chain-node-loop');
       const bm = document.getElementById('chain-node-bm');
-      const nodes = [rd, bd, ps, pb, loopBar, bm].filter(Boolean);
+      const nodes = [rd, bd, ps, pb, bm].filter(Boolean);
 
       if (!nodes.length) return;
 
@@ -5574,10 +5557,9 @@
         else if (step === 1 && bd) bd.classList.add('glow');
         else if (step === 2 && ps) ps.classList.add('glow');
         else if (step === 3 && pb) pb.classList.add('glow');
-        else if (step === 4 && loopBar) loopBar.classList.add('glow');
-        else if (step === 5 && bm) bm.classList.add('glow');
+        else if (step === 4 && bm) bm.classList.add('glow');
 
-        step = (step + 1) % 6;
+        step = (step + 1) % 5;
       }
 
       if (cycleTimer) clearInterval(cycleTimer);
