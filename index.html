@@ -4431,6 +4431,65 @@
       box-shadow: 0 1px 4px rgba(34, 31, 27, 0.03) !important;
     }
 
+  
+    /* ===================================================================
+       v27 BUSINESS FOCUS DELIVERABLES & COLOR HIGHLIGHT (#BA5A3A)
+       =================================================================== */
+    .deliv-biz-focus {
+      color: #BA5A3A !important;
+      font-weight: 800 !important;
+      font-size: 13px !important;
+      letter-spacing: -0.01em;
+    }
+    .deliv-label {
+      font-size: 11px !important;
+      font-weight: 800 !important;
+      color: #78716C !important;
+      letter-spacing: 0.04em;
+    }
+    .chain-bar-deliverable {
+      margin-top: 8px;
+      background: rgba(255, 255, 255, 0.65) !important;
+      backdrop-filter: blur(8px) !important;
+      -webkit-backdrop-filter: blur(8px) !important;
+      border: none !important;
+      border-radius: 7px;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .chain-all-focus-banner {
+      background: rgba(255, 255, 255, 0.7) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      border: none !important;
+      border-radius: 8px;
+      padding: 10px 18px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 1px 4px rgba(34, 31, 27, 0.03);
+    }
+    .chain-all-focus-banner .focus-tag {
+      background: #BA5A3A !important;
+      color: #FFFFFF !important;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .chain-all-focus-banner .focus-desc {
+      font-size: 13.5px;
+      color: #221F1B;
+      line-height: 1.45;
+    }
+
   </style>
 
 </head>
@@ -4444,7 +4503,7 @@
         <div class="brand-logo">
           <span class="dot"></span>
           <span>OMELET · 2027 KPI GOVERNANCE</span>
-          <span class="brand-v-pill">v26</span>
+          <span class="brand-v-pill">v27</span>
         </div>
       </div>
 
@@ -4585,6 +4644,14 @@
            =================================================================== -->
       <div class="guidebook-section-label" style="margin-top:12px;">ENTERPRISE VALUE CHAIN PIPELINE (5대 핵심 조직 연계 체계)</div>
       
+      <div class="chain-all-focus-banner">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="focus-tag">ONE-TEAM BUSINESS FOCUS</span>
+          <span class="focus-desc">R&D부터 BD · PS · PB · BM까지 5대 전 조직의 모든 산출물과 역량은 <strong class="deliv-biz-focus">실질적인 사업(Business) 수주와 혁신 성장</strong>에 100% Focus 됩니다.</span>
+        </div>
+        <div style="font-size:12px;color:#78716C;font-weight:700;white-space:nowrap;">100점 절대평가 원팀 거버넌스</div>
+      </div>
+
       <div class="chain-outer-wrap">
         <div class="chain-diagram-frame" id="flowDiagramFrame">
           <!-- CEO Center Top Pill Badge -->
@@ -4607,10 +4674,14 @@
               <div class="chain-avatar rd-avatar">R&D</div>
               <div class="chain-bar-title-wrap">
                 <div class="chain-bar-title" style="display:flex;align-items:center;gap:10px;">
-                <span>기술과 지능 인프라를 만든다</span>
-                <span class="chain-target-tag rd-tag">10건 <small>(자율선정)</small></span>
-              </div>
+                  <span>기술과 지능 인프라를 만든다</span>
+                  <span class="chain-target-tag rd-tag">10건 <small>(자율선정)</small></span>
+                </div>
                 <div class="chain-bar-sub">AI 최적화 Core Solver 원천 연구 · 알고리즘 표준 API/SDK 공급 · 원천기술 자산화 및 국가 R&D 총괄</div>
+                <div class="chain-bar-deliverable">
+                  <span class="deliv-label">핵심 산출물 · 사업 연계</span>
+                  <span class="deliv-val"><strong class="deliv-biz-focus">[혁신 사업 성장 견인 10건 (자율선정)]</strong> 신기술을 선도하여 전사 혁신적 사업 성장에 기여하는 Core Solver 원천 연구 및 자산화</span>
+                </div>
               </div>
             </div>
             <div class="chain-badge-role rd-role">Core Engine & AI Infra</div>
@@ -4676,8 +4747,8 @@
               <div class="pipeline-role-name">사업 기회 발굴 & 파이프라인 개척</div>
               <p class="pipeline-desc">산업 현장의 복잡한 운영 병목 진단 · PoC 발굴 · 고객 페인포인트 정의 및 신규 사업 기회 개척</p>
               <div class="pipeline-deliverable">
-                <span class="deliv-label">핵심 산출물</span>
-                <span class="deliv-val">검증된 비즈니스 기회 & 고객 문제 정의</span>
+                <span class="deliv-label">핵심 산출물 · 사업 연계</span>
+                <span class="deliv-val"><strong class="deliv-biz-focus">[사업 수주 직결 50건]</strong> 고객 페인포인트 정의 및 검증된 유상 비즈니스 기회 발굴</span>
               </div>
             </div>
 
@@ -4707,8 +4778,8 @@
               <div class="pipeline-role-name">문제해결 & 최적화 수리 모델링</div>
               <p class="pipeline-desc">수학적 최적화 수리 모델링 · 데이터 실사 분석 · 고객 맞춤형 최적화 알고리즘 도출 및 지능화 컨설팅</p>
               <div class="pipeline-deliverable">
-                <span class="deliv-label">핵심 산출물</span>
-                <span class="deliv-val">수리 최적화 Solver & 검증 알고리즘</span>
+                <span class="deliv-label">핵심 산출물 · 사업 연계</span>
+                <span class="deliv-val"><strong class="deliv-biz-focus">[사업 수주 견인 25건]</strong> 수학적 수리 최적화 Solver 도출 및 고객 맞춤형 검증 알고리즘</span>
               </div>
             </div>
 
@@ -4738,8 +4809,8 @@
               <div class="pipeline-role-name">제품화 & SaaS 시스템 구현</div>
               <p class="pipeline-desc">도출된 Solver를 고객이 매일 실사용하는 완성형 웹/API 시스템화 · SaaS 제품 구현 및 현장 운영 안정화</p>
               <div class="pipeline-deliverable">
-                <span class="deliv-label">핵심 산출물</span>
-                <span class="deliv-val">실운영 SaaS 솔루션 & 현장 운영 체계</span>
+                <span class="deliv-label">핵심 산출물 · 사업 연계</span>
+                <span class="deliv-val"><strong class="deliv-biz-focus">[사업 계약 완성 12건]</strong> 고객 현장 실운영 완성형 웹/SaaS 솔루션 및 운영 안정화 체계</span>
               </div>
             </div>
           </div>
@@ -4788,10 +4859,14 @@
               <div class="chain-avatar bm-avatar">BM</div>
               <div class="chain-bar-title-wrap">
                 <div class="chain-bar-title" style="display:flex;align-items:center;gap:10px;">
-                <span>사업을 관리·지원한다</span>
-                <span class="chain-target-tag">50건</span>
-              </div>
+                  <span>사업을 관리·지원한다</span>
+                  <span class="chain-target-tag">50건</span>
+                </div>
                 <div class="chain-bar-sub"><b>전사 핵심인재 발굴 및 적재적소 공급(채용·퇴사율/이직률 관리)</b> · 재무·회계 결산 · 계약 법무 리스크 검토 · R&D 정부과제 정산 및 전사 인프라 총괄</div>
+                <div class="chain-bar-deliverable">
+                  <span class="deliv-label">핵심 산출물 · 사업 연계</span>
+                  <span class="deliv-val"><strong class="deliv-biz-focus">[사업 수주 완결 지원 50건]</strong> 프로젝트 전방위 지원을 통한 사업수주 기여 (인사/인재채용 · 계약/법무 리스크 사전방어 · 행정/재무 총괄)</span>
+                </div>
               </div>
             </div>
             <div class="chain-badge-role bm-role">Talent & Operations</div>
