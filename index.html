@@ -4693,7 +4693,7 @@
           <!-- ===================================================================
                ACCORDION 0: 핵심 미션 및 역할 범위
                =================================================================== -->
-          <div class="accordion-card open" id="accordion-card-${tId}-0">
+          <div class="accordion-card" id="accordion-card-${tId}-0">
             <div class="accordion-header" onclick="toggleAccordionSection('${tId}', 0)">
               <div class="accordion-title-left">
                 <span class="accordion-step-num">0</span>
@@ -4701,7 +4701,7 @@
                 <span class="accordion-score-badge">팀장 직접 작성</span>
               </div>
               <div class="accordion-toggle-right">
-                <span id="accordion-toggle-txt-${tId}-0">접기</span>
+                <span id="accordion-toggle-txt-${tId}-0">펼치기</span>
                 <span class="accordion-chevron">▾</span>
               </div>
             </div>
@@ -4730,7 +4730,7 @@
           <!-- ===================================================================
                ACCORDION 1: 결과지표 세팅 (팀 공동 연간 최상위 사업 결실 50점 고정)
                =================================================================== -->
-          <div class="accordion-card open" id="accordion-card-${tId}-1">
+          <div class="accordion-card" id="accordion-card-${tId}-1">
             <div class="accordion-header" onclick="toggleAccordionSection('${tId}', 1)">
               <div class="accordion-title-left">
                 <span class="accordion-step-num">1</span>
@@ -4738,7 +4738,7 @@
                 <span class="accordion-score-badge highlight">50점 고정</span>
               </div>
               <div class="accordion-toggle-right">
-                <span id="accordion-toggle-txt-${tId}-1">접기</span>
+                <span id="accordion-toggle-txt-${tId}-1">펼치기</span>
                 <span class="accordion-chevron">▾</span>
               </div>
             </div>
@@ -4792,7 +4792,7 @@
           <!-- ===================================================================
                ACCORDION 2: 성과지표 I 세팅 (결과지표 견인 5대 선행 행동 20점 고정)
                =================================================================== -->
-          <div class="accordion-card open" id="accordion-card-${tId}-2">
+          <div class="accordion-card" id="accordion-card-${tId}-2">
             <div class="accordion-header" onclick="toggleAccordionSection('${tId}', 2)">
               <div class="accordion-title-left">
                 <span class="accordion-step-num">2</span>
@@ -4800,7 +4800,7 @@
                 <span class="accordion-score-badge">20점 고정 (각 4점)</span>
               </div>
               <div class="accordion-toggle-right">
-                <span id="accordion-toggle-txt-${tId}-2">접기</span>
+                <span id="accordion-toggle-txt-${tId}-2">펼치기</span>
                 <span class="accordion-chevron">▾</span>
               </div>
             </div>
@@ -4844,7 +4844,7 @@
           <!-- ===================================================================
                ACCORDION 3: 성과지표 II 세팅 (5대 정성 핵심 역량 30점 고정)
                =================================================================== -->
-          <div class="accordion-card open" id="accordion-card-${tId}-3">
+          <div class="accordion-card" id="accordion-card-${tId}-3">
             <div class="accordion-header" onclick="toggleAccordionSection('${tId}', 3)">
               <div class="accordion-title-left">
                 <span class="accordion-step-num">3</span>
@@ -4852,7 +4852,7 @@
                 <span class="accordion-score-badge">30점 고정 (각 6점)</span>
               </div>
               <div class="accordion-toggle-right">
-                <span id="accordion-toggle-txt-${tId}-3">접기</span>
+                <span id="accordion-toggle-txt-${tId}-3">펼치기</span>
                 <span class="accordion-chevron">▾</span>
               </div>
             </div>
@@ -4899,17 +4899,8 @@
         updateWeightTotalsUI(tId);
       });
 
-      // Initialize typewriter for accordion open sections
-      Object.keys(TEAM_METADATA).forEach(tId => {
-        // Run typewriter for section 1 (Result KPI) on first render
-        const targetElemId = `typewriter-${tId}-1`;
-        const textFn = NARRATIVE_TEXTS[1];
-        if (textFn) {
-          runTypewriter(targetElemId, textFn(tId), 12);
-        }
-        // Fill full text for 0, 2, 3 so it's readable immediately when open
-        [0, 2, 3].forEach(idx => completeTypewriter(tId, idx));
-      });
+      // Default state: all sections are collapsed initially
+      // When user clicks any section header, toggleAccordionSection expands it and triggers typewriter!
     }
 
     function renderProcess1Rows(tId) {
