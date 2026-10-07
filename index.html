@@ -204,11 +204,10 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(62, 65, 71, 0.96);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--color-powder-slate);
-      padding: 12px 0;
+      background: #FFFFFF;
+      border-bottom: 1.5px solid #E2E8F0;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05);
+      padding: 10px 0;
       width: 100%;
     }
 
@@ -232,50 +231,53 @@
     }
 
     .brand-logo {
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 800;
       letter-spacing: -0.02em;
-      color: #3E4147;
+      color: #0F172A;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     .brand-logo .dot {
-      width: 7px;
-      height: 7px;
-      background: var(--color-deep-ink);
+      width: 8px;
+      height: 8px;
+      background: #8B5CF6;
       border-radius: 50%;
     }
 
     .brand-v-pill {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
-      color: var(--color-deep-ink);
-      background: var(--color-ice-tint);
-      border: 1px solid var(--color-powder-slate);
-      padding: 2px 7px;
+      color: #475569;
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      padding: 2px 8px;
       border-radius: 4px;
       letter-spacing: 0.02em;
     }
 
     /* Sculpted Segmented Dock Navigation Track */
-    .tab-nav {
+    .tab-nav.bookmark-index-nav {
+      margin-left: auto;
       display: inline-flex;
       align-items: center;
-      gap: 2px;
-      background: transparent;
-      padding: 0;
-      border: none;
+      gap: 4px;
+      background: #F1F5F9;
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid #CBD5E1;
+      overflow-x: auto;
     }
 
     .tab-btn {
       background: transparent;
       border: 1px solid transparent;
-      color: var(--color-dark-slate);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 6px 12px;
+      color: #475569;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 6px 14px;
       border-radius: 6px;
       cursor: pointer;
       display: inline-flex;
@@ -286,32 +288,31 @@
     }
 
     .tab-btn:hover {
-      color: var(--color-deep-ink);
-      background: var(--color-ice-tint);
+      color: #0F172A;
+      background: rgba(255, 255, 255, 0.7);
     }
 
     .tab-btn.active {
-      color: var(--color-deep-ink);
+      color: #0F172A;
       font-weight: 800;
-      background: var(--color-ice-tint);
-      border: 1px solid var(--color-powder-slate);
-      box-shadow: 0 1px 3px rgba(62, 65, 71, 0.06);
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     }
 
     .tab-indicator-dot {
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: var(--color-deep-ink);
       display: inline-block;
     }
 
+    .tab-btn.active .tab-indicator-dot {
+      background: #8B5CF6;
+    }
+
     .tab-btn:not(.active) .tab-indicator-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--color-deep-ink);
-      display: inline-block;
+      background: #94A3B8;
     }
 
     .team-tab-badge {
@@ -3169,47 +3170,7 @@
       line-height: 1.5;
     }
 
-    /* Bookmark Index Tab Navigation (Thin Line Based) */
-    .tab-nav.bookmark-index-nav {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      background: transparent;
-      padding: 0;
-      border: none;
-      box-shadow: none;
-      overflow-x: auto;
-    }
 
-    .tab-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--color-dark-slate);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.15s ease;
-      white-space: nowrap;
-    }
-
-    .tab-btn:hover {
-      color: var(--color-deep-ink);
-      background: var(--color-ice-tint);
-    }
-
-    .tab-btn.active {
-      color: var(--color-deep-ink);
-      font-weight: 800;
-      background: var(--color-ice-tint);
-      border: 1px solid var(--color-powder-slate);
-      box-shadow: 0 1px 3px rgba(62, 65, 71, 0.06);
-    }
 
     /* Weight validation badge */
     .weight-total-badge {
@@ -3338,57 +3299,7 @@
     }
 
   
-    /* Cloud Sync Badges (Airtable & Google Sheets) */
-    .cloud-sync-group {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .airtable-sync-badge, .gsheet-sync-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 9px;
-      border-radius: 12px;
-      background: rgba(226, 234, 244, 0.18);
-      color: #BCCADB;
-      border: 1px solid rgba(188, 202, 219, 0.3);
-      transition: all 0.2s ease;
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .airtable-sync-badge:hover, .gsheet-sync-badge:hover {
-      background: rgba(226, 234, 244, 0.3);
-      color: #FFFFFF;
-    }
-    .airtable-sync-badge.synced {
-      background: rgba(60, 174, 163, 0.22);
-      color: #A3E6D5;
-      border-color: rgba(60, 174, 163, 0.45);
-    }
-    .gsheet-sync-badge.synced {
-      background: rgba(52, 168, 83, 0.22);
-      color: #A8F0B8;
-      border-color: rgba(52, 168, 83, 0.45);
-    }
-    .sync-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #BCCADB;
-      display: inline-block;
-    }
-    .airtable-sync-badge.synced .sync-dot {
-      background: #3CAEA3;
-      box-shadow: 0 0 6px #3CAEA3;
-    }
-    .gsheet-sync-badge.synced .sync-dot {
-      background: #34A853;
-      box-shadow: 0 0 6px #34A853;
-    }
+
 
   </style>
 
@@ -3404,16 +3315,6 @@
           <span class="dot"></span>
           <span>OMELET · 2027 KPI GOVERNANCE</span>
           <span class="brand-v-pill">v12</span>
-        </div>
-        <div class="cloud-sync-group">
-          <a href="https://airtable.com/appdF5ETllb7X4jU1/tbl7YNvxCkjbAasyu/viwbGaCCHSXgnc4fX?blocks=hide" target="_blank" class="airtable-sync-badge" id="airtableSyncStatus" title="Airtable Base (2027_전사_KPI_성과관리) 실시간 연동 (클릭 시 에어테이블로 이동)">
-            <span class="sync-dot"></span>
-            <span id="airtableSyncText">Airtable</span>
-          </a>
-          <a href="https://docs.google.com/spreadsheets/d/1J5OTpZlyFP-rnutY8mYAYP1mz3U726smtTz5u09lnO0/edit?usp=sharing" target="_blank" class="gsheet-sync-badge" id="gsheetSyncStatus" title="Google Spreadsheet (Omelet-KPI-Setup) 실시간 동시 연동 (클릭 시 구글 시트 이동)">
-            <span class="sync-dot gsheet-dot"></span>
-            <span id="gsheetSyncText">Google 시트 동시 연동</span>
-          </a>
         </div>
       </div>
 
