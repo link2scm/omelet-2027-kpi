@@ -4041,6 +4041,35 @@
       font-weight: 600;
     }
 
+  
+    /* Value Chain Target Count Tags (부사장님 지정 수치) */
+    .chain-target-tag {
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 13.5px;
+      font-weight: 800;
+      padding: 2.5px 9px;
+      border-radius: 6px;
+      background: #EAE5DB;
+      border: 1px solid #DCD6CA;
+      color: #221F1B;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 3px;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .chain-target-tag small {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #6E665B;
+    }
+
+    .chain-target-tag.rd-tag {
+      background: #E6E2D8;
+      border-color: #DCD6CA;
+    }
+
   </style>
 
 </head>
@@ -4216,7 +4245,10 @@
             <div class="chain-bar-left">
               <div class="chain-avatar rd-avatar">R&D</div>
               <div class="chain-bar-title-wrap">
-                <div class="chain-bar-title">기술과 지능 인프라를 만든다</div>
+                <div class="chain-bar-title" style="display:flex;align-items:center;gap:10px;">
+                <span>기술과 지능 인프라를 만든다</span>
+                <span class="chain-target-tag rd-tag">10건 <small>(자율선정)</small></span>
+              </div>
                 <div class="chain-bar-sub">AI 최적화 Core Solver 원천 연구 · 알고리즘 표준 API/SDK 공급 · 원천기술 자산화 및 국가 R&D 총괄</div>
               </div>
             </div>
@@ -4274,7 +4306,10 @@
                 <div class="chain-avatar bd-avatar">BD</div>
                 <div>
                   <div class="pipeline-step-tag bd-tag">VALUE CHAIN 01</div>
-                  <div class="pipeline-title">사업을 만든다</div>
+                  <div class="pipeline-title" style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                  <span>사업을 만든다</span>
+                  <span class="chain-target-tag">50건</span>
+                </div>
                 </div>
               </div>
               <div class="pipeline-role-name">사업 기회 발굴 & 파이프라인 개척</div>
@@ -4302,7 +4337,10 @@
                 <div class="chain-avatar ps-avatar">PS</div>
                 <div>
                   <div class="pipeline-step-tag ps-tag">VALUE CHAIN 02</div>
-                  <div class="pipeline-title">지능을 만든다</div>
+                  <div class="pipeline-title" style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                  <span>지능을 만든다</span>
+                  <span class="chain-target-tag">25건</span>
+                </div>
                 </div>
               </div>
               <div class="pipeline-role-name">문제해결 & 최적화 수리 모델링</div>
@@ -4330,7 +4368,10 @@
                 <div class="chain-avatar pb-avatar">PB</div>
                 <div>
                   <div class="pipeline-step-tag pb-tag">VALUE CHAIN 03</div>
-                  <div class="pipeline-title">제품을 구현한다</div>
+                  <div class="pipeline-title" style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                  <span>제품을 구현한다</span>
+                  <span class="chain-target-tag">12건</span>
+                </div>
                 </div>
               </div>
               <div class="pipeline-role-name">제품화 & SaaS 시스템 구현</div>
@@ -4385,7 +4426,10 @@
             <div class="chain-bar-left">
               <div class="chain-avatar bm-avatar">BM</div>
               <div class="chain-bar-title-wrap">
-                <div class="chain-bar-title">사업을 관리·지원한다</div>
+                <div class="chain-bar-title" style="display:flex;align-items:center;gap:10px;">
+                <span>사업을 관리·지원한다</span>
+                <span class="chain-target-tag">50건</span>
+              </div>
                 <div class="chain-bar-sub"><b>전사 핵심인재 발굴 및 적재적소 공급(채용·퇴사율/이직률 관리)</b> · 재무·회계 결산 · 계약 법무 리스크 검토 · R&D 정부과제 정산 및 전사 인프라 총괄</div>
               </div>
             </div>
@@ -4396,62 +4440,6 @@
         </div>
       </div>
       <div style="margin-bottom:36px;"></div>
-
-      <!-- ===================================================================
-           4. PRO MOVES: KPI 수립 4대 행동 원칙 (첨부 이미지의 다크 패널 1:1)
-           =================================================================== -->
-      <div class="pro-moves-panel">
-        <div class="pro-moves-header">
-          <span>💡 PRO MOVES — KPI 수립 4대 행동 원칙</span>
-        </div>
-        <div class="pro-moves-grid">
-          <!-- Move 1 -->
-          <div class="pro-move-col">
-            <span class="pro-move-icon">🎯</span>
-            <div class="pro-move-title">선행 행동 직결</div>
-            <div class="pro-move-desc">
-              결과지표와 무관한 단순 잡무는 배제하고, 실제 사업 결실로 이어지는 <b>선행 행동량</b>에 집중합니다.
-            </div>
-          </div>
-
-          <!-- Move 2 -->
-          <div class="pro-move-col">
-            <span class="pro-move-icon">🤝</span>
-            <div class="pro-move-title">원팀 공동 귀속</div>
-            <div class="pro-move-desc">
-              결과지표 50점은 <b>팀원 전원에게 균등 귀속</b>되므로 부서 간 사일로를 타파하고 원팀으로 협력합니다.
-            </div>
-          </div>
-
-          <!-- Move 3 -->
-          <div class="pro-move-col">
-            <span class="pro-move-icon">📐</span>
-            <div class="pro-move-title">명확한 산식</div>
-            <div class="pro-move-desc">
-              성과지표 I은 자의적 해석을 배제하고 누구나 객관적으로 납득할 수 있는 <b>측정 기준과 산식</b>을 확정합니다.
-            </div>
-          </div>
-
-          <!-- Move 4 -->
-          <div class="pro-move-col">
-            <span class="pro-move-icon">🔒</span>
-            <div class="pro-move-title">거버넌스 준수</div>
-            <div class="pro-move-desc">
-              결과 50점 + 성과I 20점 + 성과II 30점의 <b>100점 절대평가 틀</b>과 전사 고정 수치를 엄격히 준수합니다.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ===================================================================
-           5. BOTTOM LINE: 결론 및 핵심 메시지 (첨부 이미지 최하단 1:1)
-           =================================================================== -->
-      <div class="bottom-line-wrap">
-        <span class="bottom-line-label">BOTTOM LINE</span>
-        <div class="bottom-line-headline">You don't need complicated metrics.</div>
-        <div class="bottom-line-sub">You need clear leading action and one-team alignment.</div>
-        <div class="bottom-line-korean">✦ 팀원 각자의 개인별 50점 일상 실행이, 팀 전체의 50점 최상위 사업 결실을 완성합니다.</div>
-      </div>
 
     </section>
 
