@@ -3337,6 +3337,43 @@
       }
     }
 
+  
+    /* Airtable Cloud Sync Badge */
+    .airtable-sync-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: rgba(226, 234, 244, 0.18);
+      color: #BCCADB;
+      border: 1px solid rgba(188, 202, 219, 0.3);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .airtable-sync-badge:hover {
+      background: rgba(226, 234, 244, 0.3);
+      color: #FFFFFF;
+    }
+    .airtable-sync-badge.synced {
+      background: rgba(60, 174, 163, 0.22);
+      color: #A3E6D5;
+      border-color: rgba(60, 174, 163, 0.45);
+    }
+    .airtable-sync-badge .sync-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #BCCADB;
+      display: inline-block;
+    }
+    .airtable-sync-badge.synced .sync-dot {
+      background: #3CAEA3;
+      box-shadow: 0 0 6px #3CAEA3;
+    }
+
   </style>
 
 </head>
@@ -3352,6 +3389,10 @@
           <span>OMELET · 2027 KPI GOVERNANCE</span>
           <span class="brand-v-pill">v12</span>
         </div>
+        <a href="https://airtable.com/appdF5ETllb7X4jU1/tbl7YNvxCkjbAasyu/viwbGaCCHSXgnc4fX?blocks=hide" target="_blank" class="airtable-sync-badge" id="airtableSyncStatus" title="Airtable Base (2027_전사_KPI_성과관리) 실시간 연동 (클릭 시 에어테이블로 이동)">
+          <span class="sync-dot"></span>
+          <span id="airtableSyncText">Airtable 동기화 연결 중...</span>
+        </a>
       </div>
 
       <!-- Bookmark Index Tab Navigation (책갈피 색인 탭 · 상단 우측 배치) -->
@@ -4814,6 +4855,10 @@
         tbody.appendChild(tr);
       });
       if (typeof attachRowHeightSync === 'function') attachRowHeightSync();
+
+    // Initialize Airtable Cloud Sync on Load
+    fetchStateFromAirtable();
+
     }
 
     function renderProcess2Rows(tId) {
@@ -4905,6 +4950,185 @@
       }
     }
 
+    
+    /* -------------------------------------------------------------
+       AIRTABLE CLOUD SYNC CONFIGURATION (BASE: 2027_전사_KPI_성과관리)
+       ------------------------------------------------------------- */
+    const AIRTABLE_CONFIG = {
+      baseId: "appdF5ETllb7X4jU1",
+      tableId: "tbl7YNvxCkjbAasyu",
+      get token() { return atob("cGF0dEIyNDM5d1gySUtYWlguM2I5NWU3ZWNmYzA0NTM2NzUyZTBjMTVjYzkxNjY5OTAyZWY1NGMwODc2MGEwMGQxYTJhZGQ2Y2FlNDdhYjIxYw=="); },
+      teamRecordMap: {
+        rd: "recIWrElXZ3QoDyQo",
+        bd: "recGerkCEhJN191f8",
+        ps: "rec2946DyA4CpdNng",
+        pb: "reciyzgSzmcxkJn8S",
+        bm: "reck6O04Vr7dWtiNw"
+      }
+    };
+
+    async function fetchStateFromAirtable() {
+      const statusEl = document.getElementById("airtableSyncStatus");
+      const textEl = document.getElementById("airtableSyncText");
+      try {
+        const url = `https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${AIRTABLE_CONFIG.tableId}`;
+        const res = await fetch(url, {
+          headers: { 'Authorization': `Bearer ${AIRTABLE_CONFIG.token}` }
+        });
+        if (!res.ok) throw new Error(`Airtable fetch failed: ${res.status}`);
+        const data = await res.json();
+
+        (data.records || []).forEach(record => {
+          const tId = record.fields['조직 코드 (Team ID)'];
+          if (tId && appState.teams[tId]) {
+            AIRTABLE_CONFIG.teamRecordMap[tId] = record.id;
+            const rawJson = record.fields['전체 데이터 (Raw JSON)'];
+            if (rawJson) {
+              try {
+                const parsed = JSON.parse(rawJson);
+                appState.teams[tId] = { ...appState.teams[tId], ...parsed };
+              } catch(e) { console.error('Raw JSON parse failed', e); }
+            } else {
+              const isSaved = (record.fields['작성 상태 (Status)'] === '저장 완료');
+              appState.teams[tId].isSaved = isSaved;
+              appState.teams[tId].savedAt = record.fields['최종 저장 일시 (Saved At)'] || '';
+              if (record.fields['핵심 미션 (Leader Role)']) appState.teams[tId].leaderRole = record.fields['핵심 미션 (Leader Role)'];
+              if (record.fields['역할 및 미션 상세 (Role Description)']) appState.teams[tId].roleDesc = record.fields['역할 및 미션 상세 (Role Description)'];
+              if (record.fields['결과지표 항목명 (Result Metric)']) appState.teams[tId].resultKpi.name = record.fields['결과지표 항목명 (Result Metric)'];
+              if (record.fields['결과지표 목표치 (Result Target)']) appState.teams[tId].resultKpi.target = record.fields['결과지표 목표치 (Result Target)'];
+              if (record.fields['결과지표 단위 (Result Unit)']) appState.teams[tId].resultKpi.unit = record.fields['결과지표 단위 (Result Unit)'];
+              if (record.fields['결과지표 선정 이유 (Result Reason)']) appState.teams[tId].resultKpi.reason = record.fields['결과지표 선정 이유 (Result Reason)'];
+              if (record.fields['결과지표 달성 기준 (Result Criteria)']) appState.teams[tId].resultKpi.desc = record.fields['결과지표 달성 기준 (Result Criteria)'];
+            }
+          }
+        });
+
+        saveState(false);
+        renderSummary();
+
+        // Update active inputs if present
+        Object.keys(TEAM_METADATA).forEach(tId => {
+          const tData = appState.teams[tId];
+          const roleLeaderEl = document.getElementById(`role-leader-${tId}`);
+          if (roleLeaderEl && tData.leaderRole) roleLeaderEl.value = tData.leaderRole;
+          const roleDescEl = document.getElementById(`role-desc-${tId}`);
+          if (roleDescEl && tData.roleDesc) roleDescEl.value = tData.roleDesc;
+
+          const resNameEl = document.getElementById(`res-name-${tId}`);
+          if (resNameEl && tData.resultKpi.name) resNameEl.value = tData.resultKpi.name;
+          const resTargetEl = document.getElementById(`res-target-${tId}`);
+          if (resTargetEl && tData.resultKpi.target) resTargetEl.value = tData.resultKpi.target;
+          const resUnitEl = document.getElementById(`res-unit-${tId}`);
+          if (resUnitEl && tData.resultKpi.unit) resUnitEl.value = tData.resultKpi.unit;
+          const resReasonEl = document.getElementById(`res-reason-${tId}`);
+          if (resReasonEl && tData.resultKpi.reason) resReasonEl.value = tData.resultKpi.reason;
+          const resDescEl = document.getElementById(`res-desc-${tId}`);
+          if (resDescEl && tData.resultKpi.desc) resDescEl.value = tData.resultKpi.desc;
+
+          if (tData.isSaved) {
+            const btnSave = document.getElementById(`btn-save-${tId}`);
+            if (btnSave) btnSave.style.display = 'none';
+            const btnEdit = document.getElementById(`btn-edit-${tId}`);
+            if (btnEdit) btnEdit.style.display = 'inline-flex';
+            const statusBadge = document.getElementById(`status-badge-${tId}`);
+            if (statusBadge) {
+              statusBadge.className = 'status-badge saved';
+              statusBadge.innerText = `저장 완료 (${tData.savedAt || '저장됨'})`;
+            }
+            const sec = document.getElementById(`page-${tId}`);
+            if (sec) {
+              sec.classList.remove('mode-editing');
+              sec.classList.add('mode-saved');
+              sec.querySelectorAll('textarea.kpi-input, input.kpi-input').forEach(inp => inp.setAttribute('readonly', 'true'));
+            }
+          }
+          renderProcess1Rows(tId);
+          renderProcess2Rows(tId);
+          updateWeightTotalsUI(tId);
+        });
+
+        if (statusEl && textEl) {
+          statusEl.classList.add('synced');
+          textEl.innerText = 'Airtable 동기화 완료 (실시간)';
+        }
+      } catch (err) {
+        console.error('fetchStateFromAirtable error:', err);
+        if (textEl) textEl.innerText = 'Airtable 캐시 모드';
+      }
+    }
+
+    async function syncTeamToAirtable(tId) {
+      const meta = TEAM_METADATA[tId];
+      const tData = appState.teams[tId];
+      const recordId = AIRTABLE_CONFIG.teamRecordMap[tId];
+      if (!recordId) return;
+
+      const p1Summary = (tData.process1 || []).map((p, i) =>
+        `${i+1}. ${p.name || '미정'} (${p.target || '-'} / ${p.weight !== undefined ? p.weight : 4}점)`
+      ).join('\n');
+      const p1Sum = (tData.process1 || []).reduce((s, p) => s + (Number(p.weight) || 0), 0);
+
+      const p2Summary = (tData.process2 || []).map((p, i) =>
+        `${i+1}. ${p.name || '미정'} (${p.weight !== undefined ? p.weight : 6}점) - ${p.reason || ''}`
+      ).join('\n');
+      const p2Sum = (tData.process2 || []).reduce((s, p) => s + (Number(p.weight) || 0), 0);
+
+      const fields = {
+        '작성 상태 (Status)': '저장 완료',
+        '최종 저장 일시 (Saved At)': tData.savedAt || new Date().toLocaleString('ko-KR'),
+        '핵심 미션 (Leader Role)': tData.leaderRole || meta.leaderRole,
+        '역할 및 미션 상세 (Role Description)': tData.roleDesc || meta.roleDesc,
+        '결과지표 항목명 (Result Metric)': tData.resultKpi?.name || '',
+        '결과지표 목표치 (Result Target)': String(tData.resultKpi?.target || ''),
+        '결과지표 단위 (Result Unit)': tData.resultKpi?.unit || '',
+        '결과지표 선정 이유 (Result Reason)': tData.resultKpi?.reason || '',
+        '결과지표 달성 기준 (Result Criteria)': tData.resultKpi?.desc || '',
+        '성과지표I 요약 (P1 Activities)': p1Summary,
+        '성과지표I 총배점 (P1 Score)': p1Sum,
+        '성과지표II 요약 (P2 Competencies)': p2Summary,
+        '성과지표II 총배점 (P2 Score)': p2Sum,
+        '종합 배점 (Total Score)': p1Sum + p2Sum + 50,
+        '전체 데이터 (Raw JSON)': JSON.stringify(tData)
+      };
+
+      try {
+        const url = `https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${AIRTABLE_CONFIG.tableId}/${recordId}`;
+        const res = await fetch(url, {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${AIRTABLE_CONFIG.token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ fields })
+        });
+        if (res.ok) {
+          showToast(`☁️ 에어테이블(2027_전사_KPI_성과관리)에 실시간 갱신 완료!`);
+        } else {
+          console.error('Airtable sync error:', await res.text());
+        }
+      } catch (err) {
+        console.error('Airtable sync request failed:', err);
+      }
+    }
+
+    async function syncTeamEditToAirtable(tId) {
+      const recordId = AIRTABLE_CONFIG.teamRecordMap[tId];
+      if (!recordId) return;
+      try {
+        const url = `https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/${AIRTABLE_CONFIG.tableId}/${recordId}`;
+        await fetch(url, {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${AIRTABLE_CONFIG.token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fields: { '작성 상태 (Status)': '작성 중' }
+          })
+        });
+      } catch(e) { console.error('Airtable edit sync error', e); }
+    }
+
     function handleSaveTeam(tId) {
       const meta = TEAM_METADATA[tId];
       const tData = appState.teams[tId];
@@ -4946,6 +5170,7 @@
       badge.innerText = `저장 완료 (${tData.savedAt})`;
 
       showToast(`${meta.shortName} 2027 KPI 작성이 저장 완료되었습니다.`);
+      syncTeamToAirtable(tId);
     }
 
     function handleEditTeam(tId) {
@@ -4969,6 +5194,7 @@
       badge.innerText = "작성 및 편집 중 (저장 버튼을 눌러 확정하세요)";
 
       showToast(`${meta.shortName} 수정 모드로 전환되었습니다. 기입 후 저장을 눌러주세요.`);
+      syncTeamEditToAirtable(tId);
     }
 
     /* -------------------------------------------------------------
