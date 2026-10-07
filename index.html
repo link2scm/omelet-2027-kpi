@@ -3680,6 +3680,367 @@
       border-color: #221F1B !important;
     }
 
+  
+    /* ===================================================================
+       CLAUDE DESIGN GUIDEBOOK / CHEAT SHEET STYLES (첨부 이미지 1:1)
+       =================================================================== */
+    .guidebook-hero-wrap {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 32px;
+      align-items: start;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1.5px solid #DCD6CA;
+    }
+
+    @media (max-width: 960px) {
+      .guidebook-hero-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .guidebook-title-sub {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 22px;
+      color: #BA5A3A;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .guidebook-title-main {
+      font-family: 'Newsreader', 'Pretendard Variable', serif;
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1.15;
+      color: #221F1B;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .guidebook-brush-line {
+      width: 160px;
+      height: 4px;
+      background: #BA5A3A;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+
+    .guidebook-right-hero {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .guidebook-eyebrow-tag {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #6E665B;
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .guidebook-rust-card {
+      background: #BA5A3A;
+      border: 1.5px solid #221F1B;
+      border-radius: 8px;
+      padding: 18px 22px;
+      color: #FFFFFF;
+      box-shadow: 4px 4px 0px #221F1B;
+      position: relative;
+    }
+
+    .guidebook-rust-pill {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #BA5A3A;
+      background: #FFFFFF;
+      padding: 2.5px 9px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .guidebook-rust-text {
+      font-size: 14.5px;
+      line-height: 1.6;
+      font-weight: 500;
+      color: #FFFFFF;
+      word-break: keep-all;
+    }
+
+    .guidebook-rust-text b {
+      font-weight: 800;
+      color: #FFF2EA;
+    }
+
+    /* 3-Tier Workflow Rows */
+    .guidebook-section-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #6E665B;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .guidebook-section-label::before {
+      content: '';
+      width: 10px;
+      height: 2px;
+      background: #BA5A3A;
+    }
+
+    .guidebook-rows-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .guidebook-row {
+      display: grid;
+      grid-template-columns: 50px 70px 1.2fr 1fr;
+      align-items: center;
+      gap: 20px;
+      background: #FAF8F5;
+      border: 1px solid #DCD6CA;
+      border-radius: 8px;
+      padding: 16px 22px;
+      transition: all 0.2s ease;
+    }
+
+    @media (max-width: 1100px) {
+      .guidebook-row {
+        grid-template-columns: 50px 70px 1fr;
+      }
+      .guidebook-row .guidebook-example-box {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .guidebook-row:hover {
+      border-color: #221F1B;
+      box-shadow: 2px 2px 0px rgba(34, 31, 27, 0.08);
+    }
+
+    .guidebook-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      border: 1px solid #DCD6CA;
+      background: #EAE5DB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .guidebook-row-num {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 38px;
+      font-weight: 800;
+      color: #BA5A3A;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .guidebook-row-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .guidebook-row-title {
+      font-size: 17.5px;
+      font-weight: 800;
+      color: #221F1B;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .guidebook-row-badge {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #221F1B;
+      color: #FFFFFF;
+    }
+
+    .guidebook-row-badge.p-badge {
+      background: #EAE5DB;
+      color: #221F1B;
+      border: 1px solid #DCD6CA;
+    }
+
+    .guidebook-row-desc {
+      font-size: 14px;
+      color: #5C554D;
+      line-height: 1.5;
+    }
+
+    .guidebook-example-box {
+      background: #EAE5DB;
+      border: 1px solid #DCD6CA;
+      border-radius: 6px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .guidebook-example-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: #BA5A3A;
+      text-transform: uppercase;
+    }
+
+    .guidebook-example-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: #221F1B;
+      line-height: 1.45;
+    }
+
+    /* Pro Moves Panel */
+    .pro-moves-panel {
+      border: 1.5px solid #221F1B;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 36px;
+      background: #FAF8F5;
+      box-shadow: 4px 4px 0px rgba(34, 31, 27, 0.08);
+    }
+
+    .pro-moves-header {
+      background: #221F1B;
+      color: #FFFFFF;
+      padding: 10px 20px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pro-moves-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 960px) {
+      .pro-moves-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .pro-moves-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pro-move-col {
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-right: 1px solid #DCD6CA;
+      box-sizing: border-box;
+    }
+
+    .pro-move-col:last-child {
+      border-right: none;
+    }
+
+    .pro-move-icon {
+      font-size: 24px;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+
+    .pro-move-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #221F1B;
+      letter-spacing: -0.01em;
+    }
+
+    .pro-move-desc {
+      font-size: 13.5px;
+      color: #5C554D;
+      line-height: 1.5;
+    }
+
+    .pro-move-desc b {
+      color: #221F1B;
+    }
+
+    /* Bottom Line Banner */
+    .bottom-line-wrap {
+      padding: 24px 0 10px 0;
+      border-top: 1px dashed #DCD6CA;
+    }
+
+    .bottom-line-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #BA5A3A;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .bottom-line-headline {
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: #221F1B;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    .bottom-line-sub {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-size: 23px;
+      font-weight: 600;
+      color: #BA5A3A;
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .bottom-line-korean {
+      font-size: 14.5px;
+      color: #5C554D;
+      font-weight: 600;
+    }
+
   </style>
 
 </head>
@@ -3741,90 +4102,99 @@
          PAGE 1: 작성 개요 (Setup Overview & Causal Governance Guide)
          =================================================================== -->
                 <section id="page-overview" class="page-view active">
-      <!-- Top Executive Header -->
-      <div class="overview-hero-bar">
-        <div class="overview-hero-left">
-          <div class="page-eyebrow">EXECUTIVE GOVERNANCE OVERVIEW · 2027</div>
-          <h1 class="page-title">2027 오믈렛 KPI 성과 거버넌스 체계 <span class="title-rust">Overview</span></h1>
-          
-          <!-- High-Impact Pastel Gray Highlight Banner (핵심 거버넌스 1회 명료 요약) -->
-          <div class="pastel-gray-highlight">
-            ✦ 팀원 각자의 <b>개인별 실행 50점</b>(성과지표 I·II)이 팀 최상위 결실 <b>50점</b>(결과지표 · <b>전원 균등 귀속</b>)을 완성합니다.
+
+      <!-- ===================================================================
+           1. TOP HERO HEADER: CLAUDE DESIGN POSTER STYLE (How to Setup Omelet KPI)
+           =================================================================== -->
+      <div class="guidebook-hero-wrap">
+        <!-- Left: Titles -->
+        <div class="guidebook-left-hero">
+          <span class="guidebook-title-sub">How to Setup</span>
+          <h1 class="guidebook-title-main">2027 Omelet<br>KPI Governance.</h1>
+          <div class="guidebook-brush-line"></div>
+        </div>
+
+        <!-- Right: What It Does / Core Governance Block -->
+        <div class="guidebook-right-hero">
+          <div class="guidebook-eyebrow-tag">THE 100-POINT ABSOLUTE EVALUATION ARCHITECTURE.</div>
+          <div class="guidebook-rust-card">
+            <span class="guidebook-rust-pill">CORE GOVERNANCE</span>
+            <div class="guidebook-rust-text">
+              팀원 각자의 <b>개인별 실행 50점</b>(성과지표 I·II)이 팀 최상위 결실 <b>50점</b>(결과지표 · <b>전원 균등 귀속</b>)을 완성하여 100점 절대평가를 확정합니다.
+            </div>
           </div>
         </div>
       </div>
 
       <!-- ===================================================================
-           1. MOTION GRAPHIC ENTERPRISE VALUE CHAIN DIAGRAM (첨부 도식 원형 복원)
+           2. THE 3-TIER KPI STRUCTURE (첨부 이미지의 01, 02, 03 행 카드 레이아웃)
            =================================================================== -->
-
-      <!-- ===================================================================
-           1. SECTION: 100점 절대평가 인과 거버넌스 및 3대 핵심 지표 (제일 상단 배치)
-           =================================================================== -->
-      <div class="overview-section-divider first-section">
-        <h2 class="divider-title">2027 KPI 100점 절대평가 인과 거버넌스</h2>
-        <p class="divider-desc">
-          개인별 실행 50점이 팀 공동 결실 50점을 완성하는 직결 구조입니다.
-        </p>
-      </div>
-
-      <!-- 3-Metric Clean Causal Stage -->
-      <div class="clean-causal-stage">
-
-        <!-- METRIC 1: 성과지표 I (20점 - 개인별 정량적 목표) -->
-        <div class="clean-metric-card metric-p1">
-          <div class="metric-top-pill">개인 실행 · 20점</div>
-          <div class="metric-score">20<span class="score-unit">점</span></div>
-          <div class="metric-name">성과지표 I</div>
-          <div class="metric-role">결과지표 달성을 위한 개인별 정량적 목표 설정</div>
-          <div class="metric-keywords">SLA 준수 · 선행 행동량 · 사전 검증</div>
-        </div>
-
-        <!-- PLUS JUNCTION -->
-        <div class="clean-junction-plus">
-          <span class="junction-plus-symbol">＋</span>
-          <span class="junction-plus-label">개인 50점</span>
-        </div>
-
-        <!-- METRIC 2: 성과지표 II (30점 - 개인별 정성적 역량) -->
-        <div class="clean-metric-card metric-p2">
-          <div class="metric-top-pill">개인 역량 · 30점</div>
-          <div class="metric-score">30<span class="score-unit">점</span></div>
-          <div class="metric-name">성과지표 II</div>
-          <div class="metric-role">결과지표 달성을 위한 개인별 정성적 역량 설정</div>
-          <div class="metric-keywords">주도성 · 직무 전문성 · 원팀 협업 · 완결성</div>
-        </div>
-
-        <!-- CAUSAL ARROW BRIDGE -->
-        <div class="clean-causal-bridge">
-          <div class="bridge-tag">필연적 인과 견인</div>
-          <div class="bridge-track">
-            <div class="bridge-arrow">➔</div>
+      <div class="guidebook-section-label">THE 3-TIER KPI STRUCTURE (100점 절대평가 로드맵)</div>
+      
+      <div class="guidebook-rows-wrap">
+        <!-- Row 01: 결과지표 (50점) -->
+        <div class="guidebook-row">
+          <div class="guidebook-icon-box">🏆</div>
+          <div class="guidebook-row-num">01</div>
+          <div class="guidebook-row-content">
+            <div class="guidebook-row-title">
+              <span>결과지표 (Result KPI)</span>
+              <span class="guidebook-row-badge">팀 50점 · 전원 균등 귀속</span>
+            </div>
+            <div class="guidebook-row-desc">
+              단순 매출액을 배제하고 실질적인 현장 가치를 입증하는 프로젝트 완결 건수 (팀원 전원에게 100% 동일하게 균등 귀속)
+            </div>
           </div>
-          <div class="bridge-sub">개인 50점 ➔ 팀 균등 귀속 50점</div>
+          <div class="guidebook-example-box">
+            <span class="guidebook-example-label">2027 전사 고정 수치</span>
+            <div class="guidebook-example-text">"BD 50건 · PS 25건 · PB 12건 · BM 50건 (R&D 자율)"</div>
+          </div>
         </div>
 
-        <!-- METRIC 3: 결과지표 (50점 - 팀 공동 사업 결실) -->
-        <div class="clean-metric-card metric-res">
-          <div class="metric-top-pill">팀원 전원 100% 균등 귀속</div>
-          <div class="metric-score">50<span class="score-unit">점</span></div>
-          <div class="metric-name">결과지표</div>
-          <div class="metric-role">팀 최상위 사업 결실 · 전원 균등 귀속</div>
-          <div class="metric-keywords">BD 50건 · PS 25건 · PB 12건 · BM 50건 (R&D 자율)</div>
+        <!-- Row 02: 성과지표 I (20점) -->
+        <div class="guidebook-row">
+          <div class="guidebook-icon-box">📋</div>
+          <div class="guidebook-row-num">02</div>
+          <div class="guidebook-row-content">
+            <div class="guidebook-row-title">
+              <span>성과지표 I (Leading Performance)</span>
+              <span class="guidebook-row-badge p-badge">개인 20점 (5개 지표 × 4점)</span>
+            </div>
+            <div class="guidebook-row-desc">
+              결과지표를 달성하기 위해 개인이 일상에서 반드시 완수해야 하는 선행 행동량과 SLA 기준을 명확히 설정
+            </div>
+          </div>
+          <div class="guidebook-example-box">
+            <span class="guidebook-example-label">개인별 정량 설정 기준</span>
+            <div class="guidebook-example-text">"고객사 미팅 15회, Solver 알고리즘 검증 5건, 표준 API 패키징 배포 등"</div>
+          </div>
         </div>
 
+        <!-- Row 03: 성과지표 II (30점) -->
+        <div class="guidebook-row">
+          <div class="guidebook-icon-box">🧭</div>
+          <div class="guidebook-row-num">03</div>
+          <div class="guidebook-row-content">
+            <div class="guidebook-row-title">
+              <span>성과지표 II (Core Competency)</span>
+              <span class="guidebook-row-badge p-badge">개인 30점 (5대 영역 × 6점)</span>
+            </div>
+            <div class="guidebook-row-desc">
+              결과지표를 뒷받침하는 개개인의 핵심 역량, 주도성, 원팀 협업 태도를 객관적 행동 기준으로 설정
+            </div>
+          </div>
+          <div class="guidebook-example-box">
+            <span class="guidebook-example-label">5대 핵심 역량 영역</span>
+            <div class="guidebook-example-text">"주도성(태도) · 전문소통 · 원팀 협업 · 완결성 · 조직기여 (각 6점)"</div>
+          </div>
+        </div>
       </div>
 
       <!-- ===================================================================
-           2. MOTION GRAPHIC ENTERPRISE VALUE CHAIN DIAGRAM (5대 조직 가치사슬)
+           3. 5대 핵심 조직 유기적 가치사슬 흐름도 (ENTERPRISE VALUE CHAIN)
            =================================================================== -->
-      <div class="overview-section-divider">
-        <h2 class="divider-title">2027 오믈렛 5대 핵심 가치사슬 흐름도</h2>
-        <p class="divider-desc">
-          R&D 원천기술 인프라에서 BD 사업개발 ➔ PS 수리최적화 ➔ PB 제품 구현으로 이어지는 사업 파이프라인과 BM의 경영·운영 지원 체계입니다.
-        </p>
-      </div>
-
+      <div class="guidebook-section-label" style="margin-top:12px;">ENTERPRISE VALUE CHAIN PIPELINE (5대 핵심 조직 연계 체계)</div>
+      
       <div class="chain-outer-wrap">
         <div class="chain-diagram-frame" id="flowDiagramFrame">
           <!-- CEO Center Top Pill Badge -->
@@ -4025,10 +4395,63 @@
 
         </div>
       </div>
+      <div style="margin-bottom:36px;"></div>
 
       <!-- ===================================================================
-           2. SECTION: 100점 절대평가 인과 거버넌스 및 3대 핵심 지표 (ULTRA-CLEAN)
+           4. PRO MOVES: KPI 수립 4대 행동 원칙 (첨부 이미지의 다크 패널 1:1)
            =================================================================== -->
+      <div class="pro-moves-panel">
+        <div class="pro-moves-header">
+          <span>💡 PRO MOVES — KPI 수립 4대 행동 원칙</span>
+        </div>
+        <div class="pro-moves-grid">
+          <!-- Move 1 -->
+          <div class="pro-move-col">
+            <span class="pro-move-icon">🎯</span>
+            <div class="pro-move-title">선행 행동 직결</div>
+            <div class="pro-move-desc">
+              결과지표와 무관한 단순 잡무는 배제하고, 실제 사업 결실로 이어지는 <b>선행 행동량</b>에 집중합니다.
+            </div>
+          </div>
+
+          <!-- Move 2 -->
+          <div class="pro-move-col">
+            <span class="pro-move-icon">🤝</span>
+            <div class="pro-move-title">원팀 공동 귀속</div>
+            <div class="pro-move-desc">
+              결과지표 50점은 <b>팀원 전원에게 균등 귀속</b>되므로 부서 간 사일로를 타파하고 원팀으로 협력합니다.
+            </div>
+          </div>
+
+          <!-- Move 3 -->
+          <div class="pro-move-col">
+            <span class="pro-move-icon">📐</span>
+            <div class="pro-move-title">명확한 산식</div>
+            <div class="pro-move-desc">
+              성과지표 I은 자의적 해석을 배제하고 누구나 객관적으로 납득할 수 있는 <b>측정 기준과 산식</b>을 확정합니다.
+            </div>
+          </div>
+
+          <!-- Move 4 -->
+          <div class="pro-move-col">
+            <span class="pro-move-icon">🔒</span>
+            <div class="pro-move-title">거버넌스 준수</div>
+            <div class="pro-move-desc">
+              결과 50점 + 성과I 20점 + 성과II 30점의 <b>100점 절대평가 틀</b>과 전사 고정 수치를 엄격히 준수합니다.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           5. BOTTOM LINE: 결론 및 핵심 메시지 (첨부 이미지 최하단 1:1)
+           =================================================================== -->
+      <div class="bottom-line-wrap">
+        <span class="bottom-line-label">BOTTOM LINE</span>
+        <div class="bottom-line-headline">You don't need complicated metrics.</div>
+        <div class="bottom-line-sub">You need clear leading action and one-team alignment.</div>
+        <div class="bottom-line-korean">✦ 팀원 각자의 개인별 50점 일상 실행이, 팀 전체의 50점 최상위 사업 결실을 완성합니다.</div>
+      </div>
 
     </section>
 
