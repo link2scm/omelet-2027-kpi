@@ -758,87 +758,154 @@
     }
 
     /* ===================================================================
-       SETTING STEP TABS & EXPANDER (ACCORDION COLLAPSE SYSTEM)
+       ACCORDION SECTION SYSTEM (0번 ~ 3번 개별 접힘/펼침 시스템)
        =================================================================== */
-    .setting-step-tabs {
+    .accordion-controls {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 28px;
-      padding: 6px;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .accordion-control-btn {
       background: #F8FAFC;
       border: 1px solid #E2E8F0;
-      border-radius: 12px;
-      overflow-x: auto;
-      width: 100%;
-      box-sizing: border-box;
+      color: #64748B;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .step-tab-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: #64748B;
-      font-size: 15px;
-      font-weight: 700;
-      padding: 10px 18px;
-      border-radius: 8px;
+    .accordion-control-btn:hover {
+      background: #FFFFFF;
+      color: #0F172A;
+      border-color: #CBD5E1;
+    }
+
+    .accordion-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .accordion-card:hover {
+      border-color: #CBD5E1;
+    }
+
+    .accordion-card.open {
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+    }
+
+    .accordion-header {
+      padding: 16px 22px;
+      background: #FAFAFA;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .accordion-card.open .accordion-header {
+      background: #F8FAFC;
+      border-bottom-color: #E2E8F0;
+    }
+
+    .accordion-header:hover {
+      background: #F1F5F9;
+    }
+
+    .accordion-title-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .accordion-step-num {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      white-space: nowrap;
-      user-select: none;
-    }
-
-    .step-tab-btn:hover {
-      color: #0F172A;
-      background: rgba(255, 255, 255, 0.85);
-    }
-
-    .step-tab-btn.active {
-      color: #0F172A;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #0F172A;
+      color: #FFFFFF;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
       font-weight: 800;
-      background: #FFFFFF;
-      border-color: #CBD5E1;
-      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
     }
 
-    .step-tab-num {
+    .accordion-title-text {
+      font-size: 17px;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.3px;
+    }
+
+    .accordion-score-badge {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12.5px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+
+    .accordion-score-badge.highlight {
+      background: #0F172A;
+      color: #FFFFFF;
+    }
+
+    .accordion-toggle-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #64748B;
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+
+    .accordion-chevron {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: #E2E8F0;
-      color: #0F172A;
-      font-family: 'Space Grotesk', sans-serif;
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
       font-size: 12px;
-      font-weight: 800;
-      transition: all 0.2s ease;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .step-tab-btn.active .step-tab-num {
-      background: #0F172A;
-      color: #FFFFFF;
+    .accordion-card.open .accordion-chevron {
+      transform: rotate(180deg);
     }
 
-    .step-score-badge {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
-      font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 4px;
-      background: #F1F5F9;
-      color: #475569;
-      border: 1px solid #E2E8F0;
+    .accordion-body {
+      display: none;
+      padding: 24px;
+      background: #FFFFFF;
     }
 
-    .step-tab-btn.active .step-score-badge {
-      background: #0F172A;
-      color: #FFFFFF;
-      border-color: #0F172A;
+    .accordion-card.open .accordion-body {
+      display: block;
+      animation: accordionFadeIn 0.25s ease;
+    }
+
+    @keyframes accordionFadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Narrative Typewriter Box */
@@ -3779,7 +3846,7 @@
           result: {
             name: "연간 유상 프로젝트 수주 계약 건수 (신규 고객사 프로젝트 확보)",
             reason: "단순 매출액 규모보다 산업 도메인별 실질 유효 프로젝트 수주 건수 및 레퍼런스 확장이 최우선 핵심 지표",
-            target: "12",
+            target: "50",
             unit: "건",
             desc: "목표 대비 100% 초과 S, 90% A, 70% B, 50% C, 50% 미만 D"
           },
@@ -3864,10 +3931,10 @@
         footnote: "",
         preset: {
           result: {
-            name: "프로젝트 적기 납품 및 고객 검수 승인율",
-            reason: "현장 문제 해결을 완결하여 고객 신뢰를 확보하고 2차 확장 수주를 견인",
-            target: "100",
-            unit: "%",
+            name: "유효 프로젝트 현장 최적화 실증 및 성공 완결 건수",
+            reason: "수주된 유효 프로젝트를 성공적으로 완결하여 실제 고객사 현장 비용 절감 효과를 입증하고 2차 확장을 견인",
+            target: "25",
+            unit: "건",
             desc: "목표 대비 100% 초과 S, 90% A, 70% B, 50% C, 50% 미만 D"
           },
           p1: [
@@ -3951,10 +4018,10 @@
         footnote: "",
         preset: {
           result: {
-            name: "상용 제품 정기 릴리즈 및 서비스 SLA 99.9% 보증",
-            reason: "반복 가능한 SaaS 제품으로 SI 체질을 탈피하고 플랫폼 규모의 경제 달성",
-            target: "99.9",
-            unit: "%",
+            name: "표준 최적화 솔루션 상용 패키징 및 고객사 제품 릴리즈 건수",
+            reason: "반복 가능한 표준 SaaS 제품화로 1회성 개발을 탈피하고 고객사 상용 제품 릴리즈를 완결",
+            target: "12",
+            unit: "건",
             desc: "목표 대비 100% 초과 S, 90% A, 70% B, 50% C, 50% 미만 D"
           },
           p1: [
@@ -4038,10 +4105,10 @@
         footnote: "",
         preset: {
           result: {
-            name: "핵심 인재 리텐션 및 재무 건전성 관리",
-            reason: "사람과 자본의 안정성이 모든 기술 혁신과 수주 성장의 최종 안전판",
-            target: "95",
-            unit: "%",
+            name: "전사 50건 수주 프로젝트 계약·정산 행정 및 리스크 제로 완결 건수",
+            reason: "전사 수주 프로젝트의 계약 체결, 자금 집행, 정산 행정 및 법무 리스크를 100% 안전하게 지원 완결",
+            target: "50",
+            unit: "건",
             desc: "목표 대비 100% 초과 S, 90% A, 70% B, 50% C, 50% 미만 D"
           },
           p1: [
@@ -4160,28 +4227,39 @@
 
     function loadState() {
       const saved = localStorage.getItem(STORAGE_KEY);
+      let parsed = null;
       if (saved) {
         try {
-          return JSON.parse(saved);
+          parsed = JSON.parse(saved);
         } catch (e) {
           console.error("Failed to parse saved state", e);
         }
       }
-      // Fallback & automatic migration from older versions (v11/v06/v05)
-      const prevSaved = localStorage.getItem("OMELET_2027_KPI_STATE_V11") || localStorage.getItem("OMELET_2027_KPI_STATE_V06") || localStorage.getItem("OMELET_2027_KPI_STATE_V05");
-      if (prevSaved) {
-        try {
-          const parsed = JSON.parse(prevSaved);
-          // Auto-migrate BD result metric from revenue/억원 to project count
-          if (parsed?.teams?.bd?.resultKpi?.unit === "억원" || parsed?.teams?.bd?.resultKpi?.name?.includes("계약액")) {
-            parsed.teams.bd.resultKpi = { ...TEAM_METADATA.bd.preset.result };
+      if (!parsed) {
+        const prevSaved = localStorage.getItem("OMELET_2027_KPI_STATE_V11") || localStorage.getItem("OMELET_2027_KPI_STATE_V06") || localStorage.getItem("OMELET_2027_KPI_STATE_V05");
+        if (prevSaved) {
+          try {
+            parsed = JSON.parse(prevSaved);
+          } catch (e) {
+            console.error("Failed to parse previous state", e);
           }
-          return parsed;
-        } catch (e) {
-          console.error("Failed to parse previous state", e);
         }
       }
-      return createInitialState();
+      if (!parsed) {
+        return createInitialState();
+      }
+
+      // Auto-migrate & update presets: result metrics must be project count based
+      Object.keys(TEAM_METADATA).forEach(tId => {
+        const team = parsed.teams?.[tId];
+        const defaultPreset = TEAM_METADATA[tId].preset.result;
+        if (team) {
+          if (!team.resultKpi || !team.resultKpi.name || team.resultKpi.unit === "%" || team.resultKpi.unit === "억원" || (tId === 'bd' && team.resultKpi.target === '12') || (tId === 'ps' && team.resultKpi.unit !== '건') || (tId === 'pb' && team.resultKpi.unit !== '건') || (tId === 'bm' && team.resultKpi.unit !== '건')) {
+            team.resultKpi = { ...defaultPreset };
+          }
+        }
+      });
+      return parsed;
     }
 
     function saveState() {
@@ -4449,23 +4527,19 @@
     }
 
     /* -------------------------------------------------------------
-       4. RENDER TEAM DETAIL PAGES (Pages 2 ~ 6) - ACCORDION EXPANDER SYSTEM
+       4. RENDER TEAM DETAIL PAGES (Pages 2 ~ 6) - ACCORDION SYSTEM (0~3번)
        ------------------------------------------------------------- */
     const NARRATIVE_TEXTS = {
-      0: (tId) => "오믈렛의 2027 전사 전략 방향(Operational Intelligence Alignment)에 입각하여, 본 조직의 핵심 미션과 세부 역할을 명확히 규정하고 전사 비즈니스 가치 사슬과의 상호연동성을 확립합니다.",
-      1: (tId) => {
-        const meta = TEAM_METADATA[tId];
-        const fn = meta && meta.footnote ? ` (${meta.footnote})` : "";
-        return `결과지표는 팀 전원의 긴밀한 협업으로 완성되어 전체 구성원에게 100% 균등 귀속되는 연간 최상위 사업 결실(50점 고정)입니다. 단순 매출액은 평가에서 배제하며, 실제 현장 가치를 입증하는 유효 프로젝트 수주 및 성공 건수를 최우선으로 산정합니다. 달성도는 연간 목표 대비 100% 초과(S), 90% 이상(A), 70% 이상(B), 50% 이상(C), 50% 미만(D) 절대평가 척도로 확정됩니다.${fn}`;
-      },
-      2: (tId) => "성과지표 I은 결과지표를 단기적으로 달성하고 회사의 성장을 견인하기 위해 일상 실무에서 매일·매주 지속적으로 누적해야 하는 5대 직무 선행 실행(정량) 지표(20점 고정)입니다. 결과지표와 필연적 인과관계를 형성하는 고객 미팅, 실사 진단, 개발 배포 건수를 인당 연간 목표로 배분하여 5개 항목(각 4점)으로 공정하게 평가합니다.",
-      3: (tId) => "성과지표 II는 결과지표의 성공적 결실을 온전히 뒷받침하고 중장기적으로 회사의 지속 성장을 견인하는 5대 정성 핵심 역량(30점 고정)입니다. 주도적 업무태도, 전문 소통, 타 부서 협업, 업무 완결성, 조직 기여를 구체적인 피드백 주안점과 행동 가이드에 근거하여 5개 영역(각 6점)으로 객관적으로 평가합니다."
+      0: (tId) => "오믈렛의 2027 전사 전략 방향(Operational Intelligence Alignment)에 입각하여, 우리 팀이 올해 반드시 완수해야 할 핵심 미션과 구체적인 역할 범위를 팀장이 1줄 요약과 세부 내용으로 명확히 정의합니다.",
+      1: (tId) => "결과지표는 팀 전원이 원팀으로 긴밀히 협업하여 만들어내는 연간 최상위 사업 결실(50점 고정)로, 달성 결과는 팀원 전원에게 100% 균등하게 귀속됩니다. 단순한 매출액 숫자는 배제하며, 실제 현장 가치를 입증하는 유효 프로젝트 건수(BD 50건, PS 25건, PB 12건, BM 50건, R&D 10건)를 최우선 목표치로 설정합니다. 평가는 연간 목표 대비 100% 초과(S), 90% 이상(A), 70% 이상(B), 50% 이상(C), 50% 미만(D)의 절대평가 척도로 확정됩니다.",
+      2: (tId) => "성과지표 I은 결과지표를 단기적으로 달성하고 회사의 성장을 견인하기 위해 일상 실무에서 매일·매주 꾸준히 누적해야 하는 5대 핵심 선행 행동(정량 지표, 20점 고정)입니다. 고객 미팅, 실사 진단, 알고리즘 배포 건수 등 결과지표와 직접 이어지는 행동량을 인당 연간 목표로 배분하여 5개 항목(각 4점, 총 20점)으로 공정하게 평가합니다.",
+      3: (tId) => "성과지표 II는 결과지표의 성공을 든든하게 뒷받침하고 회사의 지속 성장을 이끄는 5대 정성 핵심 역량(30점 고정)입니다. 주도적 업무 태도, 전문적인 소통, 타 부서와의 적극적 협업, 끝까지 마치는 업무 완결성, 조직 기여도를 구체적인 행동 피드백과 평가 기준에 근거하여 5개 영역(각 6점, 총 30점)으로 객관적으로 평가합니다."
     };
 
     const typewriterTimers = {};
-    const activeSettingSection = {}; // tId -> 0, 1, 2, 3
+    const accordionState = {}; // `${tId}-${secIdx}` -> boolean
 
-    function runTypewriter(elemId, text, speed = 14) {
+    function runTypewriter(elemId, text, speed = 12) {
       if (typewriterTimers[elemId]) {
         clearInterval(typewriterTimers[elemId]);
         delete typewriterTimers[elemId];
@@ -4498,38 +4572,49 @@
       }
     }
 
-    function activateSettingSection(tId, secIdx) {
-      activeSettingSection[tId] = secIdx;
+    function toggleAccordionSection(tId, secIdx) {
+      const card = document.getElementById(`accordion-card-${tId}-${secIdx}`);
+      const toggleTxt = document.getElementById(`accordion-toggle-txt-${tId}-${secIdx}`);
+      if (!card) return;
 
-      // 1. Toggle Step Tab Buttons & Setting Blocks
+      const isOpen = card.classList.contains("open");
+      if (isOpen) {
+        card.classList.remove("open");
+        accordionState[`${tId}-${secIdx}`] = false;
+        if (toggleTxt) toggleTxt.innerText = "펼치기";
+      } else {
+        card.classList.add("open");
+        accordionState[`${tId}-${secIdx}`] = true;
+        if (toggleTxt) toggleTxt.innerText = "접기";
+
+        const targetElemId = `typewriter-${tId}-${secIdx}`;
+        const textFn = NARRATIVE_TEXTS[secIdx];
+        if (textFn) {
+          runTypewriter(targetElemId, textFn(tId), 12);
+        }
+        attachRowHeightSync(card);
+      }
+    }
+
+    function setAllAccordionSections(tId, open) {
       for (let i = 0; i <= 3; i++) {
-        const btn = document.getElementById(`step-tab-btn-${tId}-${i}`);
-        if (btn) {
-          if (i === secIdx) btn.classList.add("active");
-          else btn.classList.remove("active");
-        }
-        const block = document.getElementById(`setting-block-${tId}-${i}`);
-        if (block) {
-          if (i === secIdx) {
-            block.classList.add("active");
-          } else {
-            block.classList.remove("active");
-          }
+        const card = document.getElementById(`accordion-card-${tId}-${i}`);
+        const toggleTxt = document.getElementById(`accordion-toggle-txt-${tId}-${i}`);
+        if (!card) continue;
+        if (open) {
+          card.classList.add("open");
+          accordionState[`${tId}-${i}`] = true;
+          if (toggleTxt) toggleTxt.innerText = "접기";
+          completeTypewriter(tId, i);
+        } else {
+          card.classList.remove("open");
+          accordionState[`${tId}-${i}`] = false;
+          if (toggleTxt) toggleTxt.innerText = "펼치기";
         }
       }
-
-      // 2. Trigger Typewriter on active block
-      const targetElemId = `typewriter-${tId}-${secIdx}`;
-      const textFn = NARRATIVE_TEXTS[secIdx];
-      if (textFn) {
-        const fullText = textFn(tId);
-        runTypewriter(targetElemId, fullText, 14);
-      }
-
-      // 3. Attach Row Height Sync on visible inputs
-      const activeBlock = document.getElementById(`setting-block-${tId}-${secIdx}`);
-      if (activeBlock) {
-        attachRowHeightSync(activeBlock);
+      if (open) {
+        const page = document.getElementById(`page-${tId}`);
+        if (page) attachRowHeightSync(page);
       }
     }
 
@@ -4541,9 +4626,6 @@
         const meta = TEAM_METADATA[tId];
         const tData = appState.teams[tId];
         const isSaved = tData.isSaved;
-        if (activeSettingSection[tId] === undefined) {
-          activeSettingSection[tId] = 0; // Default to step 0
-        }
 
         const section = document.createElement("section");
         section.id = `page-${tId}`;
@@ -4602,180 +4684,212 @@
           </div>
           ` : ''}
 
-          <!-- ===================================================================
-               SETTING STEP ACCORDION TABS (Click tab to expand, collapses others)
-               =================================================================== -->
-          <div class="setting-step-tabs" id="step-tabs-${tId}">
-            <button class="step-tab-btn ${activeSettingSection[tId] === 0 ? 'active' : ''}" id="step-tab-btn-${tId}-0" onclick="activateSettingSection('${tId}', 0)">
-              <span class="step-tab-num">0</span>
-              <span>조직 핵심 미션</span>
-              <span class="step-score-badge">직접 작성</span>
-            </button>
-            <button class="step-tab-btn ${activeSettingSection[tId] === 1 ? 'active' : ''}" id="step-tab-btn-${tId}-1" onclick="activateSettingSection('${tId}', 1)">
-              <span class="step-tab-num">1</span>
-              <span>결과지표 세팅</span>
-              <span class="step-score-badge">50점 고정</span>
-            </button>
-            <button class="step-tab-btn ${activeSettingSection[tId] === 2 ? 'active' : ''}" id="step-tab-btn-${tId}-2" onclick="activateSettingSection('${tId}', 2)">
-              <span class="step-tab-num">2</span>
-              <span>성과지표 I 세팅</span>
-              <span class="step-score-badge">20점 고정</span>
-            </button>
-            <button class="step-tab-btn ${activeSettingSection[tId] === 3 ? 'active' : ''}" id="step-tab-btn-${tId}-3" onclick="activateSettingSection('${tId}', 3)">
-              <span class="step-tab-num">3</span>
-              <span>성과지표 II 세팅</span>
-              <span class="step-score-badge">30점 고정</span>
-            </button>
+          <!-- Accordion Batch Controls -->
+          <div class="accordion-controls">
+            <button class="accordion-control-btn" onclick="setAllAccordionSections('${tId}', true)">전체 섹션 펼치기 ▾</button>
+            <button class="accordion-control-btn" onclick="setAllAccordionSections('${tId}', false)">전체 섹션 접기 ▴</button>
           </div>
 
           <!-- ===================================================================
-               SECTION 0: 핵심역할 및 미션 정의 (블록 0)
+               ACCORDION 0: 핵심 미션 및 역할 범위
                =================================================================== -->
-          <div class="setting-block ${activeSettingSection[tId] === 0 ? 'active' : ''}" id="setting-block-${tId}-0">
-            <div class="narrative-typewriter-box" onclick="completeTypewriter('${tId}', 0)" title="클릭 시 전체 설명 즉시 펼침">
-              <span class="typewriter-sparkle">✦</span>
-              <div class="typewriter-text" id="typewriter-${tId}-0"></div>
-              <span class="typing-cursor"></span>
-            </div>
-
-            <div class="role-grid">
-              <div class="role-col">
-                <label class="role-label">핵심 미션 (1줄 요약)</label>
-                <textarea class="kpi-input role-input" id="role-leader-${tId}" placeholder="예: ${meta.leaderRole}" ${isSaved ? 'readonly' : ''}
-                  oninput="updateTeamRole('${tId}', 'leaderRole', this.value)">${tData.leaderRole || ''}</textarea>
+          <div class="accordion-card open" id="accordion-card-${tId}-0">
+            <div class="accordion-header" onclick="toggleAccordionSection('${tId}', 0)">
+              <div class="accordion-title-left">
+                <span class="accordion-step-num">0</span>
+                <span class="accordion-title-text">조직 핵심 미션 및 역할 범위</span>
+                <span class="accordion-score-badge">팀장 직접 작성</span>
               </div>
-              <div class="role-col">
-                <label class="role-label">세부 역할 및 지원 내용</label>
-                <textarea class="kpi-input role-input" id="role-desc-${tId}" placeholder="예: ${meta.roleDesc}" ${isSaved ? 'readonly' : ''}
-                  oninput="updateTeamRole('${tId}', 'roleDesc', this.value)">${tData.roleDesc || ''}</textarea>
+              <div class="accordion-toggle-right">
+                <span id="accordion-toggle-txt-${tId}-0">접기</span>
+                <span class="accordion-chevron">▾</span>
+              </div>
+            </div>
+            <div class="accordion-body">
+              <div class="narrative-typewriter-box" onclick="completeTypewriter('${tId}', 0)" title="클릭 시 전체 설명 즉시 펼침">
+                <span class="typewriter-sparkle">✦</span>
+                <div class="typewriter-text" id="typewriter-${tId}-0"></div>
+                <span class="typing-cursor"></span>
+              </div>
+
+              <div class="role-grid">
+                <div class="role-col">
+                  <label class="role-label">핵심 미션 (1줄 요약)</label>
+                  <textarea class="kpi-input role-input" id="role-leader-${tId}" placeholder="예: ${meta.leaderRole}" ${isSaved ? 'readonly' : ''}
+                    oninput="updateTeamRole('${tId}', 'leaderRole', this.value)">${tData.leaderRole || ''}</textarea>
+                </div>
+                <div class="role-col">
+                  <label class="role-label">세부 역할 및 지원 내용</label>
+                  <textarea class="kpi-input role-input" id="role-desc-${tId}" placeholder="예: ${meta.roleDesc}" ${isSaved ? 'readonly' : ''}
+                    oninput="updateTeamRole('${tId}', 'roleDesc', this.value)">${tData.roleDesc || ''}</textarea>
+                </div>
               </div>
             </div>
           </div>
 
           <!-- ===================================================================
-               SECTION 1: 결과지표 세팅 (블록 1 - 팀 공동 50점 고정)
+               ACCORDION 1: 결과지표 세팅 (팀 공동 연간 최상위 사업 결실 50점 고정)
                =================================================================== -->
-          <div class="setting-block ${activeSettingSection[tId] === 1 ? 'active' : ''}" id="setting-block-${tId}-1">
-            <div class="narrative-typewriter-box" onclick="completeTypewriter('${tId}', 1)" title="클릭 시 전체 설명 즉시 펼침">
-              <span class="typewriter-sparkle">✦</span>
-              <div class="typewriter-text" id="typewriter-${tId}-1"></div>
-              <span class="typing-cursor"></span>
+          <div class="accordion-card open" id="accordion-card-${tId}-1">
+            <div class="accordion-header" onclick="toggleAccordionSection('${tId}', 1)">
+              <div class="accordion-title-left">
+                <span class="accordion-step-num">1</span>
+                <span class="accordion-title-text">결과지표 세팅 (연간 최상위 사업 결실)</span>
+                <span class="accordion-score-badge highlight">50점 고정</span>
+              </div>
+              <div class="accordion-toggle-right">
+                <span id="accordion-toggle-txt-${tId}-1">접기</span>
+                <span class="accordion-chevron">▾</span>
+              </div>
             </div>
+            <div class="accordion-body">
+              <div class="narrative-typewriter-box" onclick="completeTypewriter('${tId}', 1)" title="클릭 시 전체 설명 즉시 펼침">
+                <span class="typewriter-sparkle">✦</span>
+                <div class="typewriter-text" id="typewriter-${tId}-1"></div>
+                <span class="typing-cursor"></span>
+              </div>
 
-            <table class="kpi-table">
-              <thead>
-                <tr>
-                  <th style="width:24%;">결과지표 항목명</th>
-                  <th style="width:32%;">성과지표 선정 이유 (Why this metric?)</th>
-                  <th style="width:13%;text-align:right;">2027 목표치</th>
-                  <th style="width:9%;">단위</th>
-                  <th style="width:22%;">달성 기준 (S/A/B/C/D)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <textarea class="kpi-input" id="res-name-${tId}" placeholder="예: ${meta.preset.result.name}" ${isSaved ? 'readonly' : ''}
-                      oninput="updateResultKpi('${tId}', 'name', this.value)">${tData.resultKpi.name}</textarea>
-                  </td>
-                  <td>
-                    <textarea class="kpi-input" id="res-reason-${tId}" placeholder="예: ${meta.preset.result.reason}" ${isSaved ? 'readonly' : ''}
-                      oninput="updateResultKpi('${tId}', 'reason', this.value)">${tData.resultKpi.reason || ''}</textarea>
-                  </td>
-                  <td>
-                    <input type="text" class="kpi-input num-field" id="res-target-${tId}" value="${tData.resultKpi.target}"
-                      placeholder="예: ${meta.preset.result.target}" ${isSaved ? 'readonly' : ''}
-                      oninput="updateResultKpi('${tId}', 'target', this.value)">
-                  </td>
-                  <td>
-                    <input type="text" class="kpi-input" id="res-unit-${tId}" value="${tData.resultKpi.unit}"
-                      placeholder="예: ${meta.preset.result.unit}" ${isSaved ? 'readonly' : ''}
-                      oninput="updateResultKpi('${tId}', 'unit', this.value)">
-                  </td>
-                  <td>
-                    <textarea class="kpi-input" id="res-desc-${tId}" placeholder="예: ${meta.preset.result.desc}" ${isSaved ? 'readonly' : ''}
-                      oninput="updateResultKpi('${tId}', 'desc', this.value)">${tData.resultKpi.desc}</textarea>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+              <table class="kpi-table">
+                <thead>
+                  <tr>
+                    <th style="width:24%;">결과지표 항목명</th>
+                    <th style="width:32%;">성과지표 선정 이유 (Why this metric?)</th>
+                    <th style="width:13%;text-align:right;">2027 목표치</th>
+                    <th style="width:9%;">단위</th>
+                    <th style="width:22%;">달성 기준 (S/A/B/C/D)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <textarea class="kpi-input" id="res-name-${tId}" placeholder="예: ${meta.preset.result.name}" ${isSaved ? 'readonly' : ''}
+                        oninput="updateResultKpi('${tId}', 'name', this.value)">${tData.resultKpi.name}</textarea>
+                    </td>
+                    <td>
+                      <textarea class="kpi-input" id="res-reason-${tId}" placeholder="예: ${meta.preset.result.reason}" ${isSaved ? 'readonly' : ''}
+                        oninput="updateResultKpi('${tId}', 'reason', this.value)">${tData.resultKpi.reason || ''}</textarea>
+                    </td>
+                    <td>
+                      <input type="text" class="kpi-input num-field" id="res-target-${tId}" value="${tData.resultKpi.target}"
+                        placeholder="예: ${meta.preset.result.target}" ${isSaved ? 'readonly' : ''}
+                        oninput="updateResultKpi('${tId}', 'target', this.value)">
+                    </td>
+                    <td>
+                      <input type="text" class="kpi-input" id="res-unit-${tId}" value="${tData.resultKpi.unit}"
+                        placeholder="예: ${meta.preset.result.unit}" ${isSaved ? 'readonly' : ''}
+                        oninput="updateResultKpi('${tId}', 'unit', this.value)">
+                    </td>
+                    <td>
+                      <textarea class="kpi-input" id="res-desc-${tId}" placeholder="예: ${meta.preset.result.desc}" ${isSaved ? 'readonly' : ''}
+                        oninput="updateResultKpi('${tId}', 'desc', this.value)">${tData.resultKpi.desc}</textarea>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <!-- ===================================================================
-               SECTION 2: 성과지표 I 세팅 (블록 2 - 결과지표 견인 선행 행동 20점 고정)
+               ACCORDION 2: 성과지표 I 세팅 (결과지표 견인 5대 선행 행동 20점 고정)
                =================================================================== -->
-          <div class="setting-block ${activeSettingSection[tId] === 2 ? 'active' : ''}" id="setting-block-${tId}-2">
-            <div class="narrative-typewriter-box" onclick="completeTypewriter('${tId}', 2)" title="클릭 시 전체 설명 즉시 펼침">
-              <span class="typewriter-sparkle">✦</span>
-              <div class="typewriter-text" id="typewriter-${tId}-2"></div>
-              <span class="typing-cursor"></span>
+          <div class="accordion-card open" id="accordion-card-${tId}-2">
+            <div class="accordion-header" onclick="toggleAccordionSection('${tId}', 2)">
+              <div class="accordion-title-left">
+                <span class="accordion-step-num">2</span>
+                <span class="accordion-title-text">성과지표 I 세팅 (결과지표 달성을 위한 5대 선행 행동)</span>
+                <span class="accordion-score-badge">20점 고정 (각 4점)</span>
+              </div>
+              <div class="accordion-toggle-right">
+                <span id="accordion-toggle-txt-${tId}-2">접기</span>
+                <span class="accordion-chevron">▾</span>
+              </div>
             </div>
+            <div class="accordion-body">
+              <div class="narrative-typewriter-box" onclick="completeTypewriter('${tId}', 2)" title="클릭 시 전체 설명 즉시 펼침">
+                <span class="typewriter-sparkle">✦</span>
+                <div class="typewriter-text" id="typewriter-${tId}-2"></div>
+                <span class="typing-cursor"></span>
+              </div>
 
-            <table class="kpi-table">
-              <thead>
-                <tr>
-                  <th style="width:4%;text-align:center;">No</th>
-                  <th style="width:23%;">성과지표 I 항목명 (결과지표 견인)</th>
-                  <th style="width:33%;">결과지표 달성을 위한 선정 이유</th>
-                  <th style="width:21%;">측정 산식 및 기준</th>
-                  <th style="width:10%;text-align:right;">목표치(인당)</th>
-                  <th style="width:9%;text-align:center;">배점 (수정가능)</th>
-                </tr>
-              </thead>
-              <tbody id="tbody-p1-${tId}">
-                <!-- Rendered dynamically -->
-              </tbody>
-              <tfoot>
-                <tr style="background:#F8FAFC;border-top:1.5px solid #E2E8F0;">
-                  <td colspan="5" style="text-align:right;font-weight:800;font-size:14.5px;color:#0F172A;padding:12px 16px;">
-                    성과지표 I 배점 총합계 (반드시 20점 고정):
-                  </td>
-                  <td style="text-align:center;padding:10px 4px;">
-                    <span id="total-p1-badge-${tId}" class="weight-total-badge valid">
-                      20 / 20점
-                    </span>
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
+              <table class="kpi-table">
+                <thead>
+                  <tr>
+                    <th style="width:4%;text-align:center;">No</th>
+                    <th style="width:23%;">성과지표 I 항목명 (결과지표 견인)</th>
+                    <th style="width:33%;">결과지표 달성을 위한 선정 이유</th>
+                    <th style="width:21%;">측정 산식 및 기준</th>
+                    <th style="width:10%;text-align:right;">목표치(인당)</th>
+                    <th style="width:9%;text-align:center;">배점 (수정가능)</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-p1-${tId}">
+                  <!-- Rendered dynamically -->
+                </tbody>
+                <tfoot>
+                  <tr style="background:#F8FAFC;border-top:1.5px solid #E2E8F0;">
+                    <td colspan="5" style="text-align:right;font-weight:800;font-size:14.5px;color:#0F172A;padding:12px 16px;">
+                      성과지표 I 배점 총합계 (반드시 20점 고정):
+                    </td>
+                    <td style="text-align:center;padding:10px 4px;">
+                      <span id="total-p1-badge-${tId}" class="weight-total-badge valid">
+                        20 / 20점
+                      </span>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
           </div>
 
           <!-- ===================================================================
-               SECTION 3: 성과지표 II 세팅 (블록 3 - 5대 정성 핵심 역량 30점 고정)
+               ACCORDION 3: 성과지표 II 세팅 (5대 정성 핵심 역량 30점 고정)
                =================================================================== -->
-          <div class="setting-block ${activeSettingSection[tId] === 3 ? 'active' : ''}" id="setting-block-${tId}-3">
-            <div class="narrative-typewriter-box" onclick="completeTypewriter('${tId}', 3)" title="클릭 시 전체 설명 즉시 펼침">
-              <span class="typewriter-sparkle">✦</span>
-              <div class="typewriter-text" id="typewriter-${tId}-3"></div>
-              <span class="typing-cursor"></span>
+          <div class="accordion-card open" id="accordion-card-${tId}-3">
+            <div class="accordion-header" onclick="toggleAccordionSection('${tId}', 3)">
+              <div class="accordion-title-left">
+                <span class="accordion-step-num">3</span>
+                <span class="accordion-title-text">성과지표 II 세팅 (결과지표 달성을 위한 5대 정성 핵심 역량)</span>
+                <span class="accordion-score-badge">30점 고정 (각 6점)</span>
+              </div>
+              <div class="accordion-toggle-right">
+                <span id="accordion-toggle-txt-${tId}-3">접기</span>
+                <span class="accordion-chevron">▾</span>
+              </div>
             </div>
+            <div class="accordion-body">
+              <div class="narrative-typewriter-box" onclick="completeTypewriter('${tId}', 3)" title="클릭 시 전체 설명 즉시 펼침">
+                <span class="typewriter-sparkle">✦</span>
+                <div class="typewriter-text" id="typewriter-${tId}-3"></div>
+                <span class="typing-cursor"></span>
+              </div>
 
-            <table class="kpi-table">
-              <thead>
-                <tr>
-                  <th style="width:4%;text-align:center;">No</th>
-                  <th style="width:20%;">성과지표 II 역량 항목명</th>
-                  <th style="width:37%;">결과지표 달성 관점 중점 평가 및 선정한 이유</th>
-                  <th style="width:30%;">세부 평가 기준 및 피드백 주안점</th>
-                  <th style="width:9%;text-align:center;">배점 (수정가능)</th>
-                </tr>
-              </thead>
-              <tbody id="tbody-p2-${tId}">
-                <!-- Rendered dynamically -->
-              </tbody>
-              <tfoot>
-                <tr style="background:#F8FAFC;border-top:1.5px solid #E2E8F0;">
-                  <td colspan="4" style="text-align:right;font-weight:800;font-size:14.5px;color:#0F172A;padding:12px 16px;">
-                    성과지표 II 배점 총합계 (반드시 30점 고정):
-                  </td>
-                  <td style="text-align:center;padding:10px 4px;">
-                    <span id="total-p2-badge-${tId}" class="weight-total-badge valid">
-                      30 / 30점
-                    </span>
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
+              <table class="kpi-table">
+                <thead>
+                  <tr>
+                    <th style="width:4%;text-align:center;">No</th>
+                    <th style="width:20%;">성과지표 II 역량 항목명</th>
+                    <th style="width:37%;">결과지표 달성 관점 중점 평가 및 선정한 이유</th>
+                    <th style="width:30%;">세부 평가 기준 및 피드백 주안점</th>
+                    <th style="width:9%;text-align:center;">배점 (수정가능)</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-p2-${tId}">
+                  <!-- Rendered dynamically -->
+                </tbody>
+                <tfoot>
+                  <tr style="background:#F8FAFC;border-top:1.5px solid #E2E8F0;">
+                    <td colspan="4" style="text-align:right;font-weight:800;font-size:14.5px;color:#0F172A;padding:12px 16px;">
+                      성과지표 II 배점 총합계 (반드시 30점 고정):
+                    </td>
+                    <td style="text-align:center;padding:10px 4px;">
+                      <span id="total-p2-badge-${tId}" class="weight-total-badge valid">
+                        30 / 30점
+                      </span>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
           </div>
         `;
 
@@ -4785,15 +4899,16 @@
         updateWeightTotalsUI(tId);
       });
 
-      // Initialize typewriter for default active sections
+      // Initialize typewriter for accordion open sections
       Object.keys(TEAM_METADATA).forEach(tId => {
-        const secIdx = activeSettingSection[tId] !== undefined ? activeSettingSection[tId] : 0;
-        const targetElemId = `typewriter-${tId}-${secIdx}`;
-        const textFn = NARRATIVE_TEXTS[secIdx];
+        // Run typewriter for section 1 (Result KPI) on first render
+        const targetElemId = `typewriter-${tId}-1`;
+        const textFn = NARRATIVE_TEXTS[1];
         if (textFn) {
-          const fullText = textFn(tId);
-          runTypewriter(targetElemId, fullText, 14);
+          runTypewriter(targetElemId, textFn(tId), 12);
         }
+        // Fill full text for 0, 2, 3 so it's readable immediately when open
+        [0, 2, 3].forEach(idx => completeTypewriter(tId, idx));
       });
     }
 
@@ -4987,6 +5102,14 @@
               if (record.fields['결과지표 단위 (Result Unit)']) appState.teams[tId].resultKpi.unit = record.fields['결과지표 단위 (Result Unit)'];
               if (record.fields['결과지표 선정 이유 (Result Reason)']) appState.teams[tId].resultKpi.reason = record.fields['결과지표 선정 이유 (Result Reason)'];
               if (record.fields['결과지표 달성 기준 (Result Criteria)']) appState.teams[tId].resultKpi.desc = record.fields['결과지표 달성 기준 (Result Criteria)'];
+            }
+
+            // Auto-migrate result metrics to project count presets (BD 50건, PS 25건, PB 12건, BM 50건, R&D 10건)
+            const curUnit = appState.teams[tId].resultKpi.unit;
+            const curTarget = appState.teams[tId].resultKpi.target;
+            const defaultPreset = TEAM_METADATA[tId].preset.result;
+            if (!appState.teams[tId].resultKpi.name || curUnit === "%" || curUnit === "억원" || (tId === 'bd' && curTarget === '12') || (tId === 'ps' && curUnit !== '건') || (tId === 'pb' && curUnit !== '건') || (tId === 'bm' && curUnit !== '건')) {
+              appState.teams[tId].resultKpi = { ...defaultPreset };
             }
           }
         });
@@ -5629,8 +5752,19 @@
       } else if (targetId === "matrix") {
         renderMasterMatrix(currentMatrixFilter);
       } else if (TEAM_METADATA[targetId]) {
-        const sec = activeSettingSection[targetId] !== undefined ? activeSettingSection[targetId] : 0;
-        activateSettingSection(targetId, sec);
+        for (let i = 0; i <= 3; i++) {
+          const card = document.getElementById(`accordion-card-${targetId}-${i}`);
+          if (card && card.classList.contains("open")) {
+            const targetElemId = `typewriter-${targetId}-${i}`;
+            const textFn = NARRATIVE_TEXTS[i];
+            if (textFn) {
+              const el = document.getElementById(targetElemId);
+              if (el && !el.textContent.trim()) {
+                runTypewriter(targetElemId, textFn(targetId), 12);
+              }
+            }
+          }
+        }
       }
     }
 
