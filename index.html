@@ -461,14 +461,16 @@
       line-height: 1.6;
     }
 
-    /* R&D Special Banner */
+    /* R&D Special Banner - Block-less */
     .rd-special-banner {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-left: 4px solid #8B5CF6;
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 20px;
+      background: transparent;
+      border: none;
+      border-left: 3px solid #8B5CF6;
+      border-radius: 0;
+      padding: 8px 0 8px 18px;
+      margin-bottom: 32px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .rd-special-title {
@@ -548,13 +550,14 @@
       font-weight: 800;
     }
 
-    /* Guide Box - Clean Flat Surface */
+    /* Guide Box - Block-less Minimal Editorial Strip */
     .guide-box {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 16px;
+      background: transparent;
+      border: none;
+      border-left: 3px solid #CBD5E1;
+      border-radius: 0;
+      padding: 8px 0 8px 18px;
+      margin-bottom: 24px;
     }
 
     .guide-box-head {
@@ -575,42 +578,43 @@
       margin-top: 6px;
     }
 
-    /* Cards - Frameless Breathable Surface */
+    /* Cards - Fully Block-less & Seamless Canvas Sections */
     .kpi-card {
-      background: #FFFFFF;
-      border: 1px solid rgba(226, 232, 240, 0.8);
-      border-radius: 16px;
-      padding: 26px 30px;
-      margin-bottom: 26px;
-      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 1px 3px rgba(15, 23, 42, 0.02);
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      margin-bottom: 56px;
+      box-shadow: none;
       width: 100%;
       box-sizing: border-box;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: none;
     }
 
     .kpi-card:hover {
-      box-shadow: 0 8px 30px -4px rgba(15, 23, 42, 0.06);
-      border-color: rgba(203, 213, 225, 0.9);
+      box-shadow: none;
+      border-color: transparent;
     }
 
     .kpi-card-header {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #F1F5F9;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1.5px solid #0F172A;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
     }
 
     .kpi-card-title {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 800;
-      color: var(--ink);
+      color: #0F172A;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      letter-spacing: -0.02em;
     }
 
     /* Refined Compact Micro-Badges for Score Points & Roles */
@@ -899,12 +903,14 @@
       transform: translateY(-1px);
     }
 
-    /* Summary Overview Grid - 5 Equal Columns Clean Frameless Alignment */
+    /* Summary Overview Grid - Block-less Editorial 5 Columns */
     .summary-teams-grid {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 16px;
-      margin-bottom: 32px;
+      gap: 24px;
+      margin-bottom: 56px;
+      padding-top: 18px;
+      border-top: 1.5px solid #0F172A;
       align-items: stretch;
       width: 100%;
       box-sizing: border-box;
@@ -917,24 +923,26 @@
     }
 
     .team-summary-card {
-      background: #FFFFFF;
-      border: 1px solid rgba(226, 232, 240, 0.8);
-      border-radius: 14px;
-      padding: 18px 16px;
-      box-shadow: 0 2px 10px -2px rgba(15, 23, 42, 0.03);
+      background: transparent;
+      border: none;
+      border-top: 2px solid #E2E8F0;
+      border-radius: 0;
+      padding: 16px 2px 4px 2px;
+      box-shadow: none;
       min-width: 0;
-      overflow: hidden;
+      overflow: visible;
       display: flex;
       flex-direction: column;
       width: 100%;
       box-sizing: border-box;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .team-summary-card:hover {
-      border-color: #CBD5E1;
-      box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.07);
-      transform: translateY(-3px);
+      border-top-color: #8B5CF6;
+      box-shadow: none;
+      transform: translateY(-2px);
     }
 
     /* Row 1: Top Meta Row with Badge & Status Pill */
@@ -1057,18 +1065,18 @@
       font-weight: 700;
     }
 
-    /* Row 6: KPI Preview Box */
+    /* Row 6: KPI Preview Line (Block-less) */
     .team-kpi-preview {
       margin-top: auto;
-      background: #F8FAFC;
-      border: 1px solid #F1F5F9;
-      border-radius: 8px;
-      padding: 10px 12px;
-      min-height: 60px;
-      height: auto;
+      background: transparent;
+      border: none;
+      border-top: 1px solid #F1F5F9;
+      border-radius: 0;
+      padding: 10px 0 0 0;
+      min-height: 52px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       box-sizing: border-box;
     }
 
@@ -1746,23 +1754,24 @@
        CLOSE-LOOP ARCHITECTURE: 5-TEAM INTERLOCKING VALUE CHAIN
        =================================================================== */
     .chain-loop-bar {
-      margin-top: 24px;
-      background: #FFFFFF;
-      border: 1px solid rgba(226, 232, 240, 0.8);
-      border-left: 4px solid #0F172A;
-      border-radius: 16px;
-      padding: 22px 26px;
+      margin-top: 36px;
+      margin-bottom: 56px;
+      background: transparent;
+      border: none;
+      border-top: 1.5px solid #0F172A;
+      border-radius: 0;
+      padding: 24px 0 0 0;
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      gap: 20px;
+      box-shadow: none;
+      transition: none;
     }
 
     .chain-loop-bar.glow {
-      border-color: #8B5CF6;
-      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.15);
-      transform: translateY(-2px);
+      border-color: #0F172A;
+      box-shadow: none;
+      transform: none;
     }
 
     .loop-header-row {
@@ -1828,23 +1837,23 @@
     }
 
     .loop-step-card {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-top: 3px solid #0F172A;
-      border-radius: 10px;
-      padding: 14px 14px;
+      background: transparent;
+      border: none;
+      border-top: 2px solid #E2E8F0;
+      border-radius: 0;
+      padding: 14px 2px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: none;
     }
 
     .loop-step-card:hover {
-      border-color: #CBD5E1;
+      border-top-color: #8B5CF6;
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
-      background: #FFFFFF;
+      box-shadow: none;
+      background: transparent;
     }
 
     .loop-step-head {
@@ -2040,34 +2049,33 @@
 
 
     /* ===================================================================
-       2027 EXECUTIVE GOVERNANCE 3-PILLAR ARCHITECTURE CARD
+       2027 EXECUTIVE GOVERNANCE ARCHITECTURE (BLOCK-LESS EDITORIAL)
        =================================================================== */
     .gov-card {
-      background: #FFFFFF;
-      border: 1px solid rgba(226, 232, 240, 0.8);
-      border-radius: 16px;
-      padding: 28px 32px;
-      margin-bottom: 28px;
-      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 1px 3px rgba(15, 23, 42, 0.02);
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      margin-bottom: 56px;
+      box-shadow: none;
       position: relative;
-      overflow: hidden;
       width: 100%;
       box-sizing: border-box;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: none;
     }
 
     .gov-card:hover {
-      border-color: rgba(203, 213, 225, 0.9);
-      box-shadow: 0 8px 30px -4px rgba(15, 23, 42, 0.06);
+      border-color: transparent;
+      box-shadow: none;
     }
 
     .gov-card-header {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       padding-bottom: 14px;
-      border-bottom: 1px solid #F1F5F9;
+      border-bottom: 1.5px solid #0F172A;
       flex-wrap: wrap;
       gap: 14px;
     }
@@ -2160,21 +2168,22 @@
     }
 
     .gov-progress-wrap {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-radius: 12px;
-      padding: 10px 14px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
       box-sizing: border-box;
+      width: 100%;
     }
 
     .gov-progress-bar {
-      height: 26px;
+      height: 24px;
       display: flex;
-      border-radius: 8px;
+      border-radius: 4px;
       overflow: hidden;
       background: #F1F5F9;
-      border: 1px solid #E2E8F0;
-      box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.05);
+      border: none;
+      box-shadow: none;
     }
 
     .gov-seg {
@@ -2283,22 +2292,22 @@
     }
 
     .causal-cause {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-top: 3px solid #8B5CF6;
-      border-radius: 14px;
-      padding: 20px 22px;
+      background: transparent;
+      border: none;
+      border-top: 2px solid #8B5CF6;
+      border-radius: 0;
+      padding: 18px 0 0 0;
       flex: 1.15;
       min-width: 0;
       box-sizing: border-box;
     }
 
     .causal-harvest {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-top: 3px solid #0F172A;
-      border-radius: 14px;
-      padding: 20px 22px;
+      background: transparent;
+      border: none;
+      border-top: 2px solid #0F172A;
+      border-radius: 0;
+      padding: 18px 0 0 0;
       flex: 0.85;
       min-width: 0;
       box-sizing: border-box;
@@ -2337,7 +2346,7 @@
     .causal-subgrid {
       display: flex;
       align-items: stretch;
-      gap: 14px;
+      gap: 20px;
       flex: 1;
     }
 
@@ -2349,21 +2358,22 @@
 
     .causal-subcard {
       flex: 1;
-      background: #FFFFFF;
-      border-radius: 12px;
-      padding: 18px 20px;
+      background: transparent;
+      border-radius: 0;
+      padding: 12px 2px;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      border: 1px solid #E2E8F0;
-      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none;
+      border-top: 1.5px solid #E2E8F0;
+      box-shadow: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .causal-subcard:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.08);
-      border-color: #CBD5E1;
+      transform: translateY(-2px);
+      box-shadow: none;
+      border-top-color: #8B5CF6;
     }
 
     .causal-subcard-header {
@@ -2512,12 +2522,12 @@
     }
 
     .causal-harvest-card {
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
-      border-left: 4px solid #0F172A;
-      border-radius: 12px;
-      padding: 18px 20px;
-      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+      background: transparent;
+      border: none;
+      border-top: 1.5px solid #0F172A;
+      border-radius: 0;
+      padding: 14px 2px;
+      box-shadow: none;
     }
 
     .harvest-card-header {
@@ -2531,10 +2541,10 @@
 
     .harvest-key-takeaway {
       background: #F8FAFC;
-      border: 1px solid #E2E8F0;
+      border: none;
       border-left: 3px solid #8B5CF6;
-      border-radius: 8px;
-      padding: 12px 14px;
+      border-radius: 0;
+      padding: 12px 16px;
       font-size: 13px;
       color: #0F172A;
       line-height: 1.55;
@@ -2696,30 +2706,32 @@
     .matrix-container {
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 56px;
     }
 
     .matrix-team-card {
-      background: #FFFFFF;
-      border: 1px solid rgba(226, 232, 240, 0.8);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      background: transparent;
+      border: none;
+      border-top: 2px solid #0F172A;
+      border-radius: 0;
+      overflow: visible;
+      box-shadow: none;
+      transition: none;
       width: 100%;
       box-sizing: border-box;
+      padding-top: 14px;
     }
 
     .matrix-team-card:hover {
-      border-color: #CBD5E1;
-      box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.07);
-      transform: translateY(-2px);
+      border-color: #0F172A;
+      box-shadow: none;
+      transform: none;
     }
 
     .matrix-team-header {
-      background: #F8FAFC;
+      background: transparent;
       border-bottom: 1px solid #E2E8F0;
-      padding: 18px 24px;
+      padding: 12px 0 16px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -2904,14 +2916,14 @@
     }
 
     .matrix-res-target-box {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-left: 4px solid #0F172A;
-      border-radius: 8px;
-      padding: 12px 16px;
+      background: transparent;
+      border: none;
+      border-left: 3px solid #0F172A;
+      border-radius: 0;
+      padding: 6px 0 6px 14px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 2px;
     }
 
     .matrix-target-label {
@@ -2928,21 +2940,23 @@
     }
 
     .matrix-eval-box {
-      background: #F8FAFC;
-      border: 1px solid #F1F5F9;
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-size: 12.5px;
+      background: transparent;
+      border: none;
+      border-left: 2.5px solid #CBD5E1;
+      border-radius: 0;
+      padding: 6px 0 6px 12px;
+      font-size: 13px;
       color: #475569;
       line-height: 1.5;
     }
 
     .matrix-reason-box {
-      background: #F8FAFC;
-      border: 1px dashed #CBD5E1;
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-size: 12.5px;
+      background: transparent;
+      border: none;
+      border-left: 2.5px solid #E2E8F0;
+      border-radius: 0;
+      padding: 6px 0 6px 12px;
+      font-size: 13px;
       color: #475569;
       line-height: 1.5;
     }
@@ -3022,32 +3036,32 @@
       color: #475569;
     }
 
-    /* Motto Banner: Dribbble Minimal Modern Aesthetic */
+    /* Motto Banner: Editorial Frameless Pull-Quote */
     .motto-banner {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-left: 4px solid #8B5CF6;
-      border-radius: 12px;
-      padding: 16px 24px;
-      margin-bottom: 24px;
+      background: transparent;
+      border: none;
+      border-left: 3px solid #8B5CF6;
+      border-radius: 0;
+      padding: 10px 0 10px 18px;
+      margin-bottom: 32px;
       display: flex;
       align-items: center;
       gap: 12px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      box-shadow: none;
       width: 100%;
       box-sizing: border-box;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s ease;
     }
 
     .motto-banner:hover {
-      border-color: #CBD5E1;
+      border-color: transparent;
       border-left-color: #7C3AED;
-      box-shadow: 0 4px 14px rgba(139, 92, 246, 0.08);
-      transform: translateY(-1px);
+      box-shadow: none;
+      transform: none;
     }
 
     .motto-quote {
-      font-size: 15px;
+      font-size: 15.5px;
       font-weight: 700;
       color: #0F172A !important;
       letter-spacing: -0.01em;
