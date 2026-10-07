@@ -1,0 +1,5358 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2027 오믈렛 전사 KPI 성과관리 체계 — 팀장 자율 세팅 및 종합 대시보드 (v12)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+  <style>
+    :root {
+      /* Base Canvas: Warm Beige Pastel maintained */
+      --bg: #F7F5EE;
+      --bg-canvas: #F7F5EE;
+
+      /* Strict 5-Color Palette from Reference Image (media_1790562718662.png) */
+      --color-ice-tint: #E2EAF4;
+      /* RGB(226, 234, 244) - Lightest Pastel Tint */
+      --color-powder-slate: #BCCADB;
+      /* RGB(188, 202, 219) - Soft Line & Accent */
+      --color-mid-slate: #9EA6B2;
+      /* RGB(158, 166, 178) - Medium Slate Frame */
+      --color-dark-slate: #6F7680;
+      /* RGB(111, 118, 128) - Muted Text & Tier-1 Line */
+      --color-deep-ink: #3E4147;
+      /* RGB(62, 65, 71)    - Deep Charcoal Typography & Core */
+
+      /* Surfaces */
+      --surface: #FFFFFF;
+      --surface-card: #FFFFFF;
+      --surface-subtle: #E2EAF4;
+      --surface-track: #E2EAF4;
+      --surface-hover: #E2EAF4;
+
+      /* Thin Hairline Borders */
+      --line: #BCCADB;
+      --line-light: #E2EAF4;
+      --line-strong: #9EA6B2;
+      --line-focus: #3E4147;
+
+      /* Typography Hierarchy */
+      --ink: #3E4147;
+      --ink-dim: #6F7680;
+      --ink-faint: #9EA6B2;
+      --ink-subtle: #BCCADB;
+
+      /* Titles */
+      --title-color: #3E4147;
+
+      /* 3-Tier Score Bar: Pure 5-Color System Mapping */
+      --score-res: #3E4147;
+      /* 결과 50점: 딥 잉크 차콜 (#3E4147) */
+      --score-p1: #6F7680;
+      /* 성과I 20점: 다크 슬레이트 (#6F7680) */
+      --score-p2: #9EA6B2;
+      /* 성과II 30점: 미디엄 슬레이트 (#9EA6B2) */
+
+      /* Unified Team Tone System */
+      --team-badge-bg: #E2EAF4;
+      --team-badge-color: #3E4147;
+      --team-badge-border: #BCCADB;
+
+      --rd-color: #3E4147;
+      --rd-bg: #E2EAF4;
+      --rd-light: #E2EAF4;
+      --rd-border: #BCCADB;
+
+      --bd-color: #3E4147;
+      --bd-bg: #E2EAF4;
+      --bd-light: #E2EAF4;
+      --bd-border: #BCCADB;
+
+      --ps-color: #3E4147;
+      --ps-bg: #E2EAF4;
+      --ps-light: #E2EAF4;
+      --ps-border: #BCCADB;
+
+      --pb-color: #3E4147;
+      --pb-bg: #E2EAF4;
+      --pb-light: #E2EAF4;
+      --pb-border: #BCCADB;
+
+      --bm-color: #3E4147;
+      --bm-bg: #E2EAF4;
+      --bm-light: #E2EAF4;
+      --bm-border: #BCCADB;
+
+      /* Legacy compatibility mappings */
+      --red: #3E4147;
+      --red-deep: #3E4147;
+      --red-bg: #E2EAF4;
+      --red-border: #BCCADB;
+    }
+
+    .color-rd {
+      color: var(--rd-color) !important;
+    }
+
+    .color-bd {
+      color: var(--bd-color) !important;
+    }
+
+    .color-ps {
+      color: var(--ps-color) !important;
+    }
+
+    .color-pb {
+      color: var(--pb-color) !important;
+    }
+
+    .color-bm {
+      color: var(--bm-color) !important;
+    }
+
+    .badge-rd {
+      background: var(--rd-bg) !important;
+      color: var(--rd-color) !important;
+      border: 1px solid var(--rd-border) !important;
+    }
+
+    .badge-bd {
+      background: var(--bd-bg) !important;
+      color: var(--bd-color) !important;
+      border: 1px solid var(--bd-border) !important;
+    }
+
+    .badge-ps {
+      background: var(--ps-bg) !important;
+      color: var(--ps-color) !important;
+      border: 1px solid var(--ps-border) !important;
+    }
+
+    .badge-pb {
+      background: var(--pb-bg) !important;
+      color: var(--pb-color) !important;
+      border: 1px solid var(--pb-border) !important;
+    }
+
+    .badge-bm {
+      background: var(--bm-bg) !important;
+      color: var(--bm-color) !important;
+      border: 1px solid var(--bm-border) !important;
+    }
+
+    .team-tab-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .team-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: clip;
+    }
+
+    body {
+      background: var(--bg-canvas);
+      color: var(--ink);
+      font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      line-height: 1.6;
+      font-size: 13.5px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      letter-spacing: -0.02em;
+      overflow-x: clip;
+    }
+
+    .eng,
+    .num {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+
+    /* ===================================================================
+       GLOBAL HEADER & ELEVATED DOCK NAVIGATION (IMAGE 2 REDESIGN)
+       =================================================================== */
+    header.global-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(62, 65, 71, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-powder-slate);
+      padding: 12px 0;
+      width: 100%;
+    }
+
+    .header-inner {
+      max-width: 1680px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      font-size: 14.5px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #3E4147;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-logo .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--color-deep-ink);
+      border-radius: 50%;
+    }
+
+    .brand-v-pill {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--color-deep-ink);
+      background: var(--color-ice-tint);
+      border: 1px solid var(--color-powder-slate);
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    /* Sculpted Segmented Dock Navigation Track */
+    .tab-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      background: transparent;
+      padding: 0;
+      border: none;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--color-dark-slate);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--color-deep-ink);
+      background: var(--color-ice-tint);
+    }
+
+    .tab-btn.active {
+      color: var(--color-deep-ink);
+      font-weight: 800;
+      background: var(--color-ice-tint);
+      border: 1px solid var(--color-powder-slate);
+      box-shadow: 0 1px 3px rgba(62, 65, 71, 0.06);
+    }
+
+    .tab-indicator-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--color-deep-ink);
+      display: inline-block;
+    }
+
+    .tab-btn:not(.active) .tab-indicator-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--color-deep-ink);
+      display: inline-block;
+    }
+
+    .team-tab-badge {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    /* Action Toolbar - Compact & Right-Aligned */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-left: auto;
+    }
+
+    .btn-action {
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      color: #6F7680;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 3.5px 10px;
+      height: 26px;
+      line-height: 1;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-action:hover {
+      background: #E2EAF4;
+      border-color: #3E4147;
+      color: #3E4147;
+    }
+
+    .btn-action.btn-primary {
+      background: #3E4147;
+      border: 1px solid #3E4147;
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+
+    .btn-action.btn-primary:hover {
+      background: #3E4147;
+      border-color: #3E4147;
+    }
+
+
+    /* Main Container */
+    main.main-container {
+      max-width: 1680px;
+      margin: 0 auto;
+      padding: 24px;
+      flex: 1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Page View Toggle - Strictly Unified Width Across All Pages */
+    .page-view {
+      display: none;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      animation: fadeIn 0.15s ease;
+    }
+
+    .page-view.active {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    #teamDetailPagesContainer {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(3px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Typography */
+    .page-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--red);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .page-eyebrow::before {
+      content: '';
+      width: 12px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    /* Heading Typography: Pastel Violet used cleanly on Title Texts */
+    /* Typography: Strict Palette System */
+    .page-title,
+    h1.page-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--color-deep-ink) !important;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .kpi-card-title,
+    .matrix-team-title,
+    .gov-card-title,
+    .loop-step-title,
+    .chain-bar-title,
+    .pipeline-title {
+      color: var(--color-deep-ink) !important;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .page-eyebrow {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-dark-slate);
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .page-desc {
+      font-size: 13px;
+      color: var(--ink-dim);
+      margin-bottom: 18px;
+      max-width: 1150px;
+      line-height: 1.55;
+    }
+
+    /* R&D Special Banner */
+    .rd-special-banner {
+      background: var(--surface);
+      border: 1px solid #BCCADB;
+      border-left: 3px solid var(--red);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+    }
+
+    .rd-special-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 2px;
+    }
+
+    .rd-special-desc {
+      font-size: 12px;
+      color: var(--ink-dim);
+      line-height: 1.45;
+    }
+
+    /* Master Governance Banner */
+    .gov-banner {
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-left: 3px solid #3E4147;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .gov-banner-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .gov-banner-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .gov-banner-desc {
+      font-size: 12px;
+      color: var(--ink-dim);
+    }
+
+    .gov-pills-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .gov-pill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 3px;
+      background: #E2EAF4;
+      border: 1px solid #BCCADB;
+      color: #3E4147;
+    }
+
+    .gov-pill.active {
+      color: var(--ink);
+      border-color: #BCCADB;
+    }
+
+    .gov-pill.total {
+      background: var(--red-bg);
+      border-color: var(--red-border);
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    /* Guide Box */
+    .guide-box {
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-radius: 6px;
+      padding: 14px 18px;
+    }
+
+    .guide-box-head {
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .guide-box-content {
+      color: var(--ink-dim);
+    }
+
+    .guide-box-sub {
+      font-size: 11px;
+      color: var(--ink-faint);
+      margin-top: 4px;
+    }
+
+    /* Cards */
+    .kpi-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-powder-slate);
+      border-radius: 8px;
+      padding: 22px 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(62, 65, 71, 0.02);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .kpi-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E2EAF4;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .kpi-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Refined Compact Micro-Badges for Score Points & Roles */
+    .card-fixed-score {
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-deep-ink);
+      background: var(--color-ice-tint);
+      border: 1px solid var(--color-powder-slate);
+      border-radius: 4px;
+      padding: 2.5px 8px;
+      line-height: 1.3;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+      vertical-align: middle;
+    }
+
+    .card-fixed-score.highlight {
+      background: var(--color-deep-ink);
+      color: #FFFFFF;
+      border-color: var(--color-deep-ink);
+    }
+
+    /* Tables - Strictly Fixed Layout for Zero Width Spill */
+    .kpi-table {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 6px;
+      box-sizing: border-box;
+    }
+
+    .kpi-table th {
+      background: var(--color-ice-tint);
+      color: var(--color-deep-ink);
+      font-weight: 700;
+      padding: 8px 10px;
+      border-bottom: 1.5px solid var(--color-powder-slate);
+      text-align: left;
+    }
+
+    .kpi-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--color-ice-tint);
+      vertical-align: top;
+    }
+
+    .kpi-table tr:hover td {
+      background: var(--surface-hover);
+    }
+
+    /* High-contrast Space Grey Inputs & Textareas */
+    textarea.kpi-input {
+      width: 100%;
+      min-height: 44px;
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-radius: 4px;
+      color: #3E4147;
+      font-family: inherit;
+      font-size: 11.5px;
+      line-height: 1.45;
+      padding: 7px 10px;
+      resize: vertical;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .kpi-input:focus {
+      border-color: #3E4147;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(62, 65, 71, 0.15);
+    }
+
+    input.kpi-input {
+      width: 100%;
+      min-height: 44px;
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-radius: 4px;
+      color: #3E4147;
+      font-family: inherit;
+      font-size: 11.5px;
+      line-height: 1.45;
+      padding: 7px 10px;
+      resize: vertical;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .kpi-input:focus {
+      border-color: #3E4147;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(62, 65, 71, 0.15);
+    }
+
+    textarea.kpi-input:focus,
+    input.kpi-input:focus {
+      outline: none;
+      border-color: var(--red);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(62, 65, 71, 0.15);
+    }
+
+    textarea.kpi-input::placeholder {
+      color: #BCCADB;
+      font-size: 11px;
+      font-style: italic;
+      line-height: 1.45;
+      white-space: pre-wrap;
+      opacity: 0.75;
+    }
+
+    input.kpi-input::placeholder {
+      color: #BCCADB;
+      font-size: 11.5px;
+      font-style: italic;
+      opacity: 0.75;
+    }
+
+    /* Role Setting Styles */
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 860px) {
+      .role-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .role-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .role-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--ink-dim);
+    }
+
+    .role-input {
+      min-height: 56px;
+      font-size: 11.5px;
+    }
+
+    .kpi-input.num-field {
+      text-align: right;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+    }
+
+    /* Saved Readonly Mode */
+    .mode-saved textarea.kpi-input,
+    .mode-saved input.kpi-input {
+      width: 100%;
+      min-height: 44px;
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-radius: 4px;
+      color: #3E4147;
+      font-family: inherit;
+      font-size: 11.5px;
+      line-height: 1.45;
+      padding: 7px 10px;
+      resize: vertical;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .kpi-input:focus {
+      border-color: #3E4147;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(62, 65, 71, 0.15);
+    }
+
+    /* Top Team Status Bar */
+    .team-top-bar {
+      background: transparent;
+      border: 1px solid #BCCADB;
+      border-radius: 6px;
+      padding: 12px 18px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-badge {
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .status-badge.saved {
+      background: var(--surface-subtle);
+      color: var(--ink);
+      border: 1px solid #BCCADB;
+    }
+
+    .status-badge.editing {
+      background: var(--red-bg);
+      color: var(--red);
+      border: 1px solid var(--red-border);
+    }
+
+    .team-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-save-mode {
+      background: var(--color-deep-ink);
+      color: #FFFFFF;
+      border: 1px solid var(--color-deep-ink);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-save-mode:hover {
+      background: var(--color-dark-slate);
+    }
+
+    .btn-save-mode:hover {
+      background: #3E4147;
+    }
+
+    .btn-edit-mode {
+      background: transparent;
+      color: var(--color-deep-ink);
+      border: 1px solid var(--color-powder-slate);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-edit-mode:hover {
+      background: var(--color-ice-tint);
+      border-color: var(--color-deep-ink);
+    }
+
+    .btn-edit-mode:hover {
+      background: #E2EAF4;
+      border-color: #3E4147;
+    }
+
+    .btn-sub-preset {
+      font-size: 11px;
+      background: transparent;
+      border: 1px solid var(--color-powder-slate);
+      color: var(--color-dark-slate);
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+
+    .btn-sub-preset:hover {
+      border-color: var(--color-deep-ink);
+      color: var(--color-deep-ink);
+      background: var(--color-ice-tint);
+    }
+
+    .btn-sub-preset:hover {
+      border-color: #3E4147;
+      color: #3E4147;
+      background: #E2EAF4;
+    }
+
+    .btn-sub-preset:hover {
+      background: var(--surface-hover);
+      color: var(--ink);
+    }
+
+    /* Summary Overview Grid - 5 Equal Columns Strict Alignment */
+    .summary-teams-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+      align-items: stretch;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 1080px) {
+      .summary-teams-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+    }
+
+    .team-summary-card {
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-radius: 6px;
+      padding: 14px 12px;
+      box-shadow: none;
+      min-width: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+    }
+
+    .team-summary-card:hover {
+      border-color: #3E4147;
+      box-shadow: 0 4px 12px rgba(62, 65, 71, 0.08);
+      transform: translateY(-2px);
+    }
+
+    /* Row 1: Top Meta Row with Badge & Status Pill */
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      gap: 6px;
+    }
+
+    .card-status-pill {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .card-status-pill.saved {
+      background: var(--surface-subtle);
+      color: var(--ink);
+      border: 1px solid #BCCADB;
+    }
+
+    .card-status-pill.editing {
+      background: var(--red-bg);
+      color: var(--red);
+      border: 1px solid var(--red-border);
+    }
+
+    /* Row 2: Team Title (Guaranteed 1 line, fixed height) */
+    .team-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: 20px;
+      line-height: 20px;
+      margin-bottom: 6px;
+    }
+
+    /* Row 3: Role / Mission (Exactly fixed height for strict alignment) */
+    .team-card-role {
+      font-size: 11px;
+      color: var(--ink-dim);
+      height: 32px;
+      line-height: 1.45;
+      margin-bottom: 12px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .team-card-role .preset-role {
+      color: var(--ink-faint);
+      font-style: italic;
+    }
+
+    /* Row 4: Score Breakdown Bar */
+    .score-breakdown-bar {
+      display: flex;
+      height: 9px;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 6px;
+      background: var(--color-ice-tint);
+      border: 1px solid var(--color-powder-slate);
+      flex-shrink: 0;
+    }
+
+    .bar-seg.seg-res {
+      background: var(--color-deep-ink) !important;
+      border-right: 1.5px solid #FFFFFF;
+    }
+
+    .bar-seg.seg-p1 {
+      background: var(--color-dark-slate) !important;
+      border-right: 1.5px solid #FFFFFF;
+    }
+
+    .bar-seg.seg-p2 {
+      background: var(--color-mid-slate) !important;
+    }
+
+    /* Row 5: Score Legend */
+    .score-legend-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--ink-faint);
+      margin-bottom: 12px;
+      flex-shrink: 0;
+      gap: 2px;
+      white-space: nowrap;
+    }
+
+    .score-legend-row .legend-res {
+      color: var(--color-deep-ink);
+      font-weight: 800;
+    }
+
+    .score-legend-row .legend-p1 {
+      color: var(--color-dark-slate);
+      font-weight: 700;
+    }
+
+    .score-legend-row .legend-p2 {
+      color: var(--color-mid-slate);
+      font-weight: 700;
+    }
+
+    /* Row 6: KPI Preview Box */
+    .team-kpi-preview {
+      margin-top: auto;
+      background: var(--surface);
+      border: 1px solid #E2EAF4;
+      border-radius: 6px;
+      padding: 8px 10px;
+      height: 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .kpi-preview-label {
+      font-size: 9.5px;
+      color: var(--ink-faint);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 3px;
+      white-space: nowrap;
+    }
+
+    .kpi-preview-value {
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .kpi-preview-value.empty {
+      color: var(--ink-faint);
+      font-style: italic;
+    }
+
+    /* ===================================================================
+       MOTION GRAPHIC ENTERPRISE VALUE CHAIN (v01 RESTORATION & THEME RECOLOR)
+       =================================================================== */
+    .chain-outer-wrap {
+      margin-top: 28px;
+      position: relative;
+    }
+
+    .chain-diagram-frame {
+      position: relative;
+      border: 1px solid #BCCADB;
+      border-radius: 8px;
+      background: #FFFFFF;
+      padding: 36px 20px 20px;
+      box-shadow: none;
+      transition: border-color 0.2s ease;
+      overflow: visible;
+    }
+
+    .chain-diagram-frame:hover {
+      border-color: #BCCADB;
+      box-shadow: 0 8px 28px rgba(62, 65, 71, 0.08);
+    }
+
+    /* Top Center Pill Badge: 총괄: CEO */
+    .chain-ceo-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-radius: 4px;
+      padding: 4px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #3E4147;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 1px 3px rgba(62, 65, 71, 0.08);
+      z-index: 10;
+      cursor: default;
+    }
+
+    .ceo-pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 8px rgba(62, 65, 71, 0.6);
+      animation: ceoDotPulse 2s infinite ease-in-out;
+    }
+
+    @keyframes ceoDotPulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(1.35);
+      }
+    }
+
+    /* Motion Toggle Control */
+    .chain-motion-toggle-wrap {
+      position: absolute;
+      top: -15px;
+      right: 20px;
+      z-index: 10;
+    }
+
+    .motion-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(62, 65, 71, 0.06);
+      transition: all 0.15s ease;
+    }
+
+    .motion-toggle-btn:hover {
+      border-color: var(--red);
+    }
+
+    .motion-indicator-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #3E4147;
+      display: inline-block;
+    }
+
+    .motion-paused .motion-indicator-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #3E4147;
+      display: inline-block;
+    }
+
+    /* Department Horizontal Bars (R&D & BM) */
+    .chain-bar {
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-radius: 6px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      position: relative;
+      transition: all 0.2s ease;
+      box-shadow: none;
+    }
+
+    .chain-bar:hover {
+      border-color: #9EA6B2;
+      background: #E2EAF4;
+    }
+
+    .chain-bar:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(62, 65, 71, 0.08);
+    }
+
+    .chain-bar.rd-bar {
+      border-left: 4px solid var(--rd-color);
+    }
+
+    .chain-bar.bm-bar {
+      border-left: 4px solid var(--bm-color);
+    }
+
+    .chain-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .chain-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 6px;
+      background: #E2EAF4;
+      border: 1.5px solid #9EA6B2;
+      color: #3E4147;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13.5px;
+      flex: none;
+      box-shadow: none;
+    }
+
+    .chain-avatar.rd-avatar {
+      background: var(--rd-light);
+      border: 1.5px solid var(--rd-border);
+      color: var(--rd-color);
+    }
+
+    .chain-avatar.bd-avatar {
+      background: var(--bd-light);
+      border: 1.5px solid var(--bd-border);
+      color: var(--bd-color);
+    }
+
+    .chain-avatar.ps-avatar {
+      background: var(--ps-light);
+      border: 1.5px solid var(--ps-border);
+      color: var(--ps-color);
+    }
+
+    .chain-avatar.pb-avatar {
+      background: var(--pb-light);
+      border: 1.5px solid var(--pb-border);
+      color: var(--pb-color);
+    }
+
+    .chain-avatar.bm-avatar {
+      background: var(--bm-light);
+      border: 1.5px solid var(--bm-border);
+      color: var(--bm-color);
+    }
+
+    .chain-bar-title-wrap {
+      flex: 1;
+    }
+
+    .chain-bar-title {
+      font-size: 16.5px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 3px;
+    }
+
+    .chain-bar-sub {
+      font-size: 12px;
+      color: var(--ink-dim);
+      line-height: 1.5;
+    }
+
+    .chain-bar-sub b {
+      color: var(--ink);
+    }
+
+    .chain-badge-role {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      padding: 4px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex: none;
+    }
+
+    .chain-badge-role.rd-role {
+      background: var(--rd-light);
+      border: 1px solid var(--rd-border);
+      color: var(--rd-color);
+    }
+
+    .chain-badge-role.bm-role {
+      background: var(--bm-light);
+      border: 1px solid var(--bm-border);
+      color: var(--bm-color);
+    }
+
+    /* Vertical Stream Conduits (Aligned with 5-column pipeline grid) */
+    .chain-v-streams {
+      display: grid;
+      grid-template-columns: 1fr 54px 1fr 54px 1fr;
+      align-items: stretch;
+      gap: 12px;
+      position: relative;
+    }
+
+    .chain-v-streams.down-streams {
+      margin: 10px 0 12px;
+      height: 54px;
+    }
+
+    .chain-v-streams.up-streams {
+      margin: 12px 0 10px;
+      height: 54px;
+    }
+
+    .v-stream-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 100%;
+    }
+
+    .v-stream-spacer {
+      /* empty column spacer to match horizontal connector width */
+      visibility: hidden;
+    }
+
+    .v-stream-col.dual-stream {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .sub-stream {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 100%;
+      flex: 1;
+    }
+
+    .v-stream-col.no-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .no-link-badge {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--ink-faint);
+      background: #FFFFFF;
+      border: 1px dashed #BCCADB;
+      padding: 4px 12px;
+      border-radius: 12px;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .stream-line {
+      position: absolute;
+      width: 2px;
+      height: 100%;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .stream-line.down {
+      background: repeating-linear-gradient(to bottom, rgba(62, 65, 71, 0.55) 0, rgba(62, 65, 71, 0.55) 4px, transparent 4px, transparent 8px);
+      animation: vFlowDown 1.2s linear infinite;
+    }
+
+    .stream-line.up {
+      background: repeating-linear-gradient(to top, rgba(62, 65, 71, 0.55) 0, rgba(62, 65, 71, 0.55) 4px, transparent 4px, transparent 8px);
+      animation: vFlowUp 1.2s linear infinite;
+    }
+
+    @keyframes vFlowDown {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 0 16px;
+      }
+    }
+
+    @keyframes vFlowUp {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 0 -16px;
+      }
+    }
+
+    .stream-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      left: -2px;
+    }
+
+    .stream-particle.down {
+      background: var(--rd-color);
+      box-shadow: 0 0 8px rgba(62, 65, 71, 0.7);
+      animation: particleDown 2s infinite ease-in-out;
+    }
+
+    .stream-particle.up {
+      background: var(--bm-color);
+      box-shadow: 0 0 8px rgba(62, 65, 71, 0.7);
+      animation: particleUp 2s infinite ease-in-out;
+    }
+
+    @keyframes particleDown {
+      0% {
+        top: 0%;
+        opacity: 0.2;
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.3);
+      }
+
+      100% {
+        top: 90%;
+        opacity: 0.2;
+      }
+    }
+
+    @keyframes particleUp {
+      0% {
+        bottom: 0%;
+        opacity: 0.2;
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.3);
+      }
+
+      100% {
+        bottom: 90%;
+        opacity: 0.2;
+      }
+    }
+
+    .stream-chip {
+      position: relative;
+      z-index: 3;
+      background: #FFFFFF;
+      border-radius: 14px;
+      padding: 4px 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 6px rgba(62, 65, 71, 0.05);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .stream-chip.down {
+      border: 1px solid var(--rd-border);
+    }
+
+    .stream-chip.up {
+      border: 1px solid var(--bm-border);
+    }
+
+    .stream-chip:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 10px rgba(62, 65, 71, 0.10);
+    }
+
+    .stream-arr {
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .stream-chip.down .stream-arr {
+      color: var(--rd-color);
+    }
+
+    .stream-chip.up .stream-arr {
+      color: var(--bm-color);
+    }
+
+    .stream-txt {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    /* Middle Row: 3 Pipeline Cards (BD -> PS -> PB) */
+    .chain-pipeline-grid {
+      display: grid;
+      grid-template-columns: 1fr 54px 1fr 54px 1fr;
+      align-items: stretch;
+      gap: 12px;
+      position: relative;
+    }
+
+    .pipeline-card {
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-top: 2px solid #3E4147;
+      border-radius: 6px;
+      padding: 16px 16px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.2s ease;
+      box-shadow: none;
+    }
+
+    .pipeline-card:hover {
+      border-color: #6F7680;
+      box-shadow: 0 2px 8px rgba(62, 65, 71, 0.05);
+    }
+
+    .pipeline-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(62, 65, 71, 0.08);
+    }
+
+    .pipeline-card.bd-card {
+      border-top: 3.5px solid var(--bd-color);
+    }
+
+    .pipeline-card.ps-card {
+      border-top: 3.5px solid var(--ps-color);
+    }
+
+    .pipeline-card.pb-card {
+      border-top: 3.5px solid var(--pb-color);
+    }
+
+    .pipeline-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .pipeline-step-tag {
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+
+    .pipeline-step-tag.bd-tag {
+      color: var(--bd-color);
+    }
+
+    .pipeline-step-tag.ps-tag {
+      color: var(--ps-color);
+    }
+
+    .pipeline-step-tag.pb-tag {
+      color: var(--pb-color);
+    }
+
+    .pipeline-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+
+    .pipeline-role-name {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .pipeline-card.bd-card .pipeline-role-name {
+      color: var(--bd-color);
+    }
+
+    .pipeline-card.ps-card .pipeline-role-name {
+      color: var(--ps-color);
+    }
+
+    .pipeline-card.pb-card .pipeline-role-name {
+      color: var(--pb-color);
+    }
+
+    .pipeline-desc {
+      font-size: 11.5px;
+      color: var(--ink-dim);
+      line-height: 1.55;
+      flex: 1;
+      margin-bottom: 12px;
+    }
+
+    .pipeline-deliverable {
+      background: #E2EAF4;
+      border: 1px solid #BCCADB;
+      border-radius: 4px;
+      padding: 6px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .deliv-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--ink-faint);
+      letter-spacing: 0.03em;
+    }
+
+    .deliv-val {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* Horizontal Pipeline Bridge Connectors */
+    .pipeline-h-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 54px;
+      position: relative;
+    }
+
+    .h-flow-line {
+      position: relative;
+      width: 100%;
+      height: 2px;
+      background: repeating-linear-gradient(to right, rgba(62, 65, 71, 0.65) 0, rgba(62, 65, 71, 0.65) 4px, transparent 4px, transparent 8px);
+      animation: hFlowRight 1.2s linear infinite;
+    }
+
+    @keyframes hFlowRight {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 16px 0;
+      }
+    }
+
+    .h-flow-particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 8px rgba(62, 65, 71, 0.85);
+      top: -2px;
+      animation: hParticleMove 2s infinite ease-in-out;
+    }
+
+    @keyframes hParticleMove {
+      0% {
+        left: 0%;
+        opacity: 0.2;
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.3);
+      }
+
+      100% {
+        left: 88%;
+        opacity: 0.2;
+      }
+    }
+
+    .h-flow-label {
+      margin-top: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      white-space: nowrap;
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      padding: 3px 6px;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(62, 65, 71, 0.05);
+    }
+
+    .h-flow-arr {
+      font-size: 8px;
+      font-weight: 800;
+      color: var(--red);
+    }
+
+    /* ===================================================================
+       CLOSE-LOOP ARCHITECTURE: 5-TEAM INTERLOCKING VALUE CHAIN & KPI RATIONALE
+       =================================================================== */
+    .chain-loop-bar {
+      margin-top: 24px;
+      background: #FFFFFF;
+      border: 1.5px solid #E2EAF4;
+      border-left: 5px solid #3E4147;
+      border-radius: 14px;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 4px 16px rgba(62, 65, 71, 0.05);
+      transition: all 0.25s ease;
+    }
+
+    .chain-loop-bar.glow {
+      border-color: #3E4147;
+      box-shadow: 0 6px 22px rgba(62, 65, 71, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .loop-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #E2EAF4;
+    }
+
+    .loop-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #3E4147;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .loop-icon {
+      display: inline-block;
+      font-size: 16px;
+      animation: rotateCycle 8s linear infinite;
+    }
+
+    @keyframes rotateCycle {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loop-header-desc {
+      font-size: 12px;
+      font-weight: 700;
+      color: #3E4147;
+      opacity: 0.85;
+    }
+
+    /* 5-Team Interlocking Flow Grid */
+    .loop-chain-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 1200px) {
+      .loop-chain-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .loop-chain-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .loop-step-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-powder-slate);
+      border-top: 3px solid var(--color-deep-ink);
+      border-radius: 8px;
+      padding: 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(62, 65, 71, 0.02);
+    }
+
+    .loop-step-card:hover {
+      border-color: var(--color-deep-ink);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(62, 65, 71, 0.08);
+    }
+
+    .loop-step-card:hover {
+      border-color: var(--title-violet);
+      transform: translateY(-1px);
+    }
+
+    .loop-step-card:hover {
+      border-color: #6F7680;
+      box-shadow: 0 2px 8px rgba(62, 65, 71, 0.06);
+    }
+
+    .loop-step-card:hover {
+      border-color: #BCCADB;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(62, 65, 71, 0.08);
+    }
+
+    .loop-step-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .step-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      color: #FFFFFF;
+      background: var(--color-deep-ink);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .step-conn {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--color-dark-slate);
+    }
+
+    .loop-step-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #3E4147;
+    }
+
+    .loop-step-body {
+      background: var(--bg-canvas);
+      color: var(--ink);
+      font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      line-height: 1.6;
+      font-size: 13.5px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      letter-spacing: -0.02em;
+    }
+
+    .loop-step-body b {
+      color: #3E4147;
+      font-weight: 700;
+    }
+
+    /* Executive Takeaway Banner */
+    .loop-kpi-rationale {
+      background: #FFFFFF;
+      border: 1px solid var(--color-powder-slate);
+      border-left: 4px solid var(--color-deep-ink);
+      border-radius: 8px;
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 1px 3px rgba(62, 65, 71, 0.02);
+    }
+
+    .rationale-lead-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .rationale-badge {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      color: #FFFFFF;
+      background: var(--color-deep-ink);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .rationale-tag {
+      font-size: 12px;
+      font-weight: 800;
+      color: #3E4147;
+    }
+
+    .rationale-desc {
+      font-size: 11.5px;
+      color: #3E4147;
+      line-height: 1.6;
+    }
+
+    .rationale-desc b {
+      color: #3E4147;
+      font-weight: 800;
+    }
+
+    .rationale-vision-box {
+      margin-top: 10px;
+      padding: 12px 16px;
+      background: var(--color-ice-tint);
+      border: 1px dashed var(--color-powder-slate);
+      border-left: 3px solid var(--color-deep-ink);
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--color-deep-ink);
+      line-height: 1.6;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .vision-bullet {
+      color: #3E4147;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    /* Dynamic Wave & Sequential Glow */
+    .chain-bar.glow,
+    .pipeline-card.glow {
+      transform: translateY(-2px);
+    }
+
+    .chain-bar.rd-bar.glow {
+      box-shadow: 0 6px 18px rgba(62, 65, 71, 0.25);
+      border-color: var(--rd-color);
+    }
+
+    .pipeline-card.bd-card.glow {
+      box-shadow: 0 6px 18px rgba(62, 65, 71, 0.25);
+      border-color: var(--bd-color);
+    }
+
+    .pipeline-card.ps-card.glow {
+      box-shadow: 0 6px 18px rgba(62, 65, 71, 0.25);
+      border-color: var(--ps-color);
+    }
+
+    .pipeline-card.pb-card.glow {
+      box-shadow: 0 6px 18px rgba(62, 65, 71, 0.25);
+      border-color: var(--pb-color);
+    }
+
+    .chain-bar.bm-bar.glow {
+      box-shadow: 0 6px 18px rgba(62, 65, 71, 0.25);
+      border-color: var(--bm-color);
+    }
+
+    .chain-loop-bar.glow {
+      box-shadow: 0 6px 18px rgba(62, 65, 71, 0.25);
+      border-color: var(--red);
+    }
+
+    /* Motion Paused State */
+    .motion-paused * {
+      animation-play-state: paused !important;
+    }
+
+    @keyframes pulseRadarDot {
+      0% {
+        box-shadow: 0 0 0 0 rgba(62, 65, 71, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 6px rgba(62, 65, 71, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(62, 65, 71, 0);
+      }
+    }
+
+    @media (max-width: 900px) {
+
+      .chain-pipeline-grid,
+      .chain-v-streams {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline-h-connector,
+      .v-stream-spacer {
+        display: none;
+      }
+
+      .chain-v-streams {
+        display: none;
+      }
+
+      .loop-items-wrap {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .chain-loop-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .loop-badge {
+        border-right: none;
+        border-bottom: 1px solid #E2EAF4;
+        padding-bottom: 8px;
+        width: 100%;
+      }
+    }
+
+    @media print {
+
+      .chain-diagram-frame *,
+      .stream-particle,
+      .h-flow-particle,
+      .loop-icon {
+        animation: none !important;
+      }
+    }
+
+
+    /* ===================================================================
+       2027 EXECUTIVE GOVERNANCE 3-PILLAR ARCHITECTURE CARD
+       =================================================================== */
+    .gov-card {
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-radius: 8px;
+      padding: 22px 26px;
+      margin-bottom: 24px;
+      box-shadow: none;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .gov-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--red);
+    }
+
+    .gov-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #E2EAF4;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .gov-card-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .gov-card-subtitle {
+      font-size: 12px;
+      color: var(--ink-dim);
+      margin-top: 3px;
+    }
+
+    .gov-total-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: 4px;
+      border: 1px solid #BCCADB;
+      background: #E2EAF4;
+      font-size: 11px;
+      font-weight: 700;
+      color: #3E4147;
+      white-space: nowrap;
+    }
+
+    .gov-total-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #3E4147;
+      display: inline-block;
+    }
+
+    .gov-pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .gov-pillars-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .gov-pillar-col {
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-radius: 6px;
+      padding: 14px 16px;
+    }
+
+    .gov-pillar-col:hover {
+      border-color: #BCCADB;
+      transform: translateY(-1px);
+    }
+
+    .pillar-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--ink-faint);
+    }
+
+    .pillar-res .pillar-tag {
+      color: #3E4147;
+    }
+
+    .pillar-p1 .pillar-tag {
+      color: #3E4147;
+    }
+
+    .pillar-p2 .pillar-tag {
+      color: #3E4147;
+    }
+
+    .pillar-name {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .pillar-desc {
+      font-size: 11.5px;
+      color: var(--ink-dim);
+      line-height: 1.5;
+    }
+
+    .gov-progress-wrap {
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-radius: 6px;
+      padding: 12px 16px;
+    }
+
+    .gov-progress-bar {
+      height: 9px;
+      display: flex;
+      border-radius: 5px;
+      overflow: hidden;
+      background: var(--color-ice-tint);
+      border: 1px solid var(--color-powder-slate);
+    }
+
+    .gov-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      font-size: 0px;
+      color: transparent;
+    }
+
+    .gov-seg.seg-res {
+      background: var(--color-deep-ink) !important;
+      border-right: 1.5px solid #FFFFFF;
+    }
+
+    .gov-seg.seg-p1 {
+      background: var(--color-dark-slate) !important;
+      border-right: 1.5px solid #FFFFFF;
+    }
+
+    .gov-seg.seg-p2 {
+      background: var(--color-mid-slate) !important;
+    }
+
+    /* ===================================================================
+       SEMANTIC GUIDE BOX COMPONENT (NO RUN-ON PARAGRAPHS)
+       =================================================================== */
+    .guide-box {
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-radius: 6px;
+      padding: 14px 18px;
+    }
+
+    .guide-box-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #E2EAF4;
+    }
+
+    .guide-icon {
+      font-size: 13px;
+    }
+
+    .guide-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .guide-semantic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .guide-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .guide-item-tag {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--ink-faint);
+      background: var(--surface-subtle);
+      border: 1px solid #E2EAF4;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      min-width: 72px;
+      text-align: center;
+      flex: none;
+    }
+
+    .guide-item-text {
+      color: var(--ink-dim);
+      flex: 1;
+    }
+
+    .guide-item-text b {
+      color: var(--ink);
+    }
+
+    .guide-footnote {
+      display: inline-block;
+      margin-left: 8px;
+      color: var(--red);
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    /* ===================================================================
+       CAUSAL PERFORMANCE ARCHITECTURE CARD STYLES
+       =================================================================== */
+    .gov-card-eyebrow {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #3E4147;
+      margin-bottom: 4px;
+    }
+
+    .causal-pipeline-wrap {
+      display: flex;
+      align-items: stretch;
+      gap: 16px;
+      margin: 20px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 1080px) {
+      .causal-pipeline-wrap {
+        flex-direction: column;
+      }
+    }
+
+    .causal-block {
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .causal-cause {
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-top: 2px solid #6F7680;
+      border-radius: 6px;
+      padding: 16px 18px;
+      flex: 1.1;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .causal-harvest {
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-top: 2px solid #3E4147;
+      border-radius: 6px;
+      padding: 16px 18px;
+      flex: 0.9;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .causal-block-header {
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #E2EAF4;
+    }
+
+    .causal-stage-badge {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: #3E4147;
+      background: #E2EAF4;
+      border: 1px solid #BCCADB;
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+
+    .causal-stage-badge.harvest-badge {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: #3E4147;
+      background: #E2EAF4;
+      border: 1px solid #3E4147;
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+
+    .causal-block-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #3E4147;
+    }
+
+    .causal-subgrid {
+      display: flex;
+      align-items: stretch;
+      gap: 12px;
+      flex: 1;
+    }
+
+    @media (max-width: 768px) {
+      .causal-subgrid {
+        flex-direction: column;
+      }
+    }
+
+    .causal-subcard {
+      flex: 1;
+      background: #FFFFFF;
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border: 1px solid #E2EAF4;
+      transition: all 0.2s ease;
+    }
+
+    .causal-subcard.card-p1 {
+      border-color: #BCCADB;
+    }
+
+    .causal-subcard.card-p2 {
+      border-color: #E2EAF4;
+    }
+
+    .causal-subcard:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(62, 65, 71, 0.08);
+    }
+
+    .causal-subcard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .causal-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .tag-p1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: #3E4147;
+      background: #E2EAF4;
+      border: 1px solid #6F7680;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .tag-p2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: #3E4147;
+      background: #E2EAF4;
+      border: 1px solid #9EA6B2;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .tag-res {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      color: #3E4147;
+      background: #E2EAF4;
+      border: 1px solid #3E4147;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .causal-score-chip {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #3E4147;
+    }
+
+    .causal-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #3E4147;
+    }
+
+    .causal-name.res-name {
+      font-size: 16px;
+      color: #3E4147;
+    }
+
+    .causal-desc {
+      font-size: 12px;
+      color: #3E4147;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .causal-feature-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .causal-pill {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #3E4147;
+      background: #E2EAF4;
+      border: 1px solid #BCCADB;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .causal-plus-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 0 4px;
+    }
+
+    .plus-symbol {
+      font-size: 20px;
+      font-weight: 900;
+      color: #3E4147;
+    }
+
+    .plus-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #3E4147;
+      white-space: nowrap;
+    }
+
+    .causal-bridge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
+      gap: 6px;
+    }
+
+    @media (max-width: 1080px) {
+      .causal-bridge {
+        padding: 12px 0;
+        transform: rotate(90deg);
+      }
+    }
+
+    .causal-bridge-arrow {
+      width: 60px;
+      height: 30px;
+    }
+
+    .bridge-arrow-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 2px 4px rgba(62, 65, 71, 0.3));
+    }
+
+    .causal-bridge-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .bridge-kicker {
+      font-size: 11px;
+      font-weight: 800;
+      color: #3E4147;
+      white-space: nowrap;
+    }
+
+    .bridge-sub {
+      font-size: 10px;
+      font-weight: 700;
+      color: #3E4147;
+      white-space: nowrap;
+    }
+
+    .causal-harvest-card {
+      background: #FFFFFF;
+      border: 1px solid #BCCADB;
+      border-left: 3px solid #3E4147;
+      border-radius: 6px;
+      padding: 16px 18px;
+    }
+
+    .harvest-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .harvest-key-takeaway {
+      background: #FFFFFF;
+      border: 1px solid #E2EAF4;
+      border-left: 3px solid #3E4147;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 11.5px;
+      color: #3E4147;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    .takeaway-icon {
+      color: #3E4147;
+      font-weight: 900;
+    }
+
+    .causal-synthesis-bar {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid #E2EAF4;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .causal-formula-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #3E4147;
+      text-align: center;
+    }
+
+    .formula-term {
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .tag-p1-text {
+      background: #E2EAF4;
+      color: #3E4147;
+    }
+
+    .tag-p2-text {
+      background: #E2EAF4;
+      color: #3E4147;
+    }
+
+    .tag-res-text {
+      background: #3E4147;
+      color: #FFFFFF;
+    }
+
+    .formula-arrow {
+      color: #3E4147;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+    }
+
+    .formula-total {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      color: #3E4147;
+      background: #E2EAF4;
+      border: 1px solid #3E4147;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .causal-progress-caption {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #3E4147;
+    }
+
+    .caption-arrow {
+      color: #3E4147;
+    }
+
+    /* ===================================================================
+       MASTER KPI MATRIX PAGE (PAGE 2: 전사 종합 연결) STYLES
+       =================================================================== */
+    .matrix-filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: transparent;
+      border-bottom: 1px solid var(--color-powder-slate);
+      padding: 0 0 14px 0;
+      margin-bottom: 24px;
+      box-shadow: none;
+    }
+
+    .matrix-filter-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .matrix-filter-label {
+      font-size: 12px;
+      font-weight: 800;
+      color: #3E4147;
+      margin-right: 6px;
+    }
+
+    .matrix-filter-btn {
+      background: transparent;
+      border: 1px solid var(--color-powder-slate);
+      color: var(--color-dark-slate);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 11px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .matrix-filter-btn:hover {
+      border-color: var(--color-deep-ink);
+      color: var(--color-deep-ink);
+      background: var(--color-ice-tint);
+    }
+
+    .matrix-filter-btn.active {
+      background: var(--color-ice-tint);
+      color: var(--color-deep-ink);
+      border-color: var(--color-deep-ink);
+      font-weight: 800;
+      box-shadow: 0 1px 3px rgba(62, 65, 71, 0.08);
+    }
+
+    .matrix-stats-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--color-deep-ink);
+      background: var(--color-ice-tint);
+      border: 1px solid var(--color-powder-slate);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .matrix-container {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .matrix-team-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-powder-slate);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(62, 65, 71, 0.02);
+      transition: all 0.2s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .matrix-team-card:hover {
+      border-color: #3E4147;
+      box-shadow: 0 4px 14px rgba(62, 65, 71, 0.08);
+    }
+
+    .matrix-team-header {
+      background: var(--color-ice-tint);
+      border-bottom: 1px solid var(--color-powder-slate);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .matrix-team-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .matrix-team-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 6px;
+      background: var(--color-deep-ink);
+      color: #FFFFFF;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 13.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .matrix-team-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .matrix-team-name-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .matrix-team-name {
+      font-size: 16px;
+      font-weight: 800;
+      color: #3E4147;
+    }
+
+    .matrix-team-role {
+      font-size: 13px;
+      font-weight: 700;
+      color: #3E4147;
+    }
+
+    .matrix-team-desc {
+      font-size: 11.5px;
+      color: #3E4147;
+      line-height: 1.4;
+      opacity: 0.85;
+    }
+
+    .matrix-team-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .matrix-btn-goto {
+      background: #FFFFFF;
+      border: 1.5px solid #BCCADB;
+      color: #3E4147;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .matrix-btn-goto:hover {
+      background: #3E4147;
+      color: #FFFFFF;
+      border-color: #3E4147;
+    }
+
+    /* 3-Column Layout inside Matrix Team Card */
+    .matrix-columns-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1.25fr);
+      divide-x: 1px solid #E2EAF4;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 1200px) {
+      .matrix-columns-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .matrix-col {
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .matrix-col-res {
+      background: #FFFFFF;
+      border-right: 1px solid var(--color-ice-tint);
+    }
+
+    .matrix-col-p1 {
+      background: #FFFFFF;
+      border-right: 1px solid var(--color-ice-tint);
+    }
+
+    .matrix-col-p2 {
+      background: #FFFFFF;
+    }
+
+    .matrix-col-header {
+      padding-bottom: 10px;
+      border-bottom: 1px solid #E2EAF4;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .matrix-col-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 3px;
+      display: inline-block;
+      border: 1px solid var(--color-powder-slate);
+      background: var(--color-ice-tint);
+      color: var(--color-deep-ink);
+    }
+
+    .matrix-col-tag.tag-res {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      color: #3E4147;
+      background: #E2EAF4;
+      border: 1px solid #3E4147;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .matrix-col-tag.tag-p1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: #3E4147;
+      background: #E2EAF4;
+      border: 1px solid #6F7680;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .matrix-col-tag.tag-p2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: #3E4147;
+      background: #E2EAF4;
+      border: 1px solid #9EA6B2;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .matrix-col-sub {
+      font-size: 11px;
+      color: #3E4147;
+      opacity: 0.75;
+      margin-top: 4px;
+    }
+
+    .matrix-res-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: #3E4147;
+      line-height: 1.45;
+    }
+
+    .matrix-res-target-box {
+      background: #FFFFFF;
+      border: 1px solid #E2EAF4;
+      border-left: 3px solid #3E4147;
+      border-radius: 4px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .matrix-target-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #3E4147;
+    }
+
+    .matrix-target-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: #3E4147;
+    }
+
+    .matrix-eval-box {
+      background: #FFFFFF;
+      border: 1px solid #E2EAF4;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 11px;
+      color: #6F7680;
+      line-height: 1.4;
+    }
+
+    .matrix-reason-box {
+      background: #FFFFFF;
+      border: 1px dashed #BCCADB;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 11px;
+      color: #6F7680;
+      line-height: 1.45;
+    }
+
+    .matrix-item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .matrix-list-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #E2EAF4;
+    }
+
+    .matrix-list-item:last-child {
+      border-bottom: none;
+    }
+
+    .matrix-list-item:hover {
+      border-color: #BCCADB;
+      box-shadow: 0 2px 8px rgba(62, 65, 71, 0.06);
+    }
+
+    .matrix-item-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .matrix-item-index {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      color: #3E4147;
+      background: transparent;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .matrix-item-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #3E4147;
+      flex: 1;
+    }
+
+    .matrix-item-weight {
+      font-size: 10px;
+      font-weight: 700;
+      color: #3E4147;
+      background: #E2EAF4;
+      border: 1px solid #BCCADB;
+      padding: 1px 6px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .matrix-item-meta {
+      font-size: 11px;
+      color: #3E4147;
+      line-height: 1.4;
+      opacity: 0.85;
+    }
+
+    .matrix-col-footer {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid #E2EAF4;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #3E4147;
+    }
+
+    /* ===================================================================
+       MOTTO BANNER STYLES
+       =================================================================== */
+    .motto-banner {
+      background: #FFFFFF;
+      border: 1px solid #F0D5D5;
+      border-left: 4px solid #DE5959;
+      border-radius: 8px;
+      padding: 14px 22px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 1px 3px rgba(222, 89, 89, 0.05);
+      width: 100%;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+    }
+
+    .motto-banner:hover {
+      border-color: #DE5959;
+      box-shadow: 0 4px 14px rgba(222, 89, 89, 0.12);
+    }
+
+    .motto-quote {
+      font-size: 15px;
+      font-weight: 700;
+      color: #DE5959 !important;
+      letter-spacing: -0.01em;
+      line-height: 1.5;
+    }
+
+    /* Bookmark Index Tab Navigation (Thin Line Based) */
+    .tab-nav.bookmark-index-nav {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: transparent;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--color-dark-slate);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--color-deep-ink);
+      background: var(--color-ice-tint);
+    }
+
+    .tab-btn.active {
+      color: var(--color-deep-ink);
+      font-weight: 800;
+      background: var(--color-ice-tint);
+      border: 1px solid var(--color-powder-slate);
+      box-shadow: 0 1px 3px rgba(62, 65, 71, 0.06);
+    }
+
+    /* Weight validation badge */
+    .weight-total-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+      border: 1px solid #BCCADB;
+      background: #E2EAF4;
+      color: #3E4147;
+    }
+
+    .weight-total-badge.valid {
+      border-color: #3E4147;
+      color: #3E4147;
+      background: #E2EAF4;
+    }
+
+    .weight-total-badge.invalid {
+      border-color: #9EA6B2;
+      color: #3E4147;
+      background: #E2EAF4;
+    }
+
+    .weight-total-badge.valid {
+      background: #E2EAF4;
+      color: #3E4147;
+      border: 1px solid #BCCADB;
+    }
+
+    .weight-total-badge.invalid {
+      background: #E2EAF4;
+      color: #3E4147;
+      border: 1.5px solid #3E4147;
+      box-shadow: 0 0 6px rgba(62, 65, 71, 0.2);
+    }
+  
+    /* ===================================================================
+       STICKY PAGE HEADERS & ACTIONS BAR (PINNED ON SCROLL)
+       =================================================================== */
+    :root {
+      --global-header-height: 56px;
+    }
+
+    .team-page-sticky-header {
+      position: sticky;
+      top: var(--global-header-height, 56px);
+      z-index: 90;
+      background: var(--bg-canvas);
+      margin-left: -24px;
+      margin-right: -24px;
+      padding: 12px 24px 14px 24px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--color-powder-slate);
+      box-shadow: 0 4px 16px rgba(62, 65, 71, 0.05);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .team-page-sticky-header .page-eyebrow {
+      margin-bottom: 4px;
+    }
+
+    .team-page-sticky-header .page-title {
+      margin-bottom: 6px;
+      font-size: 24px;
+    }
+
+    .team-page-sticky-header .page-desc {
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .team-page-sticky-header .team-top-bar {
+      margin-bottom: 0;
+      background: #FFFFFF;
+      border: 1px solid var(--color-powder-slate);
+      box-shadow: 0 1px 4px rgba(62, 65, 71, 0.04);
+    }
+
+    .matrix-sticky-header {
+      position: sticky;
+      top: var(--global-header-height, 56px);
+      z-index: 90;
+      background: var(--bg-canvas);
+      margin-left: -24px;
+      margin-right: -24px;
+      padding: 12px 24px 14px 24px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--color-powder-slate);
+      box-shadow: 0 4px 16px rgba(62, 65, 71, 0.05);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .matrix-sticky-header .page-eyebrow {
+      margin-bottom: 4px;
+    }
+
+    .matrix-sticky-header .page-title {
+      margin-bottom: 6px;
+    }
+
+    .matrix-sticky-header .page-desc {
+      margin-bottom: 10px;
+    }
+
+    .matrix-sticky-header .matrix-filter-bar {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    @media print {
+      .team-page-sticky-header,
+      .matrix-sticky-header,
+      header.global-header {
+        position: static !important;
+        box-shadow: none !important;
+      }
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ============ TOP STICKY HEADER ============ -->
+  <header class="global-header">
+    <div class="header-inner">
+      <div class="brand-wrap">
+        <div class="brand-logo">
+          <span class="dot"></span>
+          <span>OMELET · 2027 KPI GOVERNANCE</span>
+          <span class="brand-v-pill">v12</span>
+        </div>
+      </div>
+
+      <!-- Bookmark Index Tab Navigation (책갈피 색인 탭 · 상단 우측 배치) -->
+      <nav class="tab-nav bookmark-index-nav" aria-label="메인 대시보드 및 팀별 책갈피 색인 내비게이션">
+        <button class="tab-btn active" data-target="overview" title="2027 KPI 성과 거버넌스 가이드">
+          <span class="tab-indicator-dot"></span>
+          <span>2027 KPI</span>
+        </button>
+        <button class="tab-btn" data-target="matrix" title="전사 5대 핵심 조직 KPI 전체 매트릭스">
+          <span class="tab-indicator-dot"></span>
+          <span>전사 종합 연결</span>
+        </button>
+        <button class="tab-btn" data-target="rd" title="Research (R&D) KPI 세팅">
+          <span class="tab-indicator-dot"></span>
+          <span class="team-tab-badge">R&D</span>
+        </button>
+        <button class="tab-btn" data-target="bd" title="Business Development (BD) KPI 세팅">
+          <span class="tab-indicator-dot"></span>
+          <span class="team-tab-badge">BD</span>
+        </button>
+        <button class="tab-btn" data-target="ps" title="Problem Solving (PS) KPI 세팅">
+          <span class="tab-indicator-dot"></span>
+          <span class="team-tab-badge">PS</span>
+        </button>
+        <button class="tab-btn" data-target="pb" title="Product Build (PB) KPI 세팅">
+          <span class="tab-indicator-dot"></span>
+          <span class="team-tab-badge">PB</span>
+        </button>
+        <button class="tab-btn" data-target="bm" title="Business Management (BM) KPI 세팅">
+          <span class="tab-indicator-dot"></span>
+          <span class="team-tab-badge">BM</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ MAIN CONTAINER ============ -->
+  <main class="main-container">
+
+    <!-- ===================================================================
+         PAGE 1: 전사 종합 연결 대시보드 (Summary Page)
+         =================================================================== -->
+    <!-- ===================================================================
+         PAGE 1: 작성 개요 (Setup Overview & Causal Governance Guide)
+         =================================================================== -->
+    <section id="page-overview" class="page-view active">
+      <div class="page-eyebrow">EXECUTIVE OVERVIEW · GOVERNANCE GUIDE</div>
+      <h1 class="page-title">2027 KPI</h1>
+      <p class="page-desc">
+        오믈렛의 2027년 비즈니스는 5대 핵심 조직(R&D, BD, PS, PB, BM)의 유기적인 가치 사슬 연계를 통해 완성됩니다.<br>
+        팀 간 협업 시너지 창출과 공정한 책임 경영을 위해 전사 공통의 100점 절대평가 거버넌스를 가동합니다.
+      </p>
+
+      <!-- MOTTO BANNER -->
+      <div class="motto-banner">
+        <span class="motto-quote">"우리의 실력은 현장에서 검증되며, 우리의 결과가 AI 혁신의 기준이 된다."</span>
+      </div>
+
+      <!-- 2027 Executive Causal Governance Architecture Card (성과I + 성과II -> 결과지표 인과 구조) -->
+      <div class="gov-card">
+        <div class="gov-card-header">
+          <div>
+            <div class="gov-card-eyebrow">CAUSAL PERFORMANCE ARCHITECTURE · 인과 거버넌스</div>
+            <div class="gov-card-title">선행 동인(성과지표 I + II) ➔ 최종 결실(결과지표) 창출 메커니즘</div>
+            <div class="gov-card-subtitle">
+              결과지표(50점)는 독립적으로 달성되는 것이 아니라, 일상 직무의 정량 선행 행동(20점)과 정성 역량 협업(30점)이 축적되어 비로소 완성됩니다.
+            </div>
+          </div>
+          <div class="gov-total-badge eng">
+            <span class="gov-total-dot"></span>
+            <span>100점 만점 절대평가 체계</span>
+          </div>
+        </div>
+
+        <!-- CAUSAL FLOW PIPELINE (Causes ➔ Flow Bridge ➔ Harvest) -->
+        <div class="causal-pipeline-wrap">
+
+          <!-- LEFT: CAUSE / DRIVERS (총 50점 선행 동인) -->
+          <div class="causal-block causal-cause">
+            <div class="causal-block-header">
+              <div class="causal-stage-badge">STEP 1. 원인 및 선행 실행 동인 (총 50점)</div>
+              <div class="causal-block-title">일상 업무 행동과 시너지 역량의 누적 실천</div>
+            </div>
+
+            <div class="causal-subgrid">
+              <!-- Sub-card A: 성과지표 I (20점) -->
+              <div class="causal-subcard card-p1">
+                <div class="causal-subcard-header">
+                  <span class="causal-tag tag-p1">선행 행동 · 20점 고정</span>
+                  <span class="causal-score-chip chip-p1">5개 지표 × 4점</span>
+                </div>
+                <div class="causal-name">성과지표 I (정량 선행 행동)</div>
+                <p class="causal-desc">
+                  최상위 결과를 견인하기 위해 일상 업무에서 매일·매주 완수해야 하는 핵심 선행 직무 지표 (데이터 정합, SLA 준수, 사전 검증 등).
+                </p>
+                <div class="causal-feature-pills">
+                  <span class="causal-pill">#일상직무루틴</span>
+                  <span class="causal-pill">#병목사전차단</span>
+                  <span class="causal-pill">#결과직결동인</span>
+                </div>
+              </div>
+
+              <!-- Plus connector -->
+              <div class="causal-plus-divider" title="선행 행동과 협업 역량의 상호 결합">
+                <span class="plus-symbol">＋</span>
+                <span class="plus-label">융합 시너지</span>
+              </div>
+
+              <!-- Sub-card B: 성과지표 II (30점) -->
+              <div class="causal-subcard card-p2">
+                <div class="causal-subcard-header">
+                  <span class="causal-tag tag-p2">핵심 역량 · 30점 고정</span>
+                  <span class="causal-score-chip chip-p2">5개 영역 × 6점</span>
+                </div>
+                <div class="causal-name">성과지표 II (정성 핵심 역량)</div>
+                <p class="causal-desc">
+                  단독 실행을 넘어 팀과 전사의 사업 성공을 가능하게 만드는 5대 정성 역량 (주도적 업무태도, 전문 소통, 타 부서 협업, 업무 완결성, 조직 기여).
+                </p>
+                <div class="causal-feature-pills">
+                  <span class="causal-pill">#전문적소통</span>
+                  <span class="causal-pill">#조직화합협업</span>
+                  <span class="causal-pill">#철저한업무완결</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CENTER: DYNAMIC CAUSAL CONNECTOR (FLOW ARROW BRIDGE) -->
+          <div class="causal-bridge">
+            <div class="causal-bridge-arrow">
+              <svg class="bridge-arrow-svg" viewBox="0 0 80 40" fill="none">
+                <path d="M 5 20 H 68 M 52 8 L 68 20 L 52 32" stroke="#3E4147" stroke-width="4" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="causal-bridge-label">
+              <span class="bridge-kicker">필연적 견인</span>
+              <span class="bridge-sub">50점 동인 누적 ➔</span>
+            </div>
+          </div>
+
+          <!-- RIGHT: OUTCOME / HARVEST (50점 최종 결실) -->
+          <div class="causal-block causal-harvest">
+            <div class="causal-block-header">
+              <div class="causal-stage-badge harvest-badge">STEP 2. 최종 사업 결실 (50점 고정)</div>
+              <div class="causal-block-title">팀 공동 최상위 사업 성과 창출</div>
+            </div>
+
+            <div class="causal-harvest-card">
+              <div class="harvest-card-header">
+                <span class="causal-tag tag-res">최종 결실 · 50점 고정</span>
+                <span class="causal-score-chip chip-res">팀원 100% 동일 부여</span>
+              </div>
+              <div class="causal-name res-name">결과지표 (최상위 사업 성과)</div>
+              <p class="causal-desc res-desc">
+                성과지표 I(20점)과 성과지표 II(30점)의 지속적 실천이 축적되어 마침내 달성되는 팀 단일 최상위 사업 실적(신규 프로젝트 수주 및 성공 건수·엔진 배포 건수 등, 단순 매출액이 아닌 실질 프로젝트 건수 중심).
+              </p>
+              <div class="harvest-key-takeaway">
+                <span class="takeaway-icon">★</span>
+                <span><b>핵심 원칙:</b> 성과지표 I과 II의 뒷받침 없는 결과지표는 불가능하며, 팀 전원의 협업으로 완성된 결과는 팀원 전원에게 100% 균등 귀속됩니다.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- CAUSAL EQUATION & PROGRESS SYNTHESIS BAR -->
+        <div class="causal-synthesis-bar">
+          <div class="causal-formula-text">
+            <span class="formula-term tag-p1-text">성과지표 I (선행 행동 20점)</span>
+            <span class="formula-op">＋</span>
+            <span class="formula-term tag-p2-text">성과지표 II (협업 역량 30점)</span>
+            <span class="formula-arrow">════(인과 견인)══▶</span>
+            <span class="formula-term tag-res-text">결과지표 (최상위 사업 결실 50점)</span>
+            <span class="formula-op">＝</span>
+            <span class="formula-total">전사 100점 절대평가 확정</span>
+          </div>
+
+          <div class="gov-progress-wrap">
+            <div class="gov-progress-bar">
+              <div class="gov-seg seg-p1" style="width:20%;" title="성과지표 I: 정량 선행 행동 20점 (소프트 라벤더 #6F7680)">성과I 20%
+              </div>
+              <div class="gov-seg seg-p2" style="width:30%;" title="성과지표 II: 정성 핵심 역량 30점 (라이트 릴락 파스텔 #9EA6B2)">성과II 30%
+              </div>
+              <div class="gov-seg seg-res" style="width:50%;" title="결과지표: 최상위 사업 성과 50점 (파스텔 바이올렛 #3E4147)">결과지표 50%
+              </div>
+            </div>
+          </div>
+
+          <div class="causal-progress-caption">
+            <span class="caption-lead">선행 과정 50점 (성과I 20% + 성과II 30%)</span>
+            <span class="caption-arrow">➔ 인과적 동인 작용 ➔</span>
+            <span class="caption-trail">사업 결과 50% (결과지표 50점) = 100점 만점</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 Teams Summary Grid -->
+      <div class="summary-teams-grid" id="summaryTeamsGrid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- ============ MOTION GRAPHIC ENTERPRISE VALUE CHAIN DIAGRAM (v01 RESTORATION & THEME RECOLOR) ============ -->
+      <!-- ===================================================================
+         COMPACT CLOSED-LOOP ARCHITECTURE (슬림 가로형 선순환 레일)
+         =================================================================== -->
+      <div class="chain-loop-bar" id="chain-node-loop"
+        style="margin-top:16px;margin-bottom:24px;background:#FFFFFF;border:1px solid #BCCADB;border-left:4px solid #3E4147;border-radius:8px;padding:16px 20px;box-shadow:0 1px 3px rgba(62, 65, 71,0.03);width:100%;box-sizing:border-box;">
+        <!-- Header Row -->
+        <div
+          style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #E2EAF4;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span
+              style="font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:800;color:#FFFFFF;background:#3E4147;padding:2px 7px;border-radius:4px;letter-spacing:0.04em;">CLOSE-LOOP
+              ARCHITECTURE</span>
+            <span style="font-size:12.5px;font-weight:800;color:#3E4147;">5대 핵심 조직 상호연동 선순환 가치 사슬</span>
+          </div>
+          <div style="font-size:11px;font-weight:600;color:#6F7680;">
+            100점 절대평가 체계 (선행 과정 50점 ➔ 최종 결과 50점)
+          </div>
+        </div>
+
+        <!-- 5-Team Compact Horizontal Pipeline (높이 110px 내외의 날렵한 5열 그리드) -->
+        <div
+          style="display:grid;grid-template-columns:repeat(5, minmax(0, 1fr));gap:8px;margin-bottom:12px;width:100%;box-sizing:border-box;">
+          <!-- Node 1: R&D -->
+          <div
+            style="background:#FFFFFF;border:1px solid #BCCADB;border-top:3px solid #3E4147;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;min-width:0;box-sizing:border-box;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span
+                style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:800;color:#FFFFFF;background:#3E4147;padding:1px 5px;border-radius:3px;">01</span>
+              <span style="font-size:10px;font-weight:700;color:#6F7680;">R&D ➔ PS</span>
+            </div>
+            <div style="font-size:12px;font-weight:800;color:#3E4147;">독보적 Solver 공급</div>
+            <div style="font-size:10.5px;color:#6F7680;line-height:1.4;">원천 최적화 엔진 연구 ➔ PS 현장 문제해결 무기 완성</div>
+          </div>
+
+          <!-- Node 2: BD -->
+          <div
+            style="background:#FFFFFF;border:1px solid #BCCADB;border-top:3px solid #3E4147;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;min-width:0;box-sizing:border-box;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span
+                style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:800;color:#FFFFFF;background:#3E4147;padding:1px 5px;border-radius:3px;">02</span>
+              <span style="font-size:10px;font-weight:700;color:#6F7680;">BD ➔ PS/R&D</span>
+            </div>
+            <div style="font-size:12px;font-weight:800;color:#3E4147;">고가치 사업 기회 개척</div>
+            <div style="font-size:10.5px;color:#6F7680;line-height:1.4;">산업계 운영 병목 발굴 ➔ 대형 PoC/수주 기회 창출</div>
+          </div>
+
+          <!-- Node 3: PS -->
+          <div
+            style="background:#FFFFFF;border:1px solid #BCCADB;border-top:3px solid #3E4147;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;min-width:0;box-sizing:border-box;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span
+                style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:800;color:#FFFFFF;background:#3E4147;padding:1px 5px;border-radius:3px;">03</span>
+              <span style="font-size:10px;font-weight:700;color:#6F7680;">PS ➔ PB/R&D</span>
+            </div>
+            <div style="font-size:12px;font-weight:800;color:#3E4147;">현장 실증 & 가치 입증</div>
+            <div style="font-size:10.5px;color:#6F7680;line-height:1.4;">고객 실데이터 검증 ➔ 정량 효과 납품 및 PB 제품화 스펙 전달</div>
+          </div>
+
+          <!-- Node 4: PB -->
+          <div
+            style="background:#FFFFFF;border:1px solid #BCCADB;border-top:3px solid #3E4147;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;min-width:0;box-sizing:border-box;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span
+                style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:800;color:#FFFFFF;background:#3E4147;padding:1px 5px;border-radius:3px;">04</span>
+              <span style="font-size:10px;font-weight:700;color:#6F7680;">PB ➔ BD/R&D</span>
+            </div>
+            <div style="font-size:12px;font-weight:800;color:#3E4147;">표준 SaaS 상용화</div>
+            <div style="font-size:10.5px;color:#6F7680;line-height:1.4;">현장 검증 로직 제품화 ➔ SI 탈피 및 플랫폼 표준 적용 프로젝트 확산</div>
+          </div>
+
+          <!-- Node 5: BM -->
+          <div
+            style="background:#FFFFFF;border:1px solid #BCCADB;border-top:3px solid #3E4147;border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;min-width:0;box-sizing:border-box;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span
+                style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:800;color:#FFFFFF;background:#3E4147;padding:1px 5px;border-radius:3px;">05</span>
+              <span style="font-size:10px;font-weight:700;color:#6F7680;">BM ➔ 전사</span>
+            </div>
+            <div style="font-size:12px;font-weight:800;color:#3E4147;">인재 확보 & 리스크 방어</div>
+            <div style="font-size:10.5px;color:#6F7680;line-height:1.4;">핵심 인재 리텐션(퇴사율 관리) 및 안정적 재무 인프라 총괄</div>
+          </div>
+        </div>
+
+        <!-- Strategic Governance Strip (컴팩트 요약 바) -->
+        <div
+          style="background:#E2EAF4;border:1px solid #BCCADB;border-radius:6px;padding:8px 12px;font-size:11.5px;color:#3E4147;line-height:1.5;">
+          <b>🎯 전사 전략 거버넌스 원칙:</b> 앞선 팀의 실천(인풋)이 다음 팀의 혁신(아웃풋)으로 직결되므로, <b>각 팀이 50점 선행 과정(성과지표 I·II)을 완결해야만 전사 50점 사업
+            결과(유효 프로젝트 수주 및 성공 건수·납품·엔진 배포)가 완성</b>됩니다.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         PAGE 2: 전사 종합 연결 (5대 조직 KPI 전체 매트릭스 보드)
+         =================================================================== -->
+    <section id="page-matrix" class="page-view">
+      <!-- Sticky Header Area (Pinned on Scroll) -->
+      <div class="matrix-sticky-header">
+        <div class="page-eyebrow">ENTERPRISE MASTER KPI MATRIX · AT-A-GLANCE</div>
+        <h1 class="page-title">2027 오믈렛 전사 종합 연결 (5대 조직 KPI 전체 매트릭스)</h1>
+        <p class="page-desc">
+          5대 핵심 조직(R&D, BD, PS, PB, BM)의 결과지표(50점), 성과지표 I(20점), 성과지표 II(30점) 전 항목을 한눈에 비교·점검하는 전사 통합 거버넌스 보드입니다.<br>
+          각 팀의 선행 행동과 협업 역량이 최상위 결과지표로 어떻게 유기적으로 직결되는지 전사 관점에서 조망할 수 있습니다.
+        </p>
+
+        <!-- Matrix Filter Bar -->
+        <div class="matrix-filter-bar">
+        <div class="matrix-filter-group">
+          <span class="matrix-filter-label">조직 필터:</span>
+          <button class="matrix-filter-btn active" id="filter-btn-all" onclick="filterMatrix('all', this)">전체 5대
+            조직</button>
+          <button class="matrix-filter-btn" id="filter-btn-rd" onclick="filterMatrix('rd', this)">R&D</button>
+          <button class="matrix-filter-btn" id="filter-btn-bd" onclick="filterMatrix('bd', this)">BD</button>
+          <button class="matrix-filter-btn" id="filter-btn-ps" onclick="filterMatrix('ps', this)">PS</button>
+          <button class="matrix-filter-btn" id="filter-btn-pb" onclick="filterMatrix('pb', this)">PB</button>
+          <button class="matrix-filter-btn" id="filter-btn-bm" onclick="filterMatrix('bm', this)">BM</button>
+        </div>
+        <div class="matrix-stats-badge">
+          <span>●</span>
+          <span>5대 핵심 조직 100점 거버넌스 완결 체계</span>
+        </div>
+      </div>
+      </div>
+
+      <!-- MOTTO BANNER -->
+      <div class="motto-banner">
+        <span class="motto-quote">"우리의 실력은 현장에서 검증되며, 우리의 결과가 AI 혁신의 기준이 된다."</span>
+      </div>
+
+      <!-- Matrix Cards Container -->
+      <div class="matrix-container" id="matrixContainer">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         PAGES 2 ~ 6: 각 팀별 상세 세팅 페이지 (Template Generator via JS)
+         =================================================================== -->
+    <div id="teamDetailPagesContainer">
+      <!-- 5 Team detail sections will be injected dynamically by JS -->
+    </div>
+
+  </main>
+
+  <!-- Notification Toast -->
+  <div id="toast" style="display:none;"></div>
+
+  <!-- ===================================================================
+       JAVASCRIPT: REACTIVE KPI GOVERNANCE APPLICATION LOGIC
+       =================================================================== -->
+  <script>
+    /* -------------------------------------------------------------
+       1. TEAM METADATA & PRESETS (HINTS & REASONS)
+       ------------------------------------------------------------- */
+    const TEAM_METADATA = {
+      rd: {
+        id: "rd",
+        name: "Research (R&D)",
+        shortName: "R&D",
+        leaderRole: "기술과 지능 인프라를 만든다",
+        roleDesc: "AI 최적화 Core Solver 원천 연구 · OCP 표준 엔진 배포 · 글로벌 벤치마크 입증 및 알고리즘 고도화",
+        isFirstYear: true,
+        footnote: "※ 단, R&D는 신설조직으로 자유롭게 기재 (오믈렛 핵심 자산 구축을 위한 도전적 목표 설정)",
+        preset: {
+          result: {
+            name: "차세대 Core Solver 알고리즘 개발 및 엔진 배포 건수",
+            reason: "전사 제품화와 산업 현장 수주를 뒷받침할 핵심 최적화 엔진 확보",
+            target: "10",
+            unit: "건",
+            desc: "목표 대비 100% 초과 S, 90% A, 70% B, 50% C, 50% 미만 D"
+          },
+          p1: [
+            {
+              name: "현장 운영 제약조건 수리 모델링 정의",
+              reason: "현장 복잡성을 수학적 모델로 정형화해야 Solver가 범용 연산 가능",
+              formula: "산업별 제약조건 수리 모델링 정의 건수",
+              target: "5건",
+              weight: 4
+            },
+            {
+              name: "Core Solver 벤치마크 연산 속도 개선",
+              reason: "글로벌 상용 Solver 대비 연산 수렴 속도 및 해의 품질 우위 입증",
+              formula: "글로벌 벤치마크 통과 및 성능 개선 보고서 건수",
+              target: "5건",
+              weight: 4
+            },
+            {
+              name: "OCP Server 표준 인터페이스 패키징",
+              reason: "PS와 PB가 즉시 제품 및 현장에 연동할 수 있는 표준 API/SDK 제공",
+              formula: "표준 인터페이스 및 컴파일러 모듈 패키징 건수",
+              target: "6건",
+              weight: 4
+            },
+            {
+              name: "현장 실데이터 기반 알고리즘 안정성 검증",
+              reason: "극단적 예외 상황에서도 엔진이 다운되지 않도록 사전 디버깅",
+              formula: "실증 데이터 기반 디버깅 및 안정성 검증 건수",
+              target: "8건",
+              weight: 4
+            },
+            {
+              name: "Core Engine 기술 규격서 및 지식재산 등록",
+              reason: "연구 결과를 사내 표준 가이드로 체계화하고 독점적 기술 자산으로 축적",
+              formula: "기술 백서 발행 및 특허/소프트웨어 등록 건수",
+              target: "4건",
+              weight: 4
+            }
+          ],
+          p2: [
+            {
+              name: "연구 집념 (난제 해결 완결성)",
+              reason: "복잡한 수학 난제에 포기하지 않고 알고리즘 수렴성을 증명하는 태도",
+              desc: "미해결 최적화 난제에 대한 끈기 있는 연구 집념 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "기술 소통 (명확한 API 규격화)",
+              reason: "타 부서 엔지니어가 쉽게 연동할 수 있도록 API를 명확히 문서화",
+              desc: "OCP 인터페이스의 명확한 문서화 및 부서 간 기술 소통 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "파이프라인 협업 (PS/PB 가교)",
+              reason: "PS의 현장 요구와 PB의 제품 요구를 Solver 스펙에 기민하게 반영",
+              desc: "현장 피드백 수용도 및 플랫폼 연동을 위한 적극적 협력 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "마일스톤 준수 (릴리즈 완결)",
+              reason: "합의된 R&D 로드맵과 릴리즈 일정을 기한 내에 엄격히 완결",
+              desc: "연간 R&D 마일스톤 마감 준수율 및 릴리즈 완성도 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "자산화 마인드 (재사용 모듈 구축)",
+              reason: "1회성 연구에 그치지 않고 전사 공통 자산으로 재사용되도록 모듈화",
+              desc: "알고리즘 코드의 모듈화 및 재사용성 기여도 (0~6점)",
+              weight: 6
+            }
+          ]
+        }
+      },
+      bd: {
+        id: "bd",
+        name: "Business Development (BD)",
+        shortName: "BD",
+        leaderRole: "기회를 만들고 사업을 확장한다",
+        roleDesc: "고가치 산업 병목 발굴 · 신규 유상 프로젝트 수주 계약 및 고객 파이프라인 확장 · 핵심 레퍼런스 확보",
+        isFirstYear: false,
+        footnote: "",
+        preset: {
+          result: {
+            name: "연간 유상 프로젝트 수주 계약 건수 (신규 고객사 프로젝트 확보)",
+            reason: "단순 매출액 규모보다 산업 도메인별 실질 유효 프로젝트 수주 건수 및 레퍼런스 확장이 최우선 핵심 지표",
+            target: "12",
+            unit: "건",
+            desc: "목표 대비 100% 초과 S, 90% A, 70% B, 50% C, 50% 미만 D"
+          },
+          p1: [
+            {
+              name: "Tier-1 타깃 기업 의사결정권자 미팅",
+              reason: "유효 예산과 권한을 가진 핵심 임원진과의 직접 접점 확보",
+              formula: "임원급 핵심 의사결정권자 대면 미팅 완료 횟수",
+              target: "30회",
+              weight: 4
+            },
+            {
+              name: "운영 병목 진단 제안서 및 견적서 제출",
+              reason: "고객사의 페인포인트를 수리적으로 진단하고 구체적 가치 제안 완결",
+              formula: "공식 기술제안서 및 견적서 제출 완료 건수",
+              target: "15건",
+              weight: 4
+            },
+            {
+              name: "PS 기술검증(PoC) 전환 체결",
+              reason: "단순 상담을 실질적 유상 프로젝트 및 기술 검증으로 전환",
+              formula: "유상 PoC 및 실증 프로젝트 전환 계약 건수",
+              target: "8건",
+              weight: 4
+            },
+            {
+              name: "수주 파이프라인 관리 및 딜 진척",
+              reason: "기회 누락 방지 및 프로젝트 계약 체결율(Win-rate) 극대화",
+              formula: "주간 딜 진척 관리율 및 유효 프로젝트 전환율",
+              target: "95%",
+              weight: 4
+            },
+            {
+              name: "계약 조건 및 납품 마일스톤 리스크 사전 검토",
+              reason: "무리한 납품 조항 방지 및 프로젝트 수행 안정성 사전 방어",
+              formula: "프로젝트 계약서 사전 법무·기술 리스크 검토 완료율",
+              target: "100%",
+              weight: 4
+            }
+          ],
+          p2: [
+            {
+              name: "고객 집착 (핵심 페인포인트 규명)",
+              reason: "고객의 숨겨진 운영 병목을 끝까지 파고들어 설득력 있는 가치를 제시",
+              desc: "고객 페인포인트 분석의 깊이 및 맞춤형 가치 제안 역량 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "기술 번역 소통 (비즈니스 언어 전환)",
+              reason: "R&D/PS의 고난도 수학 모델을 C-Level이 이해하는 ROI 언어로 전달",
+              desc: "기술적 가치의 쉬운 비즈니스 전달력 및 프레젠테이션 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "크로스 펑셔널 협업 (PS 밀착 공조)",
+              reason: "제안 초기부터 PS와 원팀으로 협력하여 실현 가능한 제안 구성",
+              desc: "PS팀과의 제안 스펙 조율 및 원활한 핸드오버 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "영업 실행력 (클로징 집념)",
+              reason: "딜 정체 상황을 돌파하고 약속된 마감 기한 내 수주를 클로징",
+              desc: "목표 딜의 적기 클로징 집념 및 장애 요인 해결력 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "제안 자산화 (표준 제안 템플릿 환류)",
+              reason: "수주 성공 사례를 산업별 표준 제안서로 패키징하여 전사 배포",
+              desc: "산업군별 표준 제안 자산 및 견적 모델 기여도 (0~6점)",
+              weight: 6
+            }
+          ]
+        }
+      },
+      ps: {
+        id: "ps",
+        name: "Problem Solving (PS)",
+        shortName: "PS",
+        leaderRole: "현장 문제를 풀고 가치를 입증한다",
+        roleDesc: "고객 현장 데이터 기반 최적화 검증 · 프로젝트 적기 납품 · 공통 컴포넌트(Application Kit) 자산화",
+        isFirstYear: false,
+        footnote: "",
+        preset: {
+          result: {
+            name: "프로젝트 적기 납품 및 고객 검수 승인율",
+            reason: "현장 문제 해결을 완결하여 고객 신뢰를 확보하고 2차 확장 수주를 견인",
+            target: "100",
+            unit: "%",
+            desc: "목표 대비 100% 초과 S, 90% A, 70% B, 50% C, 50% 미만 D"
+          },
+          p1: [
+            {
+              name: "고객사 현장 데이터 정제 및 온톨로지 수립",
+              reason: "비정형 현장 데이터를 수리 모델링 가능한 표준 데이터셋으로 정비",
+              formula: "프로젝트별 데이터 스키마 및 온톨로지 정의 건수",
+              target: "10건",
+              weight: 4
+            },
+            {
+              name: "Core Solver 현장 튜닝 및 알고리즘 검증",
+              reason: "고객사 제약조건에 맞춰 Solver 파라미터를 튜닝하고 최적해 도출",
+              formula: "현장 최적해 도출 및 알고리즘 검증 통과 건수",
+              target: "12건",
+              weight: 4
+            },
+            {
+              name: "검수 마일스톤 적기 달성 및 보고서 납품",
+              reason: "정량적 개선 효과를 입증하고 고객사 공식 검수 승인 획득",
+              formula: "마일스톤 적기 완결 및 공식 검수 승인 완료 건수",
+              target: "8건",
+              weight: 4
+            },
+            {
+              name: "공통 컴포넌트(Application Kit) 자산화",
+              reason: "1회성 SI 코드를 재사용 가능한 전사 공통 컴포넌트로 환류",
+              formula: "재사용 가능 Application Kit 컴포넌트 배포 건수",
+              target: "5건",
+              weight: 4
+            },
+            {
+              name: "R&D 알고리즘 디버깅 피드백 및 엣지케이스 공유",
+              reason: "현장 예외 데이터를 R&D에 전달하여 원천 엔진의 안정성 강화",
+              formula: "현장 엣지케이스 분석 및 R&D 피드백 보고서 건수",
+              target: "8건",
+              weight: 4
+            }
+          ],
+          p2: [
+            {
+              name: "현장 책임감 (끝장 해결 완결성)",
+              reason: "열악한 고객사 현장 환경에서도 물러서지 않고 반드시 해를 도출",
+              desc: "현장 제약 극복 집념 및 고객 약속 완결 책임감 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "도메인 통찰력 (산업 프로세스 분석)",
+              reason: "고객사의 복잡한 물류·제조 현장 규칙을 빠르고 정확하게 분석",
+              desc: "산업 도메인 이해도 및 수리적 모델링 전환 역량 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "가교 소통 (R&D와 PB의 연결고리)",
+              reason: "R&D 엔진의 한계와 PB 제품의 요구를 현장 관점에서 조율",
+              desc: "타 부서와의 유기적 소통 및 기술적 갭 조율 역량 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "일정 준수 (납기 마일스톤 엄수)",
+              reason: "고객사와의 납품 약속을 철저히 지키는 프로페셔널한 일정 관리",
+              desc: "프로젝트 단계별 마일스톤 및 최종 납기 준수율 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "자산화 마인드 (반복 재사용 지향)",
+              reason: "바쁜 일정 속에서도 재사용 가능한 자산(Asset)으로 남기려는 태도",
+              desc: "코드 표준화 및 사내 지식 공유 기여도 (0~6점)",
+              weight: 6
+            }
+          ]
+        }
+      },
+      pb: {
+        id: "pb",
+        name: "Product Build (PB)",
+        shortName: "PB",
+        leaderRole: "제품을 만들고 플랫폼을 운영한다",
+        roleDesc: "현장 검증 로직의 표준 SaaS 제품화 · 무중단 플랫폼 운영 · 사용자 경험(UX) 고도화",
+        isFirstYear: false,
+        footnote: "",
+        preset: {
+          result: {
+            name: "상용 제품 정기 릴리즈 및 서비스 SLA 99.9% 보증",
+            reason: "반복 가능한 SaaS 제품으로 SI 체질을 탈피하고 플랫폼 규모의 경제 달성",
+            target: "99.9",
+            unit: "%",
+            desc: "목표 대비 100% 초과 S, 90% A, 70% B, 50% C, 50% 미만 D"
+          },
+          p1: [
+            {
+              name: "핵심 제품 분기별 정기 릴리즈 완결",
+              reason: "고객 요구와 시장 로드맵에 맞춘 기능 업데이트의 적기 배포",
+              formula: "분기별 정기 릴리즈 및 신규 메이저 기능 배포 건수",
+              target: "4회",
+              weight: 4
+            },
+            {
+              name: "표준 UI/UX 및 직관적 시각화 대시보드 배포",
+              reason: "비전문가인 현장 관리자도 쉽게 최적화 결과를 조작할 수 있는 UX 제공",
+              formula: "표준 시각화 모듈 및 UI 컴포넌트 배포 건수",
+              target: "6건",
+              weight: 4
+            },
+            {
+              name: "서비스 장애 예방 및 MTTR 30분 이내 복구",
+              reason: "고객사 산업 현장의 가동 중단을 원천 방지하는 고가용성 보증",
+              formula: "장애 발생 시 평균 복구 시간(MTTR) 30분 이내 달성률",
+              target: "98%",
+              weight: 4
+            },
+            {
+              name: "PS 현장 피드백 기반 제품 백로그 반영",
+              reason: "현장에서 실제로 필요한 기능을 기민하게 제품화하여 시장 적합도 향상",
+              formula: "PS 현장 요구사항 분석 및 제품 백로그 반영 건수",
+              target: "15건",
+              weight: 4
+            },
+            {
+              name: "제품 사용 가이드 및 표준 배포 매뉴얼 정비",
+              reason: "고객사 도입 시간(Time-to-Value)을 획기적으로 단축",
+              formula: "표준 배포 매뉴얼 및 사용자 가이드 최신화 건수",
+              target: "8건",
+              weight: 4
+            }
+          ],
+          p2: [
+            {
+              name: "사용자 중심 (현장 친화적 UI/UX)",
+              reason: "현장 작업자의 관점에서 쉽고 직관적인 소프트웨어를 만들려는 태도",
+              desc: "사용자 피드백 수용도 및 UI/UX 편의성 완성도 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "코드 퀄리티 (확장 가능한 아키텍처)",
+              reason: "빠른 개발 속에서도 유지보수와 안정성을 고려한 모듈형 코드 설계",
+              desc: "코드 품질, 테스트 커버리지 및 기술 부채 관리 역량 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "팀 간 정렬 (PS/R&D 요구 통합)",
+              reason: "PS의 고객 요구와 R&D의 엔진 스펙을 제품 아키텍처에 균형 있게 통합",
+              desc: "타 부서 요구사항 조율 및 우선순위 결정 역량 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "릴리즈 엄수 (배포 일정 완결성)",
+              reason: "약속된 배포 일정을 철저히 지키며 릴리즈 품질을 담보",
+              desc: "제품 릴리즈 계획 대비 적기 배포 완료율 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "데이터 기반 개선 (사용성 지표 분석)",
+              reason: "직관에 의존하지 않고 실제 고객 사용 데이터를 기반으로 개선점 도출",
+              desc: "사용자 행동 로그 분석 및 데이터 기반 기능 고도화 (0~6점)",
+              weight: 6
+            }
+          ]
+        }
+      },
+      bm: {
+        id: "bm",
+        name: "Business Management (BM)",
+        shortName: "BM",
+        leaderRole: "인재를 지키고 인프라를 지원한다",
+        roleDesc: "핵심 인재 채용·리텐션(퇴사율 관리) · 안정적 재무 거버넌스 · 계약 및 법무 리스크 사전 방어",
+        isFirstYear: false,
+        footnote: "",
+        preset: {
+          result: {
+            name: "핵심 인재 리텐션 및 재무 건전성 관리",
+            reason: "사람과 자본의 안정성이 모든 기술 혁신과 수주 성장의 최종 안전판",
+            target: "95",
+            unit: "%",
+            desc: "목표 대비 100% 초과 S, 90% A, 70% B, 50% C, 50% 미만 D"
+          },
+          p1: [
+            {
+              name: "기술·사업 핵심 인재 적기 채용",
+              reason: "각 조직의 성장 병목을 해결할 우수 인재의 적시 공급",
+              formula: "조직별 핵심 인재 채용 계획 대비 달성률",
+              target: "95%",
+              weight: 4
+            },
+            {
+              name: "임직원 몰입도 점검 및 리텐션 면담",
+              reason: "핵심 인재의 이탈 징후를 조기에 감지하고 퇴사율을 한자리수로 억제",
+              formula: "분기별 1on1 면담 시행 및 핵심 인재 퇴사율 관리",
+              target: "5% 이하",
+              weight: 4
+            },
+            {
+              name: "월간 재무 결산 및 현금 런웨이 관리",
+              reason: "정확한 손익 분석과 안정적인 현금 흐름으로 회사 생존력 담보",
+              formula: "월간 결산 기한(익월 10일) 준수율 및 현금 런웨이 보고",
+              target: "100%",
+              weight: 4
+            },
+            {
+              name: "고객사 계약서 법무 검토 및 납품 리스크 방어",
+              reason: "불공정 계약 조항 및 대손 위험을 사전에 완벽히 필터링",
+              formula: "수주 및 외주 계약서 사전 법무 검토 완료율",
+              target: "100%",
+              weight: 4
+            },
+            {
+              name: "임직원 업무 몰입 환경 및 사내 제도 정비",
+              reason: "4대 조직이 본연의 혁신에 100% 집중할 수 있는 업무 인프라 구축",
+              formula: "사내 제도 개선 및 생산성 지원 프로젝트 완결 건수",
+              target: "4건",
+              weight: 4
+            }
+          ],
+          p2: [
+            {
+              name: "인재 진정성 (임직원 신뢰 구축)",
+              reason: "구성원의 고충에 진심으로 귀 기울이고 신뢰받는 인사 문화를 구축",
+              desc: "임직원 신뢰도 및 조직 문화 활성화 기여도 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "리스크 감수성 (선제적 위험 방어)",
+              reason: "재무, 노무, 법무 상의 잠재적 리스크를 사전에 감지하고 차단",
+              desc: "규제 준수 및 리스크 사전 예방 역량 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "전사 서포트 (기민하고 유연한 지원)",
+              reason: "기술·사업 부서의 긴급한 지원 요청에 신속하고 유연하게 대응",
+              desc: "타 부서 업무 지원 만족도 및 행정 처리 신속성 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "규정 준수 (공정한 제도 집행)",
+              reason: "투명하고 공정한 평가 및 보상 시스템 운영으로 조직 신뢰 확보",
+              desc: "사내 규정 준수도 및 거버넌스 투명성 유지 (0~6점)",
+              weight: 6
+            },
+            {
+              name: "제도 혁신 (지속 가능한 성장 체계 구축)",
+              reason: "회사의 규모 확장에 맞춰 유연하고 효율적인 인사·재무 제도를 고도화",
+              desc: "조직 성장에 맞춘 업무 프로세스 개선 및 제도 혁신 (0~6점)",
+              weight: 6
+            }
+          ]
+        }
+      }
+    };
+
+    /* -------------------------------------------------------------
+       2. APPLICATION STATE MANAGEMENT (LOCAL STORAGE)
+       ------------------------------------------------------------- */
+    const STORAGE_KEY = "OMELET_2027_KPI_STATE_V12";
+
+    function createInitialState() {
+      const state = { teams: {} };
+      Object.keys(TEAM_METADATA).forEach(tId => {
+        state.teams[tId] = {
+          isSaved: false,
+          savedAt: null,
+          leaderRole: "",
+          roleDesc: "",
+          resultKpi: {
+            name: "",
+            reason: "",
+            target: "",
+            unit: "",
+            desc: ""
+          },
+          process1: [
+            { name: "", reason: "", formula: "", target: "", weight: 4 },
+            { name: "", reason: "", formula: "", target: "", weight: 4 },
+            { name: "", reason: "", formula: "", target: "", weight: 4 },
+            { name: "", reason: "", formula: "", target: "", weight: 4 },
+            { name: "", reason: "", formula: "", target: "", weight: 4 }
+          ],
+          process2: [
+            { name: "", reason: "", desc: "", weight: 6 },
+            { name: "", reason: "", desc: "", weight: 6 },
+            { name: "", reason: "", desc: "", weight: 6 },
+            { name: "", reason: "", desc: "", weight: 6 },
+            { name: "", reason: "", desc: "", weight: 6 }
+          ]
+        };
+      });
+      return state;
+    }
+
+    let appState = loadState();
+
+    function loadState() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {
+          console.error("Failed to parse saved state", e);
+        }
+      }
+      // Fallback & automatic migration from older versions (v11/v06/v05)
+      const prevSaved = localStorage.getItem("OMELET_2027_KPI_STATE_V11") || localStorage.getItem("OMELET_2027_KPI_STATE_V06") || localStorage.getItem("OMELET_2027_KPI_STATE_V05");
+      if (prevSaved) {
+        try {
+          const parsed = JSON.parse(prevSaved);
+          // Auto-migrate BD result metric from revenue/억원 to project count
+          if (parsed?.teams?.bd?.resultKpi?.unit === "억원" || parsed?.teams?.bd?.resultKpi?.name?.includes("계약액")) {
+            parsed.teams.bd.resultKpi = { ...TEAM_METADATA.bd.preset.result };
+          }
+          return parsed;
+        } catch (e) {
+          console.error("Failed to parse previous state", e);
+        }
+      }
+      return createInitialState();
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      renderSummary();
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      if (!t) return;
+      t.innerText = msg;
+      t.style.display = "block";
+      t.classList.add("show");
+      setTimeout(() => {
+        t.classList.remove("show");
+        t.style.display = "none";
+      }, 2200);
+    }
+
+    /* -------------------------------------------------------------
+       3. RENDER SUMMARY PAGE (Page 1)
+       ------------------------------------------------------------- */
+    let currentMatrixFilter = 'all';
+
+    function renderOverview() {
+      const grid = document.getElementById("summaryTeamsGrid");
+      if (!grid) return;
+      grid.innerHTML = "";
+
+      Object.keys(TEAM_METADATA).forEach(tId => {
+        const meta = TEAM_METADATA[tId];
+        const tData = appState.teams[tId];
+
+        const card = document.createElement("div");
+        card.className = "team-summary-card";
+        card.onclick = () => switchTab(tId);
+
+        const currentLeaderRole = tData.leaderRole || meta.leaderRole;
+        const isRoleCustom = !!tData.leaderRole;
+        const currentRoleDesc = tData.roleDesc || meta.roleDesc;
+        const isDescCustom = !!tData.roleDesc;
+
+        const cardHtml = `
+          <div class="card-meta-row">
+            <span class="team-chip badge-${tId}">${meta.shortName}</span>
+            <span class="card-status-pill ${tData.isSaved ? 'saved' : 'editing'}">
+              ${tData.isSaved ? '저장 완료' : '작성 중'}
+            </span>
+          </div>
+
+          <div class="team-card-title" title="${meta.name}">${meta.name}</div>
+
+          <div class="team-card-role" title="${currentLeaderRole}">
+            ${isRoleCustom ? `<b>${currentLeaderRole}</b>` : `<span class="preset-role">예: ${currentLeaderRole}</span>`}
+          </div>
+          
+          <div class="score-breakdown-bar">
+            <div class="bar-seg seg-p1" style="width:20%" title="성과지표I: 20점 고정"></div>
+            <div class="bar-seg seg-p2" style="width:30%" title="성과지표II: 30점 고정"></div>
+            <div class="bar-seg seg-res" style="width:50%" title="결과지표: 50점 고정"></div>
+          </div>
+
+          <div class="score-legend-row num">
+            <span class="legend-p1">과정I 20점</span>
+            <span class="legend-p2">과정II 30점</span>
+            <span class="legend-res">결과 50점</span>
+          </div>
+
+          <div class="team-kpi-preview">
+            <div class="kpi-preview-label">핵심 결과지표 세팅 현황</div>
+            <div class="kpi-preview-value ${tData.resultKpi.name ? '' : 'empty'}" title="${tData.resultKpi.name ? `${tData.resultKpi.name} · ${tData.resultKpi.target || '0'} ${tData.resultKpi.unit || ''}` : `예시: ${meta.preset.result.name} (${meta.preset.result.target}${meta.preset.result.unit})`}">
+              ${tData.resultKpi.name ? `${tData.resultKpi.name} · ${tData.resultKpi.target || '0'} ${tData.resultKpi.unit || ''}` : `예시: ${meta.preset.result.name} (${meta.preset.result.target}${meta.preset.result.unit})`}
+            </div>
+          </div>
+        `;
+        card.innerHTML = cardHtml;
+        grid.appendChild(card);
+      });
+    }
+
+    function renderSummary() {
+      renderOverview();
+      renderMasterMatrix(currentMatrixFilter);
+    }
+
+    function filterMatrix(teamId, btnElem) {
+      currentMatrixFilter = teamId;
+      document.querySelectorAll(".matrix-filter-btn").forEach(b => b.classList.remove("active"));
+      if (btnElem) {
+        btnElem.classList.add("active");
+      } else {
+        const targetBtn = document.getElementById(`filter-btn-${teamId}`);
+        if (targetBtn) targetBtn.classList.add("active");
+      }
+      renderMasterMatrix(teamId);
+    }
+
+    function renderMasterMatrix(filterTeam = 'all') {
+      const container = document.getElementById("matrixContainer");
+      if (!container) return;
+      container.innerHTML = "";
+
+      const teamIds = Object.keys(TEAM_METADATA);
+      const targetIds = (filterTeam === 'all') ? teamIds : teamIds.filter(id => id === filterTeam);
+
+      targetIds.forEach(tId => {
+        const meta = TEAM_METADATA[tId];
+        const tData = appState.teams[tId];
+
+        const card = document.createElement("div");
+        card.className = "matrix-team-card";
+        card.id = `matrix-card-${tId}`;
+
+        const resName = tData.resultKpi.name || meta.preset.result.name;
+        const resTarget = tData.resultKpi.target ? `${tData.resultKpi.target} ${tData.resultKpi.unit || ''}` : `${meta.preset.result.target} ${meta.preset.result.unit}`;
+        const resDesc = tData.resultKpi.desc || meta.preset.result.desc;
+        const resReason = tData.resultKpi.reason || meta.preset.result.reason;
+
+        // Process 1 (5 items)
+        const p1Items = (tData.process1 && tData.process1.length === 5) ? tData.process1 : meta.preset.p1;
+        let p1Html = "";
+        p1Items.forEach((p, idx) => {
+          const itemPreset = meta.preset.p1[idx] || {};
+          const name = p.name || itemPreset.name || `선행지표 ${idx + 1}`;
+          const target = p.target || itemPreset.target || "-";
+          const formula = p.formula || itemPreset.formula || "-";
+          const reason = p.reason || itemPreset.reason || "";
+          p1Html += `
+            <div class="matrix-list-item">
+              <div class="matrix-item-top">
+                <span class="matrix-item-index">0${idx + 1}</span>
+                <span class="matrix-item-title">${name}</span>
+                <span class="matrix-item-weight">${p.weight !== undefined ? p.weight : 4}점</span>
+              </div>
+              <div class="matrix-item-meta">
+                <b>목표:</b> ${target} · <b>산식:</b> ${formula}
+              </div>
+              ${reason ? `<div class="matrix-item-meta" style="opacity:0.75;font-size:10.5px;">사유: ${reason}</div>` : ''}
+            </div>
+          `;
+        });
+
+        // Process 2 (5 items)
+        const p2Items = (tData.process2 && tData.process2.length === 5) ? tData.process2 : meta.preset.p2;
+        let p2Html = "";
+        p2Items.forEach((p, idx) => {
+          const itemPreset = meta.preset.p2[idx] || {};
+          const name = p.name || itemPreset.name || `역량지표 ${idx + 1}`;
+          const desc = p.desc || itemPreset.desc || "-";
+          const reason = p.reason || itemPreset.reason || "";
+          p2Html += `
+            <div class="matrix-list-item">
+              <div class="matrix-item-top">
+                <span class="matrix-item-index">0${idx + 1}</span>
+                <span class="matrix-item-title">${name}</span>
+                <span class="matrix-item-weight">${p.weight !== undefined ? p.weight : 6}점</span>
+              </div>
+              <div class="matrix-item-meta">
+                <b>행동 가이드:</b> ${desc}
+              </div>
+              ${reason ? `<div class="matrix-item-meta" style="opacity:0.75;font-size:10.5px;">사유: ${reason}</div>` : ''}
+            </div>
+          `;
+        });
+
+        card.innerHTML = `
+          <!-- Team Header -->
+          <div class="matrix-team-header">
+            <div class="matrix-team-title-wrap">
+              <div class="matrix-team-avatar">${meta.shortName}</div>
+              <div class="matrix-team-info">
+                <div class="matrix-team-name-row">
+                  <span class="matrix-team-name">${meta.name}</span>
+                  <span class="card-status-pill ${tData.isSaved ? 'saved' : 'editing'}">
+                    ${tData.isSaved ? '저장 완료' : '작성 중'}
+                  </span>
+                </div>
+                <div class="matrix-team-role">${tData.leaderRole || meta.leaderRole}</div>
+                <div class="matrix-team-desc">${tData.roleDesc || meta.roleDesc}</div>
+              </div>
+            </div>
+            <div class="matrix-team-actions">
+              <button class="matrix-btn-goto" onclick="switchTab('${tId}')">
+                <span>${meta.shortName} 상세 세팅 바로가기</span>
+                <span>➔</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 3-Column Causal Matrix Layout -->
+          <div class="matrix-columns-grid">
+            
+            <!-- Col 1: 결과지표 (50점) -->
+            <div class="matrix-col matrix-col-res">
+              <div class="matrix-col-header">
+                <div>
+                  <span class="matrix-col-tag tag-res">PILLAR 01 · 50점 고정</span>
+                  <div class="matrix-col-sub">팀 공동 최상위 사업 실적 (팀원 100% 동일 부여)</div>
+                </div>
+              </div>
+              
+              <div class="matrix-res-name">${resName}</div>
+
+              <div class="matrix-res-target-box">
+                <span class="matrix-target-label">2027 연간 목표치:</span>
+                <span class="matrix-target-num">${resTarget}</span>
+              </div>
+
+              <div class="matrix-eval-box">
+                <b>달성 기준:</b> ${resDesc}
+              </div>
+
+              <div class="matrix-reason-box">
+                <b>선정 사유:</b> ${resReason}
+              </div>
+
+              <div class="matrix-col-footer">
+                <span>성과지표 I·II 달성으로 견인</span>
+                <span>배점 50점 만점</span>
+              </div>
+            </div>
+
+            <!-- Col 2: 성과지표 I (20점) -->
+            <div class="matrix-col matrix-col-p1">
+              <div class="matrix-col-header">
+                <div>
+                  <span class="matrix-col-tag tag-p1">PILLAR 02 · 20점 고정</span>
+                  <div class="matrix-col-sub">정량 선행 행동 지표 (5개 항목 × 각 4점)</div>
+                </div>
+              </div>
+
+              <div class="matrix-item-list">
+                ${p1Html}
+              </div>
+
+              <div class="matrix-col-footer">
+                <span>일상 업무 직무 루틴 완결</span>
+                <span>5개 항목 합계 20점</span>
+              </div>
+            </div>
+
+            <!-- Col 3: 성과지표 II (30점) -->
+            <div class="matrix-col matrix-col-p2">
+              <div class="matrix-col-header">
+                <div>
+                  <span class="matrix-col-tag tag-p2">PILLAR 03 · 30점 고정</span>
+                  <div class="matrix-col-sub">정성 핵심 역량 지표 (5대 영역 × 각 6점)</div>
+                </div>
+              </div>
+
+              <div class="matrix-item-list">
+                ${p2Html}
+              </div>
+
+              <div class="matrix-col-footer">
+                <span>조직 시너지 및 협업 태도</span>
+                <span>5개 영역 합계 30점</span>
+              </div>
+            </div>
+
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    /* -------------------------------------------------------------
+       4. RENDER TEAM DETAIL PAGES (Pages 2 ~ 6)
+       ------------------------------------------------------------- */
+    function buildTeamDetailPages() {
+      const container = document.getElementById("teamDetailPagesContainer");
+      container.innerHTML = "";
+
+      Object.keys(TEAM_METADATA).forEach(tId => {
+        const meta = TEAM_METADATA[tId];
+        const tData = appState.teams[tId];
+        const isSaved = tData.isSaved;
+
+        const section = document.createElement("section");
+        section.id = `page-${tId}`;
+        section.className = `page-view ${isSaved ? 'mode-saved' : 'mode-editing'}`;
+
+        section.innerHTML = `
+          <!-- Sticky Header Area (Pinned on Scroll) -->
+          <div class="team-page-sticky-header" id="sticky-header-${tId}">
+            <div class="page-eyebrow" style="display:flex;align-items:center;gap:6px;">
+              <span class="team-chip badge-${tId}">${meta.shortName}</span>
+              <span>TEAM KPI SETTING · 2027</span>
+            </div>
+            <h1 class="page-title"><span class="color-${tId}">${meta.name}</span> 2027 KPI 세팅</h1>
+            <p class="page-desc">
+              팀의 본질적 미션을 명확히 규정하고, 전사 비즈니스 가치 사슬과 직결되는 핵심 성과 지표를 확정합니다.
+            </p>
+
+            <!-- Top Status Bar & Actions -->
+            <div class="team-top-bar" id="topbar-${tId}">
+              <div class="status-indicator">
+                <span class="status-badge ${isSaved ? 'saved' : 'editing'}" id="status-badge-${tId}">
+                  ${isSaved ? `저장 완료 (${tData.savedAt || '저장됨'})` : '작성 및 편집 중 (저장 버튼을 눌러 확정하세요)'}
+                </span>
+              </div>
+
+              <div class="team-btn-group">
+                <button class="btn-save-mode" id="btn-save-${tId}" onclick="handleSaveTeam('${tId}')" style="${isSaved ? 'display:none;' : ''}">
+                  저장하기
+                </button>
+                <button class="btn-edit-mode" id="btn-edit-${tId}" onclick="handleEditTeam('${tId}')" style="${!isSaved ? 'display:none;' : ''}">
+                  수정하기
+                </button>
+                <button class="btn-sub-preset" onclick="applyTeamPreset('${tId}')">
+                  추천 예시 채우기
+                </button>
+                <button class="btn-sub-preset" onclick="clearTeamInputs('${tId}')">
+                  빈값 초기화
+                </button>
+                <button class="btn-sub-preset" onclick="switchTab('overview')">
+                  2027 KPI
+                </button>
+                <button class="btn-sub-preset" onclick="switchTab('matrix')">
+                  전사 종합 연결
+                </button>
+              </div>
+            </div>
+          </div>
+
+          ${meta.isFirstYear ? `
+          <!-- R&D First-Year Special Banner -->
+          <div class="rd-special-banner">
+            <div class="rd-special-title">R&D 조직 설립 원년 특별 안내</div>
+            <div class="rd-special-desc">
+              2027년은 R&D 조직 설립 원년입니다. 오믈렛을 지원하기 위해 형식에 구애받지 않고 <b>자유로운 KPI 설정</b>을 할 수 있습니다.
+            </div>
+          </div>
+          ` : ''}
+
+          <!-- ===================================================================
+               SECTION 0: 핵심역할 및 미션 정의 (팀장 직접 작성)
+               =================================================================== -->
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <div class="kpi-card-title">
+                0. 조직 핵심 미션 및 역할 범위
+                <span class="card-fixed-score">팀장 직접 작성</span>
+              </div>
+              <span style="font-size:11.5px;color:var(--ink-faint);">오믈렛 전사 전략 방향(Operational Intelligence Alignment)에 입각하여 2027년 팀의 핵심 미션과 역할 범위를 규정합니다</span>
+            </div>
+
+            <div class="role-grid">
+              <div class="role-col">
+                <label class="role-label">핵심 미션 (1줄 요약)</label>
+                <textarea class="kpi-input role-input" id="role-leader-${tId}" placeholder="예: ${meta.leaderRole}" ${isSaved ? 'readonly' : ''}
+                  oninput="updateTeamRole('${tId}', 'leaderRole', this.value)">${tData.leaderRole || ''}</textarea>
+              </div>
+              <div class="role-col">
+                <label class="role-label">세부 역할 및 지원 내용</label>
+                <textarea class="kpi-input role-input" id="role-desc-${tId}" placeholder="예: ${meta.roleDesc}" ${isSaved ? 'readonly' : ''}
+                  oninput="updateTeamRole('${tId}', 'roleDesc', this.value)">${tData.roleDesc || ''}</textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===================================================================
+               SECTION 1: 결과지표 세팅 (팀 공동 50점 고정)
+               =================================================================== -->
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <div class="kpi-card-title">
+                1. 결과지표 세팅 (팀 공동 목표)
+                <span class="card-fixed-score highlight">50점 고정</span>
+              </div>
+              <span style="font-size:11.5px;color:var(--ink-faint);">연간 팀 목표 달성도가 전 팀원에게 동일하게 귀속되는 최상위 사업 성과</span>
+            </div>
+
+            <div class="guide-box">
+              <div class="guide-box-header">
+                <span class="guide-icon">📌</span>
+                <span class="guide-title">결과지표 (50점 고정) 설정 원칙 및 평가 척도</span>
+              </div>
+              <div class="guide-semantic-list">
+                <div class="guide-item">
+                  <span class="guide-item-tag">핵심 정의</span>
+                  <span class="guide-item-text">2027년에 팀 전체 구성원이 공동으로 달성할 최상위 비즈니스 성과 목표입니다. (연간 팀 목표 달성도가 팀원 전원에게 동일하게 귀속)</span>
+                </div>
+                <div class="guide-item">
+                  <span class="guide-item-tag">산정 원칙</span>
+                  <span class="guide-item-text"><b>단순 매출액(금액)은 평가 지표에서 배제</b>하며, 실제 현장 가치 입증 및 레퍼런스 확장을 담보하는 <b>'유효 프로젝트 수주 및 성공 건수'</b>를 최우선 핵심 지표로 설정합니다.</span>
+                </div>
+                <div class="guide-item">
+                  <span class="guide-item-tag">달성 기준표</span>
+                  <span class="guide-item-text"><b>100% 초과 (S)</b> · <b>90% 이상 (A)</b> · <b>70% 이상 (B)</b> · <b>50% 이상 (C)</b> · <b>50% 미만 (D)</b> ${meta.footnote ? `<span class="guide-footnote">${meta.footnote}</span>` : ''}</span>
+                </div>
+              </div>
+            </div>
+
+            <table class="kpi-table">
+              <thead>
+                <tr>
+                  <th style="width:24%;">결과지표 항목명</th>
+                  <th style="width:32%;">성과지표 선정 이유 (Why this metric?)</th>
+                  <th style="width:13%;text-align:right;">2027 목표치</th>
+                  <th style="width:9%;">단위</th>
+                  <th style="width:22%;">달성 기준 (S/A/B/C/D)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <textarea class="kpi-input" id="res-name-${tId}" placeholder="예: ${meta.preset.result.name}" ${isSaved ? 'readonly' : ''}
+                      oninput="updateResultKpi('${tId}', 'name', this.value)">${tData.resultKpi.name}</textarea>
+                  </td>
+                  <td>
+                    <textarea class="kpi-input" id="res-reason-${tId}" placeholder="예: ${meta.preset.result.reason}" ${isSaved ? 'readonly' : ''}
+                      oninput="updateResultKpi('${tId}', 'reason', this.value)">${tData.resultKpi.reason || ''}</textarea>
+                  </td>
+                  <td>
+                    <input type="text" class="kpi-input num-field" id="res-target-${tId}" value="${tData.resultKpi.target}"
+                      placeholder="예: ${meta.preset.result.target}" ${isSaved ? 'readonly' : ''}
+                      oninput="updateResultKpi('${tId}', 'target', this.value)">
+                  </td>
+                  <td>
+                    <input type="text" class="kpi-input" id="res-unit-${tId}" value="${tData.resultKpi.unit}"
+                      placeholder="예: ${meta.preset.result.unit}" ${isSaved ? 'readonly' : ''}
+                      oninput="updateResultKpi('${tId}', 'unit', this.value)">
+                  </td>
+                  <td>
+                    <textarea class="kpi-input" id="res-desc-${tId}" placeholder="예: ${meta.preset.result.desc}" ${isSaved ? 'readonly' : ''}
+                      oninput="updateResultKpi('${tId}', 'desc', this.value)">${tData.resultKpi.desc}</textarea>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- ===================================================================
+               SECTION 2: 성과지표 I 세팅 (개별성과 · 정량 과정지표 20점 고정)
+               =================================================================== -->
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <div class="kpi-card-title">
+                2. 성과지표 I 세팅 (개별성과 · 5대 선행 행동)
+                <span class="card-fixed-score">20점 고정 (각 4점)</span>
+              </div>
+              <span style="font-size:11.5px;color:var(--ink-faint);">최상위 결과를 이끌어내기 위해 일상 업무에서 실천하고 누적해야 할 5대 정량 선행 지표</span>
+            </div>
+
+            <div class="guide-box">
+              <div class="guide-box-header">
+                <span class="guide-icon">⚡</span>
+                <span class="guide-title">성과지표 I (20점 고정) 설정 원칙 (5개 선행 행동 지표)</span>
+              </div>
+              <div class="guide-semantic-list">
+                <div class="guide-item">
+                  <span class="guide-item-tag">핵심 정의</span>
+                  <span class="guide-item-text">최상위 결과지표를 달성하기 위해 일상 실무에서 지속적으로 실행하고 누적해야 하는 팀내 5대 핵심 직무 선행(정량) 지표입니다.</span>
+                </div>
+                <div class="guide-item">
+                  <span class="guide-item-tag">작성 기준</span>
+                  <span class="guide-item-text">결과지표와 명확한 인과관계가 성립하는 행동량, 고객 미팅, 실사 진단, 개발 배포 건수 등을 인당 연간 목표치로 배분합니다. (5개 항목 × 각 4점 = 20점)</span>
+                </div>
+              </div>
+            </div>
+
+            <table class="kpi-table">
+              <thead>
+                <tr>
+                  <th style="width:4%;text-align:center;">No</th>
+                  <th style="width:23%;">성과지표 항목명</th>
+                  <th style="width:33%;">성과지표로 선정한 이유</th>
+                  <th style="width:21%;">측정 산식 및 기준</th>
+                  <th style="width:10%;text-align:right;">목표치(인당)</th>
+                  <th style="width:9%;text-align:center;">배점 (수정가능)</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-p1-${tId}">
+                <!-- Rendered dynamically -->
+              </tbody>
+              <tfoot>
+                <tr style="background:#E2EAF4;border-top:1.5px solid #BCCADB;">
+                  <td colspan="5" style="text-align:right;font-weight:800;font-size:12px;color:var(--ink);padding:10px 14px;">
+                    성과지표 I 배점 총합계 (반드시 20점 고정):
+                  </td>
+                  <td style="text-align:center;padding:8px 4px;">
+                    <span id="total-p1-badge-${tId}" class="weight-total-badge valid">
+                      20 / 20점
+                    </span>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <!-- ===================================================================
+               SECTION 3: 성과지표 II 세팅 (역량평가 · 정성 과정지표 30점 고정)
+               =================================================================== -->
+          <div class="kpi-card">
+            <div class="kpi-card-header">
+              <div class="kpi-card-title">
+                3. 성과지표 II 세팅 (역량평가 · 5대 정성 핵심 역량)
+                <span class="card-fixed-score">30점 고정 (각 6점)</span>
+              </div>
+              <span style="font-size:11.5px;color:var(--ink-faint);">사업 완결성과 조직 시너지를 담보하는 5대 핵심 공통 역량 평가</span>
+            </div>
+
+            <div class="guide-box">
+              <div class="guide-box-header">
+                <span class="guide-icon">🎯</span>
+                <span class="guide-title">성과지표 II (30점 고정) 평가 원칙 (5대 정성 핵심 역량)</span>
+              </div>
+              <div class="guide-semantic-list">
+                <div class="guide-item">
+                  <span class="guide-item-tag">핵심 정의</span>
+                  <span class="guide-item-text">결과지표 달성 과정에서 팀원들이 견지해야 하는 5대 공통 역량(업무 태도, 전문 소통, 조직 화합, 업무 완결성, 조직 기여) 지표입니다.</span>
+                </div>
+                <div class="guide-item">
+                  <span class="guide-item-tag">평가 원칙</span>
+                  <span class="guide-item-text">형식적인 정성 평가를 지양하고, 부서 간 시너지와 협업 태도를 구체적인 피드백 주안점에 근거하여 객관적으로 평가합니다. (5개 역량 × 각 6점 = 30점)</span>
+                </div>
+              </div>
+            </div>
+
+            <table class="kpi-table">
+              <thead>
+                <tr>
+                  <th style="width:4%;text-align:center;">No</th>
+                  <th style="width:20%;">역량 평가 항목명</th>
+                  <th style="width:37%;">중점 평가 및 선정한 이유</th>
+                  <th style="width:30%;">세부 평가 기준 및 피드백 주안점</th>
+                  <th style="width:9%;text-align:center;">배점 (수정가능)</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-p2-${tId}">
+                <!-- Rendered dynamically -->
+              </tbody>
+              <tfoot>
+                <tr style="background:#E2EAF4;border-top:1.5px solid #BCCADB;">
+                  <td colspan="4" style="text-align:right;font-weight:800;font-size:12px;color:var(--ink);padding:10px 14px;">
+                    성과지표 II 배점 총합계 (반드시 30점 고정):
+                  </td>
+                  <td style="text-align:center;padding:8px 4px;">
+                    <span id="total-p2-badge-${tId}" class="weight-total-badge valid">
+                      30 / 30점
+                    </span>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        `;
+
+        container.appendChild(section);
+        renderProcess1Rows(tId);
+        renderProcess2Rows(tId);
+        updateWeightTotalsUI(tId);
+      });
+    }
+
+    function renderProcess1Rows(tId) {
+      const tbody = document.getElementById(`tbody-p1-${tId}`);
+      if (!tbody) return;
+      tbody.innerHTML = "";
+      const meta = TEAM_METADATA[tId];
+      const tData = appState.teams[tId];
+      const isSaved = tData.isSaved;
+
+      tData.process1.forEach((item, idx) => {
+        const hint = meta.preset.p1[idx] || { name: `지표 ${idx + 1}`, reason: "선정 이유 예시", formula: "산식 예시", target: "목표 예시", weight: 4 };
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td style="text-align:center;" class="num">
+            <span style="font-weight:700;color:var(--ink-faint);">${idx + 1}</span>
+          </td>
+          <td>
+            <textarea class="kpi-input" placeholder="예: ${hint.name}" ${isSaved ? 'readonly' : ''}
+              oninput="updateProcess1('${tId}', ${idx}, 'name', this.value)">${item.name}</textarea>
+          </td>
+          <td>
+            <textarea class="kpi-input" placeholder="예: ${hint.reason}" ${isSaved ? 'readonly' : ''}
+              oninput="updateProcess1('${tId}', ${idx}, 'reason', this.value)">${item.reason || ''}</textarea>
+          </td>
+          <td>
+            <textarea class="kpi-input" placeholder="예: ${hint.formula}" ${isSaved ? 'readonly' : ''}
+              oninput="updateProcess1('${tId}', ${idx}, 'formula', this.value)">${item.formula}</textarea>
+          </td>
+          <td>
+            <input type="text" class="kpi-input num-field" value="${item.target}"
+              placeholder="예: ${hint.target}" ${isSaved ? 'readonly' : ''}
+              oninput="updateProcess1('${tId}', ${idx}, 'target', this.value)">
+          </td>
+          <td style="text-align:center;" class="num">
+            <div style="display:flex;align-items:center;justify-content:center;gap:3px;">
+              <input type="number" class="kpi-input weight-input" id="weight-p1-${tId}-${idx}"
+                value="${item.weight !== undefined ? item.weight : 4}" min="1" max="20" step="1"
+                ${isSaved ? 'readonly' : ''}
+                style="width:48px;text-align:center;padding:3px 4px;font-weight:800;font-size:12px;height:26px;"
+                oninput="updateProcess1Weight('${tId}', ${idx}, this.value)">
+              <span style="font-size:11px;font-weight:700;color:var(--ink-dim);">점</span>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+      if (typeof attachRowHeightSync === 'function') attachRowHeightSync();
+    }
+
+    function renderProcess2Rows(tId) {
+      const tbody = document.getElementById(`tbody-p2-${tId}`);
+      if (!tbody) return;
+      tbody.innerHTML = "";
+      const meta = TEAM_METADATA[tId];
+      const tData = appState.teams[tId];
+      const isSaved = tData.isSaved;
+
+      tData.process2.forEach((item, idx) => {
+        const hint = meta.preset.p2[idx] || { name: `역량 ${idx + 1}`, reason: "선정 이유 예시", desc: "평가 기준 예시", weight: 6 };
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td style="text-align:center;" class="num">
+            <span style="font-weight:700;color:var(--ink-faint);">${idx + 1}</span>
+          </td>
+          <td>
+            <textarea class="kpi-input" placeholder="예: ${hint.name}" ${isSaved ? 'readonly' : ''}
+              oninput="updateProcess2('${tId}', ${idx}, 'name', this.value)">${item.name}</textarea>
+          </td>
+          <td>
+            <textarea class="kpi-input" placeholder="예: ${hint.reason}" ${isSaved ? 'readonly' : ''}
+              oninput="updateProcess2('${tId}', ${idx}, 'reason', this.value)">${item.reason || ''}</textarea>
+          </td>
+          <td>
+            <textarea class="kpi-input" placeholder="예: ${hint.desc}" ${isSaved ? 'readonly' : ''}
+              oninput="updateProcess2('${tId}', ${idx}, 'desc', this.value)">${item.desc}</textarea>
+          </td>
+          <td style="text-align:center;" class="num">
+            <div style="display:flex;align-items:center;justify-content:center;gap:3px;">
+              <input type="number" class="kpi-input weight-input" id="weight-p2-${tId}-${idx}"
+                value="${item.weight !== undefined ? item.weight : 6}" min="1" max="30" step="1"
+                ${isSaved ? 'readonly' : ''}
+                style="width:48px;text-align:center;padding:3px 4px;font-weight:800;font-size:12px;height:26px;"
+                oninput="updateProcess2Weight('${tId}', ${idx}, this.value)">
+              <span style="font-size:11px;font-weight:700;color:var(--ink-dim);">점</span>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+      if (typeof attachRowHeightSync === 'function') attachRowHeightSync();
+    }
+
+    /* -------------------------------------------------------------
+       5. SAVE & EDIT ACTIONS (PER TEAM)
+       ------------------------------------------------------------- */
+    function updateProcess1Weight(tId, idx, val) {
+      const num = parseInt(val, 10) || 0;
+      appState.teams[tId].process1[idx].weight = num;
+      saveState(true);
+      updateWeightTotalsUI(tId);
+    }
+
+    function updateProcess2Weight(tId, idx, val) {
+      const num = parseInt(val, 10) || 0;
+      appState.teams[tId].process2[idx].weight = num;
+      saveState(true);
+      updateWeightTotalsUI(tId);
+    }
+
+    function updateWeightTotalsUI(tId) {
+      const tData = appState.teams[tId];
+      if (!tData) return;
+
+      const p1Sum = tData.process1.reduce((sum, item) => sum + (Number(item.weight) || 0), 0);
+      const p1Badge = document.getElementById(`total-p1-badge-${tId}`);
+      if (p1Badge) {
+        if (p1Sum === 20) {
+          p1Badge.className = "weight-total-badge valid";
+          p1Badge.innerHTML = "✅ 20 / 20점 (정상 합계)";
+        } else {
+          p1Badge.className = "weight-total-badge invalid";
+          p1Badge.innerHTML = `⚠️ ${p1Sum} / 20점 (불일치)`;
+        }
+      }
+
+      const p2Sum = tData.process2.reduce((sum, item) => sum + (Number(item.weight) || 0), 0);
+      const p2Badge = document.getElementById(`total-p2-badge-${tId}`);
+      if (p2Badge) {
+        if (p2Sum === 30) {
+          p2Badge.className = "weight-total-badge valid";
+          p2Badge.innerHTML = "✅ 30 / 30점 (정상 합계)";
+        } else {
+          p2Badge.className = "weight-total-badge invalid";
+          p2Badge.innerHTML = `⚠️ ${p2Sum} / 30점 (불일치)`;
+        }
+      }
+    }
+
+    function handleSaveTeam(tId) {
+      const meta = TEAM_METADATA[tId];
+      const tData = appState.teams[tId];
+
+      // Weight validation: P1 must equal 20, P2 must equal 30
+      const p1Sum = tData.process1.reduce((sum, item) => sum + (Number(item.weight) || 0), 0);
+      const p2Sum = tData.process2.reduce((sum, item) => sum + (Number(item.weight) || 0), 0);
+
+      if (p1Sum !== 20) {
+        alert(`[${meta.shortName}] 성과지표 I의 배점 총합계는 반드시 20점이어야 합니다.
+현재 합계: ${p1Sum}점 (차이: ${20 - p1Sum}점)
+20점으로 맞춘 후 저장해 주세요.`);
+        return;
+      }
+
+      if (p2Sum !== 30) {
+        alert(`[${meta.shortName}] 성과지표 II의 배점 총합계는 반드시 30점이어야 합니다.
+현재 합계: ${p2Sum}점 (차이: ${30 - p2Sum}점)
+30점으로 맞춘 후 저장해 주세요.`);
+        return;
+      }
+
+      tData.isSaved = true;
+      tData.savedAt = new Date().toLocaleString('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+      saveState(true);
+
+      const section = document.getElementById(`page-${tId}`);
+      if (section) {
+        section.classList.remove("mode-editing");
+        section.classList.add("mode-saved");
+        section.querySelectorAll("textarea.kpi-input, input.kpi-input").forEach(inp => inp.setAttribute("readonly", "true"));
+      }
+
+      document.getElementById(`btn-save-${tId}`).style.display = "none";
+      document.getElementById(`btn-edit-${tId}`).style.display = "inline-flex";
+
+      const badge = document.getElementById(`status-badge-${tId}`);
+      badge.className = "status-badge saved";
+      badge.innerText = `저장 완료 (${tData.savedAt})`;
+
+      showToast(`${meta.shortName} 2027 KPI 작성이 저장 완료되었습니다.`);
+    }
+
+    function handleEditTeam(tId) {
+      const meta = TEAM_METADATA[tId];
+      const tData = appState.teams[tId];
+      tData.isSaved = false;
+      saveState(true);
+
+      const section = document.getElementById(`page-${tId}`);
+      if (section) {
+        section.classList.remove("mode-saved");
+        section.classList.add("mode-editing");
+        section.querySelectorAll("textarea.kpi-input, input.kpi-input").forEach(inp => inp.removeAttribute("readonly"));
+      }
+
+      document.getElementById(`btn-save-${tId}`).style.display = "inline-flex";
+      document.getElementById(`btn-edit-${tId}`).style.display = "none";
+
+      const badge = document.getElementById(`status-badge-${tId}`);
+      badge.className = "status-badge editing";
+      badge.innerText = "작성 및 편집 중 (저장 버튼을 눌러 확정하세요)";
+
+      showToast(`${meta.shortName} 수정 모드로 전환되었습니다. 기입 후 저장을 눌러주세요.`);
+    }
+
+    /* -------------------------------------------------------------
+       6. INPUT & STATE CHANGE HANDLERS
+       ------------------------------------------------------------- */
+    function updateTeamRole(tId, field, val) {
+      if (!appState.teams[tId]) return;
+      appState.teams[tId][field] = val;
+      saveState(true);
+      renderSummary();
+    }
+
+    function updateResultKpi(tId, field, val) {
+      appState.teams[tId].resultKpi[field] = val;
+      saveState(true);
+    }
+
+    function updateProcess1(tId, idx, field, val) {
+      appState.teams[tId].process1[idx][field] = val;
+      saveState(true);
+    }
+
+    function updateProcess2(tId, idx, field, val) {
+      appState.teams[tId].process2[idx][field] = val;
+      saveState(true);
+    }
+
+    /* -------------------------------------------------------------
+       7. PRESET & CLEAR OPERATIONS
+       ------------------------------------------------------------- */
+    function applyTeamPreset(tId) {
+      const meta = TEAM_METADATA[tId];
+      const tData = appState.teams[tId];
+      tData.leaderRole = meta.leaderRole;
+      tData.roleDesc = meta.roleDesc;
+      tData.resultKpi = { ...meta.preset.result };
+      tData.process1 = meta.preset.p1.map(p => ({ ...p }));
+      tData.process2 = meta.preset.p2.map(p => ({ ...p }));
+
+      const roleLeaderEl = document.getElementById(`role-leader-${tId}`);
+      if (roleLeaderEl) roleLeaderEl.value = tData.leaderRole;
+      const roleDescEl = document.getElementById(`role-desc-${tId}`);
+      if (roleDescEl) roleDescEl.value = tData.roleDesc;
+
+      document.getElementById(`res-name-${tId}`).value = tData.resultKpi.name;
+      document.getElementById(`res-reason-${tId}`).value = tData.resultKpi.reason || '';
+      document.getElementById(`res-target-${tId}`).value = tData.resultKpi.target;
+      document.getElementById(`res-unit-${tId}`).value = tData.resultKpi.unit;
+      document.getElementById(`res-desc-${tId}`).value = tData.resultKpi.desc;
+
+      renderProcess1Rows(tId);
+      renderProcess2Rows(tId);
+      updateWeightTotalsUI(tId);
+      saveState(true);
+      showToast(`${meta.shortName} 추천 예시값이 채워졌습니다.`);
+    }
+
+    function clearTeamInputs(tId) {
+      const meta = TEAM_METADATA[tId];
+      const tData = appState.teams[tId];
+      tData.leaderRole = "";
+      tData.roleDesc = "";
+      tData.resultKpi = { name: "", reason: "", target: "", unit: "", desc: "" };
+      tData.process1 = tData.process1.map(p => ({ name: "", reason: "", formula: "", target: "", weight: 4 }));
+      tData.process2 = tData.process2.map(p => ({ name: "", reason: "", desc: "", weight: 6 }));
+
+      const roleLeaderEl = document.getElementById(`role-leader-${tId}`);
+      if (roleLeaderEl) roleLeaderEl.value = "";
+      const roleDescEl = document.getElementById(`role-desc-${tId}`);
+      if (roleDescEl) roleDescEl.value = "";
+
+      document.getElementById(`res-name-${tId}`).value = "";
+      document.getElementById(`res-reason-${tId}`).value = "";
+      document.getElementById(`res-target-${tId}`).value = "";
+      document.getElementById(`res-unit-${tId}`).value = "";
+      document.getElementById(`res-desc-${tId}`).value = "";
+
+      renderProcess1Rows(tId);
+      renderProcess2Rows(tId);
+      saveState(true);
+      showToast(`${meta.shortName} 입력란이 빈값으로 초기화되었습니다.`);
+    }
+
+    const btnLoadAll = document.getElementById("btnLoadAllPresets");
+    if (btnLoadAll) btnLoadAll.onclick = () => {
+      if (confirm("5개 전 부서에 추천 예시값을 일괄 적용하시겠습니까?")) {
+        Object.keys(TEAM_METADATA).forEach(tId => {
+          const meta = TEAM_METADATA[tId];
+          const tData = appState.teams[tId];
+          tData.leaderRole = meta.leaderRole;
+          tData.roleDesc = meta.roleDesc;
+          tData.resultKpi = { ...meta.preset.result };
+          tData.process1 = meta.preset.p1.map(p => ({ ...p }));
+          tData.process2 = meta.preset.p2.map(p => ({ ...p }));
+        });
+        buildTeamDetailPages();
+        saveState();
+        showToast("전사 추천 예시값이 일괄 적용되었습니다.");
+      }
+    };
+
+    const btnClear = document.getElementById("btnClearAll");
+    if (btnClear) btnClear.onclick = () => {
+      if (confirm("모든 팀의 입력란을 빈값으로 완전히 초기화하시겠습니까?")) {
+        appState = createInitialState();
+        buildTeamDetailPages();
+        saveState();
+        showToast("모든 팀의 KPI가 빈값으로 초기화되었습니다.");
+      }
+    };
+
+    const btnExport = document.getElementById("btnExportJson");
+    if (btnExport) btnExport.onclick = () => {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
+      const dlAnchorElem = document.createElement('a');
+      dlAnchorElem.setAttribute("href", dataStr);
+      dlAnchorElem.setAttribute("download", `omelet_2027_kpi_setup_${new Date().toISOString().slice(0, 10)}.json`);
+      dlAnchorElem.click();
+    };
+
+    /* -------------------------------------------------------------
+       7.5 ROW HEIGHT SYNCHRONIZATION (RowSync)
+       왼쪽 또는 임의의 창 높이를 조정하면 같은 행(Row)의 모든 창들이
+       동일한 높이로 실시간 연동되어 완벽하게 일체화됩니다.
+       ------------------------------------------------------------- */
+    let rowSyncObserver = null;
+    let isRowSyncing = false;
+
+    function syncRowHeightsToTallest(tr) {
+      if (!tr) return;
+      const inputs = tr.querySelectorAll("textarea.kpi-input, input.kpi-input:not(.weight-input)");
+      if (inputs.length <= 1) return;
+
+      let maxHeight = 0;
+      inputs.forEach(inp => {
+        const h = inp.offsetHeight || 0;
+        const sh = inp.scrollHeight || 0;
+        if (h > maxHeight) maxHeight = h;
+        if (sh > maxHeight) maxHeight = sh;
+      });
+
+      if (maxHeight >= 40) {
+        inputs.forEach(inp => {
+          inp.style.height = maxHeight + "px";
+          inp.dataset.prevHeight = maxHeight;
+        });
+      }
+    }
+
+    function syncRoleGridHeightsToTallest(roleGrid) {
+      if (!roleGrid) return;
+      const roleInputs = roleGrid.querySelectorAll("textarea.role-input");
+      if (roleInputs.length <= 1) return;
+
+      let maxHeight = 0;
+      roleInputs.forEach(inp => {
+        const h = inp.offsetHeight || 0;
+        const sh = inp.scrollHeight || 0;
+        if (h > maxHeight) maxHeight = h;
+        if (sh > maxHeight) maxHeight = sh;
+      });
+
+      if (maxHeight >= 40) {
+        roleInputs.forEach(inp => {
+          inp.style.height = maxHeight + "px";
+          inp.dataset.prevHeight = maxHeight;
+        });
+      }
+    }
+
+    function initRowHeightSync() {
+      if (rowSyncObserver) return;
+      if (typeof ResizeObserver === "undefined") return;
+
+      rowSyncObserver = new ResizeObserver((entries) => {
+        if (isRowSyncing) return;
+
+        for (const entry of entries) {
+          const target = entry.target;
+          const currentHeight = target.offsetHeight;
+          if (!currentHeight || currentHeight < 30) continue;
+
+          // 이미 동기화된 높이면 스킵 (무한 루프 방지)
+          if (parseInt(target.dataset.prevHeight, 10) === currentHeight) continue;
+          target.dataset.prevHeight = currentHeight;
+
+          // 1. 테이블 행 (tr) 내의 모든 입력/텍스트창 실시간 동기화
+          const tr = target.closest("tr");
+          if (tr) {
+            const siblings = tr.querySelectorAll("textarea.kpi-input, input.kpi-input:not(.weight-input)");
+            if (siblings.length > 1) {
+              isRowSyncing = true;
+              siblings.forEach(sib => {
+                if (sib !== target) {
+                  sib.style.height = currentHeight + "px";
+                  sib.dataset.prevHeight = currentHeight;
+                }
+              });
+              if (typeof requestAnimationFrame !== "undefined") {
+                requestAnimationFrame(() => { isRowSyncing = false; });
+              } else {
+                isRowSyncing = false;
+              }
+            }
+            continue;
+          }
+
+          // 2. Section 0 역할 범위 (.role-grid) 내의 좌우 텍스트창 실시간 동기화
+          const roleGrid = target.closest(".role-grid");
+          if (roleGrid) {
+            const siblings = roleGrid.querySelectorAll("textarea.role-input");
+            if (siblings.length > 1) {
+              isRowSyncing = true;
+              siblings.forEach(sib => {
+                if (sib !== target) {
+                  sib.style.height = currentHeight + "px";
+                  sib.dataset.prevHeight = currentHeight;
+                }
+              });
+              if (typeof requestAnimationFrame !== "undefined") {
+                requestAnimationFrame(() => { isRowSyncing = false; });
+              } else {
+                isRowSyncing = false;
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function attachRowHeightSync(container) {
+      initRowHeightSync();
+
+      const root = container || document;
+      const elements = root.querySelectorAll(
+        "textarea.kpi-input, textarea.role-input"
+      );
+      if (rowSyncObserver) {
+        elements.forEach(el => {
+          if (!el.dataset.rowSyncAttached) {
+            rowSyncObserver.observe(el);
+            el.dataset.rowSyncAttached = "true";
+          }
+        });
+      }
+
+      // 화면에 표시된 활성 행들의 초기 높이를 가장 높은 창에 맞춰 일체화
+      const rows = root.querySelectorAll(".kpi-table tbody tr");
+      rows.forEach(tr => syncRowHeightsToTallest(tr));
+      const roleGrids = root.querySelectorAll(".role-grid");
+      roleGrids.forEach(rg => syncRoleGridHeightsToTallest(rg));
+    }
+
+    /* -------------------------------------------------------------
+       8. TAB NAVIGATION
+       ------------------------------------------------------------- */
+    
+    function updateStickyHeaderOffsets() {
+      const gh = document.querySelector('header.global-header');
+      if (gh) {
+        const h = gh.getBoundingClientRect().height;
+        document.documentElement.style.setProperty('--global-header-height', `${Math.round(h)}px`);
+      }
+    }
+    window.addEventListener('resize', updateStickyHeaderOffsets);
+    window.addEventListener('DOMContentLoaded', updateStickyHeaderOffsets);
+    setTimeout(updateStickyHeaderOffsets, 60);
+
+    function switchTab(targetId) {
+      // Normalize legacy target IDs
+      if (targetId === "summary") targetId = "overview";
+
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        if (btn.getAttribute("data-target") === targetId) {
+          btn.classList.add("active");
+        } else {
+          btn.classList.remove("active");
+        }
+      });
+
+      document.querySelectorAll(".page-view").forEach(pv => {
+        pv.classList.remove("active");
+      });
+
+      const activePage = document.getElementById(`page-${targetId}`);
+      if (activePage) {
+        activePage.classList.add("active");
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        attachRowHeightSync(activePage);
+      }
+
+      if (targetId === "overview") {
+        renderOverview();
+      } else if (targetId === "matrix") {
+        renderMasterMatrix(currentMatrixFilter);
+      }
+    }
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-target");
+        switchTab(target);
+      });
+    });
+
+    /* -------------------------------------------------------------
+       9. INITIAL BOOTSTRAP
+       ------------------------------------------------------------- */
+    buildTeamDetailPages();
+    renderSummary();
+    attachRowHeightSync();
+
+    /* -------------------------------------------------------------
+       9. MOTION GRAPHICS & VALUE CHAIN SEQUENTIAL CYCLE
+       ------------------------------------------------------------- */
+    let isMotionActive = true;
+    let cycleTimer = null;
+
+    function initValueChainMotion() {
+      const rd = document.getElementById('chain-node-rd');
+      const bd = document.getElementById('chain-node-bd');
+      const ps = document.getElementById('chain-node-ps');
+      const pb = document.getElementById('chain-node-pb');
+      const loopBar = document.getElementById('chain-node-loop');
+      const bm = document.getElementById('chain-node-bm');
+      const nodes = [rd, bd, ps, pb, loopBar, bm].filter(Boolean);
+
+      if (!nodes.length) return;
+
+      // Sequential ambient pulse cycle ("서로가 묶여서 돌아가는 순환 흐름")
+      let step = 0;
+      function runCycleWave() {
+        if (!isMotionActive) return;
+        nodes.forEach(n => n.classList.remove('glow'));
+        if (step === 0 && rd) rd.classList.add('glow');
+        else if (step === 1 && bd) bd.classList.add('glow');
+        else if (step === 2 && ps) ps.classList.add('glow');
+        else if (step === 3 && pb) pb.classList.add('glow');
+        else if (step === 4 && loopBar) loopBar.classList.add('glow');
+        else if (step === 5 && bm) bm.classList.add('glow');
+
+        step = (step + 1) % 6;
+      }
+
+      if (cycleTimer) clearInterval(cycleTimer);
+      cycleTimer = setInterval(runCycleWave, 1100);
+
+      // Interactive hover highlight
+      nodes.forEach(node => {
+        node.addEventListener('mouseenter', () => {
+          nodes.forEach(n => n.classList.remove('glow'));
+          node.classList.add('glow');
+        });
+        node.addEventListener('mouseleave', () => {
+          node.classList.remove('glow');
+        });
+      });
+    }
+
+    function toggleFlowMotion() {
+      const frame = document.getElementById("flowDiagramFrame");
+      const btn = document.getElementById("btnToggleMotion");
+      const txt = document.getElementById("motionToggleText");
+      if (!frame || !btn) return;
+
+      isMotionActive = !isMotionActive;
+      if (isMotionActive) {
+        frame.classList.remove("motion-paused");
+        btn.classList.add("active");
+        if (txt) txt.innerText = "플로우 모션 ON";
+        showToast("유기적 플로우 모션 애니메이션이 활성화되었습니다.");
+      } else {
+        frame.classList.add("motion-paused");
+        btn.classList.remove("active");
+        if (txt) txt.innerText = "모션 일시정지됨";
+        const nodes = document.querySelectorAll(".chain-bar, .pipeline-card, .chain-loop-bar");
+        nodes.forEach(n => n.classList.remove("glow"));
+        showToast("플로우 모션이 일시정지되었습니다.");
+      }
+    }
+
+    initValueChainMotion();
+
+  </script>
+</body>
+
+</html>
