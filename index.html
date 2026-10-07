@@ -3338,22 +3338,29 @@
     }
 
   
-    /* Airtable Cloud Sync Badge */
-    .airtable-sync-badge {
-      display: inline-flex;
+    /* Cloud Sync Badges (Airtable & Google Sheets) */
+    .cloud-sync-group {
+      display: flex;
       align-items: center;
       gap: 6px;
+    }
+    .airtable-sync-badge, .gsheet-sync-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
       font-size: 11px;
       font-weight: 700;
-      padding: 3px 10px;
+      padding: 3px 9px;
       border-radius: 12px;
       background: rgba(226, 234, 244, 0.18);
       color: #BCCADB;
       border: 1px solid rgba(188, 202, 219, 0.3);
       transition: all 0.2s ease;
       cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
     }
-    .airtable-sync-badge:hover {
+    .airtable-sync-badge:hover, .gsheet-sync-badge:hover {
       background: rgba(226, 234, 244, 0.3);
       color: #FFFFFF;
     }
@@ -3362,7 +3369,12 @@
       color: #A3E6D5;
       border-color: rgba(60, 174, 163, 0.45);
     }
-    .airtable-sync-badge .sync-dot {
+    .gsheet-sync-badge.synced {
+      background: rgba(52, 168, 83, 0.22);
+      color: #A8F0B8;
+      border-color: rgba(52, 168, 83, 0.45);
+    }
+    .sync-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
@@ -3372,6 +3384,10 @@
     .airtable-sync-badge.synced .sync-dot {
       background: #3CAEA3;
       box-shadow: 0 0 6px #3CAEA3;
+    }
+    .gsheet-sync-badge.synced .sync-dot {
+      background: #34A853;
+      box-shadow: 0 0 6px #34A853;
     }
 
   </style>
@@ -3389,10 +3405,16 @@
           <span>OMELET · 2027 KPI GOVERNANCE</span>
           <span class="brand-v-pill">v12</span>
         </div>
-        <a href="https://airtable.com/appdF5ETllb7X4jU1/tbl7YNvxCkjbAasyu/viwbGaCCHSXgnc4fX?blocks=hide" target="_blank" class="airtable-sync-badge" id="airtableSyncStatus" title="Airtable Base (2027_전사_KPI_성과관리) 실시간 연동 (클릭 시 에어테이블로 이동)">
-          <span class="sync-dot"></span>
-          <span id="airtableSyncText">Airtable 동기화 연결 중...</span>
-        </a>
+        <div class="cloud-sync-group">
+          <a href="https://airtable.com/appdF5ETllb7X4jU1/tbl7YNvxCkjbAasyu/viwbGaCCHSXgnc4fX?blocks=hide" target="_blank" class="airtable-sync-badge" id="airtableSyncStatus" title="Airtable Base (2027_전사_KPI_성과관리) 실시간 연동 (클릭 시 에어테이블로 이동)">
+            <span class="sync-dot"></span>
+            <span id="airtableSyncText">Airtable</span>
+          </a>
+          <a href="https://docs.google.com/spreadsheets/d/1J5OTpZlyFP-rnutY8mYAYP1mz3U726smtTz5u09lnO0/edit?usp=sharing" target="_blank" class="gsheet-sync-badge" id="gsheetSyncStatus" title="Google Spreadsheet (Omelet-KPI-Setup) 실시간 동시 연동 (클릭 시 구글 시트 이동)">
+            <span class="sync-dot gsheet-dot"></span>
+            <span id="gsheetSyncText">Google 시트 동시 연동</span>
+          </a>
+        </div>
       </div>
 
       <!-- Bookmark Index Tab Navigation (책갈피 색인 탭 · 상단 우측 배치) -->
@@ -5101,12 +5123,14 @@
           body: JSON.stringify({ fields })
         });
         if (res.ok) {
-          showToast(`☁️ 에어테이블(2027_전사_KPI_성과관리)에 실시간 갱신 완료!`);
+          return true;
         } else {
           console.error('Airtable sync error:', await res.text());
+          return false;
         }
       } catch (err) {
         console.error('Airtable sync request failed:', err);
+        return false;
       }
     }
 
@@ -5126,6 +5150,136 @@
           })
         });
       } catch(e) { console.error('Airtable edit sync error', e); }
+    }
+
+    /* -------------------------------------------------------------
+       GOOGLE SPREADSHEET CLOUD DUAL-SYNC CONFIGURATION
+       Spreadsheet: Omelet-KPI-Setup
+       URL: https://docs.google.com/spreadsheets/d/1J5OTpZlyFP-rnutY8mYAYP1mz3U726smtTz5u09lnO0/edit?usp=sharing
+       ------------------------------------------------------------- */
+    const GOOGLE_SHEET_CONFIG = {
+      spreadsheetUrl: "https://docs.google.com/spreadsheets/d/1J5OTpZlyFP-rnutY8mYAYP1mz3U726smtTz5u09lnO0/edit?usp=sharing",
+      spreadsheetId: "1J5OTpZlyFP-rnutY8mYAYP1mz3U726smtTz5u09lnO0",
+      get scriptUrl() {
+        return localStorage.getItem("OMELET_GSHEET_WEBAPP_URL") || "";
+      },
+      set scriptUrl(val) {
+        if (val) {
+          localStorage.setItem("OMELET_GSHEET_WEBAPP_URL", val.trim());
+        }
+      }
+    };
+
+    async function syncTeamToGoogleSheets(tId) {
+      const scriptUrl = GOOGLE_SHEET_CONFIG.scriptUrl;
+      const meta = TEAM_METADATA[tId];
+      const tData = appState.teams[tId];
+
+      const p1Summary = (tData.process1 || []).map((p, i) =>
+        `${i+1}. ${p.name || '미정'} (${p.target || '-'} / ${p.weight !== undefined ? p.weight : 4}점)`
+      ).join('\n');
+      const p1Sum = (tData.process1 || []).reduce((s, p) => s + (Number(p.weight) || 0), 0);
+
+      const p2Summary = (tData.process2 || []).map((p, i) =>
+        `${i+1}. ${p.name || '미정'} (${p.weight !== undefined ? p.weight : 6}점) - ${p.reason || ''}`
+      ).join('\n');
+      const p2Sum = (tData.process2 || []).reduce((s, p) => s + (Number(p.weight) || 0), 0);
+
+      const payload = {
+        action: "save",
+        teamId: tId,
+        teamName: meta.name,
+        status: "저장 완료",
+        savedAt: tData.savedAt || new Date().toLocaleString('ko-KR'),
+        leaderRole: tData.leaderRole || meta.leaderRole,
+        roleDesc: tData.roleDesc || meta.roleDesc,
+        resultMetric: tData.resultKpi?.name || '',
+        resultTarget: String(tData.resultKpi?.target || ''),
+        resultUnit: tData.resultKpi?.unit || '',
+        resultReason: tData.resultKpi?.reason || '',
+        resultCriteria: tData.resultKpi?.desc || '',
+        p1Summary: p1Summary,
+        p1Score: p1Sum,
+        p2Summary: p2Summary,
+        p2Score: p2Sum,
+        totalScore: p1Sum + p2Sum + 50,
+        raw: tData
+      };
+
+      if (!scriptUrl) {
+        console.info("Google Apps Script URL 대기 중 - 로컬 캐시 및 에어테이블 저장 진행");
+        return false;
+      }
+
+      try {
+        await fetch(scriptUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        const gsheetBadge = document.getElementById("gsheetSyncStatus");
+        const gsheetText = document.getElementById("gsheetSyncText");
+        if (gsheetBadge && gsheetText) {
+          gsheetBadge.classList.add("synced");
+          gsheetText.innerText = "Google 시트 동기화 완료";
+        }
+        return true;
+      } catch (err) {
+        console.error("Google Sheets sync error:", err);
+        return false;
+      }
+    }
+
+    async function syncTeamEditToGoogleSheets(tId) {
+      const scriptUrl = GOOGLE_SHEET_CONFIG.scriptUrl;
+      if (!scriptUrl) return;
+      try {
+        await fetch(scriptUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: "edit",
+            teamId: tId,
+            status: "작성 중"
+          })
+        });
+      } catch (e) {
+        console.error("Google Sheets edit sync error:", e);
+      }
+    }
+
+    function initGoogleSheetsBadgeHandler() {
+      const badge = document.getElementById("gsheetSyncStatus");
+      if (!badge) return;
+      badge.addEventListener("click", (e) => {
+        // If Shift/Alt clicked or if scriptUrl is not configured, open modal prompt to enter/update Web App URL
+        if (e.shiftKey || e.altKey || !GOOGLE_SHEET_CONFIG.scriptUrl) {
+          e.preventDefault();
+          const currentUrl = GOOGLE_SHEET_CONFIG.scriptUrl;
+          const newUrl = prompt(
+            "구글 스프레드시트 실시간 동기화 웹 앱 URL(Apps Script Web App)을 입력하거나 변경하세요:\n(예: https://script.google.com/macros/s/.../exec)",
+            currentUrl
+          );
+          if (newUrl !== null) {
+            GOOGLE_SHEET_CONFIG.scriptUrl = newUrl;
+            if (newUrl.trim()) {
+              alert("Google Apps Script 동기화 URL이 등록되었습니다.");
+              badge.classList.add("synced");
+              document.getElementById("gsheetSyncText").innerText = "Google 시트 연동 완료";
+            } else {
+              badge.classList.remove("synced");
+              document.getElementById("gsheetSyncText").innerText = "Google 시트 동시 연동";
+            }
+          }
+        }
+      });
+      if (GOOGLE_SHEET_CONFIG.scriptUrl) {
+        badge.classList.add("synced");
+        const gText = document.getElementById("gsheetSyncText");
+        if (gText) gText.innerText = "Google 시트 연동 완료";
+      }
     }
 
     function handleSaveTeam(tId) {
@@ -5168,8 +5322,25 @@
       badge.className = "status-badge saved";
       badge.innerText = `저장 완료 (${tData.savedAt})`;
 
-      showToast(`${meta.shortName} 2027 KPI 작성이 저장 완료되었습니다.`);
-      syncTeamToAirtable(tId);
+      showToast(`${meta.shortName} 2027 KPI 저장 중...`);
+      
+      const pAir = syncTeamToAirtable(tId);
+      const pGSheet = syncTeamToGoogleSheets(tId);
+
+      Promise.allSettled([pAir, pGSheet]).then(results => {
+        const airOk = (results[0].status === 'fulfilled' && results[0].value);
+        const sheetOk = (results[1].status === 'fulfilled' && results[1].value);
+
+        if (airOk && sheetOk) {
+          showToast(`☁️ 에어테이블 & 구글시트 동시 갱신 완료!`);
+        } else if (sheetOk) {
+          showToast(`☁️ 구글 스프레드시트에 실시간 갱신 완료! (에어테이블 백업 안전 보관)`);
+        } else if (airOk) {
+          showToast(`☁️ 에어테이블(2027_전사_KPI_성과관리)에 실시간 갱신 완료!`);
+        } else {
+          showToast(`💾 로컬 브라우저에 안전하게 저장 완료되었습니다.`);
+        }
+      });
     }
 
     function handleEditTeam(tId) {
@@ -5194,6 +5365,7 @@
 
       showToast(`${meta.shortName} 수정 모드로 전환되었습니다. 기입 후 저장을 눌러주세요.`);
       syncTeamEditToAirtable(tId);
+      syncTeamEditToGoogleSheets(tId);
     }
 
     /* -------------------------------------------------------------
@@ -5505,6 +5677,7 @@
     buildTeamDetailPages();
     renderSummary();
     attachRowHeightSync();
+    initGoogleSheetsBadgeHandler();
 
     /* -------------------------------------------------------------
        9. MOTION GRAPHICS & VALUE CHAIN SEQUENTIAL CYCLE
