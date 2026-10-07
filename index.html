@@ -2375,7 +2375,46 @@
       border-top: none;
     }
 
-    /* Ultra-Clean Causal Stage */
+        /* Fixed Target Styling */
+    .fixed-target-field {
+      background: #F1F5F9 !important;
+      color: #0F172A !important;
+      font-weight: 800 !important;
+      border: 1.5px solid #CBD5E1 !important;
+      cursor: not-allowed;
+      text-align: right;
+    }
+
+    .fixed-target-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+    }
+
+    .fixed-val-tag {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #1E40AF;
+      background: #DBEAFE;
+      border: 1px solid #BFDBFE;
+      padding: 1.5px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .free-val-tag {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #6D28D9;
+      background: #EDE9FE;
+      border: 1px solid #DDD6FE;
+      padding: 1.5px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+/* Ultra-Clean Causal Stage */
     .clean-causal-stage {
       display: flex;
       align-items: center;
@@ -2523,8 +2562,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: #FFFFFF;
       border: 2px solid #8B5CF6;
@@ -2533,7 +2572,7 @@
     }
 
     .junction-plus-symbol {
-      font-size: 20px;
+      font-size: 17px;
       font-weight: 900;
       color: #8B5CF6;
       line-height: 1;
@@ -3267,35 +3306,35 @@
       <div class="overview-section-divider first-section">
         <h2 class="divider-title">2027 KPI 100점 절대평가 인과 거버넌스</h2>
         <p class="divider-desc">
-          선행 과정 50점(정량·정성 성과 I·II)의 일상적 실천이 팀 최상위 사업 결실 50점(결과지표 · <b>전원 균등 귀속</b>)을 필연적으로 견인합니다.
+          팀원 각자가 개인별로 완수하는 <b>성과지표 I·II (개인별 50점)</b>의 일상적 실천이 팀 최상위 사업 결실인 <b>결과지표 (50점 · 팀원 전원 균등 귀속)</b>를 필연적으로 견인합니다.
         </p>
       </div>
 
       <!-- 3-Metric Clean Causal Stage -->
       <div class="clean-causal-stage">
 
-        <!-- METRIC 1: 성과지표 I (20점) -->
+        <!-- METRIC 1: 성과지표 I (20점 - 개인별 정량적 목표) -->
         <div class="clean-metric-card metric-p1">
-          <div class="metric-top-pill">5개 지표 × 4점</div>
+          <div class="metric-top-pill">개인별 5개 지표 × 4점</div>
           <div class="metric-score">20<span class="score-unit">점</span></div>
           <div class="metric-name">성과지표 I</div>
-          <div class="metric-role">결과지표 달성을 위한 정량적 목표 설정</div>
-          <div class="metric-keywords">데이터 선행 · SLA 준수 · 사전 검증</div>
+          <div class="metric-role">결과지표 달성을 위한 개인별 정량적 목표 설정</div>
+          <div class="metric-keywords">개인별 선행 행동량 · SLA 준수 · 사전 검증</div>
         </div>
 
         <!-- PLUS JUNCTION -->
         <div class="clean-junction-plus">
           <span class="junction-plus-symbol">＋</span>
-          <span class="junction-plus-label">융합</span>
+          <span class="junction-plus-label">개인 50점</span>
         </div>
 
-        <!-- METRIC 2: 성과지표 II (30점) -->
+        <!-- METRIC 2: 성과지표 II (30점 - 개인별 정성적 역량) -->
         <div class="clean-metric-card metric-p2">
-          <div class="metric-top-pill">5개 영역 × 6점</div>
+          <div class="metric-top-pill">개인별 5대 영역 × 6점</div>
           <div class="metric-score">30<span class="score-unit">점</span></div>
           <div class="metric-name">성과지표 II</div>
-          <div class="metric-role">결과지표 달성을 위한 정성적 역량 설정</div>
-          <div class="metric-keywords">주도성 · 소통 · 협업 · 완결성 · 기여</div>
+          <div class="metric-role">결과지표 달성을 위한 개인별 정성적 역량 설정</div>
+          <div class="metric-keywords">개인별 핵심 역량 · 주도성 · 협업 · 완결성</div>
         </div>
 
         <!-- CAUSAL ARROW BRIDGE -->
@@ -3304,16 +3343,16 @@
           <div class="bridge-track">
             <div class="bridge-arrow">➔</div>
           </div>
-          <div class="bridge-sub">결실 50점 균등 귀속</div>
+          <div class="bridge-sub">개인 50점 ➔ 팀 균등 귀속</div>
         </div>
 
-        <!-- METRIC 3: 결과지표 (50점) - 전원 균등 귀속 강조 -->
+        <!-- METRIC 3: 결과지표 (50점 - 팀 공동 사업 결실) -->
         <div class="clean-metric-card metric-res">
           <div class="metric-top-pill">팀원 전원 100% 균등 귀속</div>
           <div class="metric-score">50<span class="score-unit">점</span></div>
           <div class="metric-name">결과지표</div>
-          <div class="metric-role">최상위 사업 결실 · 전원 균등 귀속</div>
-          <div class="metric-keywords">유효 프로젝트 성공 건수 중심 (매출액 배제)</div>
+          <div class="metric-role">팀 최상위 사업 결실 · 전원 균등 귀속</div>
+          <div class="metric-keywords">BD 50건 · PS 25건 · PB 12건 · BM 50건 (R&D 자율)</div>
         </div>
 
       </div>
@@ -3544,8 +3583,8 @@
         <div class="page-eyebrow">ENTERPRISE MASTER KPI MATRIX · AT-A-GLANCE</div>
         <h1 class="page-title">2027 오믈렛 전사 종합연결 (5대 조직 KPI 전체 매트릭스)</h1>
         <p class="page-desc">
-          5대 핵심 조직(R&D, BD, PS, PB, BM)의 결과지표(50점), 성과지표 I(결과지표 달성을 위한 정량적 목표 설정 20점), 성과지표 II(결과지표 달성을 위한 정성적 역량 설정 30점) 전 항목을 한눈에 비교·점검하는 전사 통합 거버넌스 보드입니다.<br>
-          성과지표 I과 II는 단기적으로 결과지표를 달성하고, 중장기적으로 회사의 성장을 견인하며, 결과지표는 전체 구성원의 결과가 균등 귀속됩니다.
+          5대 핵심 조직(R&D, BD, PS, PB, BM)의 결과지표(팀 결실 50점 · 전원 균등 귀속), 성과지표 I(개인별 정량적 목표 20점), 성과지표 II(개인별 정성적 역량 30점) 전 항목을 한눈에 비교·점검하는 전사 통합 거버넌스 보드입니다.<br>
+          팀원 개개인이 개인별 성과지표 I·II(개인별 50점)를 일상에서 충실히 완수함으로써 팀 최상위 결과지표(50점)가 견인되며, 결과지표는 팀원 전원에게 균등 귀속되어 최종 100점 절대평가로 확정됩니다.
         </p>
 
         <!-- Matrix Filter Bar -->
@@ -4043,6 +4082,8 @@
     function createInitialState() {
       const state = { teams: {} };
       Object.keys(TEAM_METADATA).forEach(tId => {
+        const meta = TEAM_METADATA[tId];
+        const isFixed = (tId !== 'rd');
         state.teams[tId] = {
           isSaved: false,
           savedAt: null,
@@ -4051,8 +4092,8 @@
           resultKpi: {
             name: "",
             reason: "",
-            target: "",
-            unit: "",
+            target: isFixed ? meta.preset.result.target : "",
+            unit: isFixed ? meta.preset.result.unit : "",
             desc: ""
           },
           process1: [
@@ -4275,8 +4316,8 @@
             <div class="matrix-col matrix-col-res">
               <div class="matrix-col-header">
                 <div>
-                  <span class="matrix-col-tag tag-res">PILLAR 01 · 50점 고정</span>
-                  <div class="matrix-col-sub">팀 공동 최상위 사업 실적 (팀원 100% 동일 부여)</div>
+                  <span class="matrix-col-tag tag-res">PILLAR 01 · 원팀 50점</span>
+                  <div class="matrix-col-sub">팀 최상위 사업 결실 (팀원 전원 100% 균등 귀속)</div>
                 </div>
               </div>
               
@@ -4305,8 +4346,8 @@
             <div class="matrix-col matrix-col-p1">
               <div class="matrix-col-header">
                 <div>
-                  <span class="matrix-col-tag tag-p1">성과지표 I · 20점 고정</span>
-                  <div class="matrix-col-sub">결과지표 달성을 위한 정량적 목표 설정 (5개 항목 × 각 4점)</div>
+                  <span class="matrix-col-tag tag-p1">성과지표 I · 개인별 20점</span>
+                  <div class="matrix-col-sub">결과지표 달성을 위한 개인별 정량적 목표 (5개 항목 × 각 4점)</div>
                 </div>
               </div>
 
@@ -4324,8 +4365,8 @@
             <div class="matrix-col matrix-col-p2">
               <div class="matrix-col-header">
                 <div>
-                  <span class="matrix-col-tag tag-p2">성과지표 II · 30점 고정</span>
-                  <div class="matrix-col-sub">결과지표 달성을 위한 정성적 역량 설정 (5대 영역 × 각 6점)</div>
+                  <span class="matrix-col-tag tag-p2">성과지표 II · 개인별 30점</span>
+                  <div class="matrix-col-sub">결과지표 달성을 위한 개인별 정성적 역량 (5대 영역 × 각 6점)</div>
                 </div>
               </div>
 
@@ -4350,9 +4391,15 @@
        ------------------------------------------------------------- */
     const NARRATIVE_TEXTS = {
       0: (tId) => "오믈렛의 2027 전사 전략 방향(Operational Intelligence Alignment)에 입각하여, 우리 팀이 올해 반드시 완수해야 할 핵심 미션과 구체적인 역할 범위를 팀리더가 1줄 요약과 세부 내용으로 명확히 정의합니다.",
-      1: (tId) => "결과지표는 팀 전원이 원팀으로 긴밀히 협업하여 만들어내는 연간 최상위 사업 결실(50점 고정)로, 달성 결과는 팀원 전원에게 100% 균등하게 귀속됩니다. 단순한 매출액 숫자는 배제하며, 실제 현장 가치를 입증하는 유효 프로젝트 건수(BD 50건, PS 25건, PB 12건, BM 50건, R&D 10건)를 최우선 목표치로 설정합니다. 평가는 연간 목표 대비 100% 초과(S), 90% 이상(A), 70% 이상(B), 50% 이상(C), 50% 미만(D)의 절대평가 척도로 확정됩니다.",
-      2: (tId) => "성과지표 I은 결과지표 달성을 위한 정량적 목표 설정(20점 고정)입니다. 결과지표와 직접 이어지는 일상 실무의 정량 선행 행동량을 5개 지표(각 4점, 총 20점)로 구체화하여 공정하게 평가합니다.",
-      3: (tId) => "성과지표 II는 결과지표 달성을 위한 정성적 역량 설정(30점 고정)입니다. 주도적 업무태도, 전문 소통, 타 부서 협업, 업무 완결성, 조직 기여도의 5대 핵심 역량을 5개 영역(각 6점, 총 30점)으로 객관적으로 평가합니다."
+      1: (tId) => {
+        const meta = TEAM_METADATA[tId];
+        if (tId === 'rd') {
+          return "결과지표는 팀 전원이 원팀으로 협력하여 달성하는 연간 최상위 연구·개발 결실(50점 고정)입니다. R&D는 2027년 신설 조직으로서 원천 최적화 Solver 확보를 위한 도전적 목표치를 자율적으로 설정하며, 달성 결과는 팀원 전원에게 100% 균등하게 귀속됩니다.";
+        }
+        return `결과지표는 팀 전원이 원팀으로 협력하여 만들어내는 연간 최상위 사업 결실(50점 고정)로, 전사 거버넌스에 따라 ${meta.shortName}은 '${meta.preset.result.target}${meta.preset.result.unit}'이 고정 목표치로 부여됩니다. 단순 매출액은 배제하며, 실제 현장 가치를 입증하는 프로젝트 완결 건수를 기준으로 평가 결과는 팀원 전원에게 100% 균등하게 귀속됩니다.`;
+      },
+      2: (tId) => "성과지표 I은 결과지표 달성을 위해 팀원 각자가 개인별로 반드시 완수해야 하는 정량적 목표(개인별 20점 고정)를 기재합니다. 고객 미팅, 실사 진단, 배포 건수 등 결과지표로 직결되는 개인별 선행 행동량을 5개 지표(개인별 각 4점, 총 20점)로 명확히 설정하여 평가합니다.",
+      3: (tId) => "성과지표 II는 결과지표를 든든히 뒷받침하기 위해 팀원 각자가 개인별로 발휘해야 하는 정성적 역량(개인별 30점 고정)을 기재합니다. 주도적 업무태도, 전문 소통, 원팀 협업, 업무 완결성, 조직 기여도의 5대 영역에서 개개인이 실천해야 할 구체적 행동 기준(개인별 각 6점, 총 30점)을 객관적으로 평가합니다."
     };
 
     const typewriterTimers = {};
@@ -4547,14 +4594,22 @@
           </div>
 
           <!-- ===================================================================
-               ACCORDION 1: 결과지표 세팅 (팀 공동 연간 최상위 사업 결실 50점 고정)
+               ACCORDION 1: 결과지표 세팅 (연간 최상위 사업 결실 50점 고정)
                =================================================================== -->
           <div class="accordion-card" id="accordion-card-${tId}-1">
             <div class="accordion-header" onclick="toggleAccordionSection('${tId}', 1)">
               <div class="accordion-title-left">
                 <span class="accordion-step-num">1</span>
-                <span class="accordion-title-text">결과지표 세팅 (연간 최상위 사업 결실)</span>
-                <span class="accordion-score-badge highlight">50점 고정</span>
+                <span class="accordion-title-text">${
+                  (tId === 'rd') 
+                    ? '결과지표 세팅 (연간 최상위 연구·개발 결실 · 신설 자율 설정)' 
+                    : `결과지표 세팅 (연간 최상위 사업 결실 · ${meta.preset.result.target}${meta.preset.result.unit} 고정)`
+                }</span>
+                <span class="accordion-score-badge highlight">${
+                  (tId === 'rd') 
+                    ? '50점 고정 (신설 자율 설정)' 
+                    : `50점 고정 (전사 ${meta.preset.result.target}${meta.preset.result.unit} 확정)`
+                }</span>
               </div>
               <div class="accordion-toggle-right">
                 <span id="accordion-toggle-txt-${tId}-1">펼치기</span>
@@ -4573,7 +4628,7 @@
                   <tr>
                     <th style="width:24%;">결과지표 항목명</th>
                     <th style="width:32%;">성과지표 선정 이유 (Why this metric?)</th>
-                    <th style="width:13%;text-align:right;">2027 목표치</th>
+                    <th style="width:13%;text-align:right;">2027 목표치 ${tId !== 'rd' ? '(전사 고정)' : '(자율 설정)'}</th>
                     <th style="width:9%;">단위</th>
                     <th style="width:22%;">달성 기준 (S/A/B/C/D)</th>
                   </tr>
@@ -4589,14 +4644,28 @@
                         oninput="updateResultKpi('${tId}', 'reason', this.value)">${tData.resultKpi.reason || ''}</textarea>
                     </td>
                     <td>
-                      <input type="text" class="kpi-input num-field" id="res-target-${tId}" value="${tData.resultKpi.target || ''}"
-                        placeholder="예: ${meta.preset.result.target}" ${isSaved ? 'readonly' : ''}
-                        oninput="updateResultKpi('${tId}', 'target', this.value)">
+                      ${(tId !== 'rd') ? `
+                        <div class="fixed-target-box">
+                          <input type="text" class="kpi-input num-field fixed-target-field" id="res-target-${tId}" value="${meta.preset.result.target}" readonly title="전사 거버넌스 확정 고정 수치 (${meta.preset.result.target}${meta.preset.result.unit})">
+                          <span class="fixed-val-tag">전사 고정 수치</span>
+                        </div>
+                      ` : `
+                        <div class="fixed-target-box">
+                          <input type="text" class="kpi-input num-field" id="res-target-${tId}" value="${tData.resultKpi.target || ''}"
+                            placeholder="예: ${meta.preset.result.target}" ${isSaved ? 'readonly' : ''}
+                            oninput="updateResultKpi('${tId}', 'target', this.value)">
+                          <span class="free-val-tag">신설 자율 설정</span>
+                        </div>
+                      `}
                     </td>
                     <td>
-                      <input type="text" class="kpi-input" id="res-unit-${tId}" value="${tData.resultKpi.unit || ''}"
-                        placeholder="예: ${meta.preset.result.unit}" ${isSaved ? 'readonly' : ''}
-                        oninput="updateResultKpi('${tId}', 'unit', this.value)">
+                      ${(tId !== 'rd') ? `
+                        <input type="text" class="kpi-input fixed-target-field" id="res-unit-${tId}" value="${meta.preset.result.unit}" readonly title="단위 고정">
+                      ` : `
+                        <input type="text" class="kpi-input" id="res-unit-${tId}" value="${tData.resultKpi.unit || ''}"
+                          placeholder="예: ${meta.preset.result.unit}" ${isSaved ? 'readonly' : ''}
+                          oninput="updateResultKpi('${tId}', 'unit', this.value)">
+                      `}
                     </td>
                     <td>
                       <textarea class="kpi-input" id="res-desc-${tId}" placeholder="예: ${meta.preset.result.desc}" ${isSaved ? 'readonly' : ''}
@@ -4615,8 +4684,8 @@
             <div class="accordion-header" onclick="toggleAccordionSection('${tId}', 2)">
               <div class="accordion-title-left">
                 <span class="accordion-step-num">2</span>
-                <span class="accordion-title-text">성과지표 I 세팅 (결과지표 달성을 위한 정량적 목표 설정)</span>
-                <span class="accordion-score-badge">20점 고정 (각 4점)</span>
+                <span class="accordion-title-text">성과지표 I 세팅 (개인별 정량적 목표 설정)</span>
+                <span class="accordion-score-badge">개인별 20점 고정 (각 4점)</span>
               </div>
               <div class="accordion-toggle-right">
                 <span id="accordion-toggle-txt-${tId}-2">펼치기</span>
@@ -4634,11 +4703,11 @@
                 <thead>
                   <tr>
                     <th style="width:4%;text-align:center;">No</th>
-                    <th style="width:23%;">성과지표 I 항목명 (결과지표 견인)</th>
+                    <th style="width:23%;">성과지표 I 항목명 (개인별 정량 목표)</th>
                     <th style="width:33%;">결과지표 달성을 위한 선정 이유</th>
                     <th style="width:21%;">측정 산식 및 기준</th>
-                    <th style="width:10%;text-align:right;">목표치(인당)</th>
-                    <th style="width:9%;text-align:center;">배점 (수정가능)</th>
+                    <th style="width:10%;text-align:right;">개인별 목표치</th>
+                    <th style="width:9%;text-align:center;">개인별 배점</th>
                   </tr>
                 </thead>
                 <tbody id="tbody-p1-${tId}">
@@ -4647,7 +4716,7 @@
                 <tfoot>
                   <tr style="background:#F8FAFC;border-top:1.5px solid #E2E8F0;">
                     <td colspan="5" style="text-align:right;font-weight:800;font-size:14.5px;color:#0F172A;padding:12px 16px;">
-                      성과지표 I 배점 총합계 (반드시 20점 고정):
+                      성과지표 I 개인별 배점 합계 (반드시 20점 고정):
                     </td>
                     <td style="text-align:center;padding:10px 4px;">
                       <span id="total-p1-badge-${tId}" class="weight-total-badge valid">
@@ -4667,8 +4736,8 @@
             <div class="accordion-header" onclick="toggleAccordionSection('${tId}', 3)">
               <div class="accordion-title-left">
                 <span class="accordion-step-num">3</span>
-                <span class="accordion-title-text">성과지표 II 세팅 (결과지표 달성을 위한 정성적 역량 설정)</span>
-                <span class="accordion-score-badge">30점 고정 (각 6점)</span>
+                <span class="accordion-title-text">성과지표 II 세팅 (개인별 정성적 역량 설정)</span>
+                <span class="accordion-score-badge">개인별 30점 고정 (각 6점)</span>
               </div>
               <div class="accordion-toggle-right">
                 <span id="accordion-toggle-txt-${tId}-3">펼치기</span>
@@ -4686,10 +4755,10 @@
                 <thead>
                   <tr>
                     <th style="width:4%;text-align:center;">No</th>
-                    <th style="width:20%;">성과지표 II 역량 항목명</th>
+                    <th style="width:20%;">성과지표 II 역량 항목명 (개인별 정성 역량)</th>
                     <th style="width:37%;">결과지표 달성 관점 중점 평가 및 선정한 이유</th>
-                    <th style="width:30%;">세부 평가 기준 및 피드백 주안점</th>
-                    <th style="width:9%;text-align:center;">배점 (수정가능)</th>
+                    <th style="width:30%;">개인별 구체적 행동 기준 및 피드백 주안점</th>
+                    <th style="width:9%;text-align:center;">개인별 배점</th>
                   </tr>
                 </thead>
                 <tbody id="tbody-p2-${tId}">
@@ -4698,7 +4767,7 @@
                 <tfoot>
                   <tr style="background:#F8FAFC;border-top:1.5px solid #E2E8F0;">
                     <td colspan="4" style="text-align:right;font-weight:800;font-size:14.5px;color:#0F172A;padding:12px 16px;">
-                      성과지표 II 배점 총합계 (반드시 30점 고정):
+                      성과지표 II 개인별 배점 합계 (반드시 30점 고정):
                     </td>
                     <td style="text-align:center;padding:10px 4px;">
                       <span id="total-p2-badge-${tId}" class="weight-total-badge valid">
@@ -5258,9 +5327,13 @@
     function clearTeamInputs(tId) {
       const meta = TEAM_METADATA[tId];
       const tData = appState.teams[tId];
+      const isFixed = (tId !== 'rd');
+      const fixedTarget = isFixed ? meta.preset.result.target : "";
+      const fixedUnit = isFixed ? meta.preset.result.unit : "";
+
       tData.leaderRole = "";
       tData.roleDesc = "";
-      tData.resultKpi = { name: "", reason: "", target: "", unit: "", desc: "" };
+      tData.resultKpi = { name: "", reason: "", target: fixedTarget, unit: fixedUnit, desc: "" };
       tData.process1 = tData.process1.map(p => ({ name: "", reason: "", formula: "", target: "", weight: 4 }));
       tData.process2 = tData.process2.map(p => ({ name: "", reason: "", desc: "", weight: 6 }));
 
@@ -5274,9 +5347,9 @@
       const resReasonEl = document.getElementById(`res-reason-${tId}`);
       if (resReasonEl) resReasonEl.value = "";
       const resTargetEl = document.getElementById(`res-target-${tId}`);
-      if (resTargetEl) resTargetEl.value = "";
+      if (resTargetEl) resTargetEl.value = fixedTarget;
       const resUnitEl = document.getElementById(`res-unit-${tId}`);
-      if (resUnitEl) resUnitEl.value = "";
+      if (resUnitEl) resUnitEl.value = fixedUnit;
       const resDescEl = document.getElementById(`res-desc-${tId}`);
       if (resDescEl) resDescEl.value = "";
 
