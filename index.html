@@ -172,8 +172,8 @@
       background: var(--bg-canvas);
       color: var(--ink);
       font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-      line-height: 1.6;
-      font-size: 14px;
+      line-height: 1.65;
+      font-size: 16px;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -435,11 +435,11 @@
 
     .page-title,
     h1.page-title {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 800;
       color: var(--color-deep-ink) !important;
       letter-spacing: -0.03em;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .kpi-card-title,
@@ -454,11 +454,11 @@
     }
 
     .page-desc {
-      font-size: 14.5px;
+      font-size: 16px;
       color: var(--ink-dim);
-      margin-bottom: 22px;
-      max-width: 1200px;
-      line-height: 1.6;
+      margin-bottom: 26px;
+      max-width: 1250px;
+      line-height: 1.65;
     }
 
     /* R&D Special Banner - Block-less */
@@ -647,7 +647,7 @@
       table-layout: fixed;
       border-collapse: separate;
       border-spacing: 0;
-      font-size: 13.5px;
+      font-size: 15px;
       margin-top: 10px;
       box-sizing: border-box;
     }
@@ -656,8 +656,8 @@
       background: #F8FAFC;
       color: #334155;
       font-weight: 700;
-      font-size: 13px;
-      padding: 12px 14px;
+      font-size: 14px;
+      padding: 13px 14px;
       border-bottom: 1.5px solid #E2E8F0;
       text-align: left;
       letter-spacing: -0.01em;
@@ -674,10 +674,10 @@
     }
 
     .kpi-table td {
-      padding: 12px 14px;
+      padding: 13px 14px;
       border-bottom: 1px solid #F1F5F9;
       vertical-align: top;
-      font-size: 13.5px;
+      font-size: 15px;
       transition: background 0.15s ease;
     }
 
@@ -688,14 +688,14 @@
     /* Modern Soft Inputs & Textareas */
     textarea.kpi-input {
       width: 100%;
-      min-height: 48px;
+      min-height: 52px;
       background: #F8FAFC;
       border: 1px solid #E2E8F0;
       border-radius: 8px;
       color: #0F172A;
       font-family: inherit;
-      font-size: 13.5px;
-      line-height: 1.5;
+      font-size: 15px;
+      line-height: 1.55;
       padding: 10px 14px;
       resize: vertical;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -716,14 +716,14 @@
 
     input.kpi-input {
       width: 100%;
-      min-height: 44px;
+      min-height: 46px;
       background: #F8FAFC;
       border: 1px solid #E2E8F0;
       border-radius: 8px;
       color: #0F172A;
       font-family: inherit;
-      font-size: 13.5px;
-      line-height: 1.5;
+      font-size: 15px;
+      line-height: 1.55;
       padding: 8px 14px;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       box-sizing: border-box;
@@ -755,6 +755,172 @@
       font-size: 12.5px;
       font-style: normal;
       opacity: 0.85;
+    }
+
+    /* ===================================================================
+       SETTING STEP TABS & EXPANDER (ACCORDION COLLAPSE SYSTEM)
+       =================================================================== */
+    .setting-step-tabs {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      padding: 6px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      overflow-x: auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .step-tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #64748B;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .step-tab-btn:hover {
+      color: #0F172A;
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .step-tab-btn.active {
+      color: #0F172A;
+      font-weight: 800;
+      background: #FFFFFF;
+      border-color: #CBD5E1;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+    }
+
+    .step-tab-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #E2E8F0;
+      color: #0F172A;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      transition: all 0.2s ease;
+    }
+
+    .step-tab-btn.active .step-tab-num {
+      background: #0F172A;
+      color: #FFFFFF;
+    }
+
+    .step-score-badge {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #F1F5F9;
+      color: #475569;
+      border: 1px solid #E2E8F0;
+    }
+
+    .step-tab-btn.active .step-score-badge {
+      background: #0F172A;
+      color: #FFFFFF;
+      border-color: #0F172A;
+    }
+
+    /* Narrative Typewriter Box */
+    .narrative-typewriter-box {
+      background: #F8FAFC;
+      border-left: 3.5px solid #8B5CF6;
+      border-radius: 0 8px 8px 0;
+      padding: 18px 22px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+      box-sizing: border-box;
+      cursor: pointer;
+      user-select: text;
+      transition: all 0.2s ease;
+    }
+
+    .narrative-typewriter-box:hover {
+      background: #F1F5F9;
+    }
+
+    .typewriter-sparkle {
+      font-size: 16px;
+      color: #8B5CF6;
+      flex-shrink: 0;
+      margin-top: 3px;
+      animation: pulseSparkle 2s ease infinite;
+    }
+
+    @keyframes pulseSparkle {
+      0%, 100% { opacity: 0.6; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .typewriter-text {
+      font-size: 15.5px;
+      font-weight: 600;
+      color: #1E293B;
+      line-height: 1.7;
+      word-break: keep-all;
+      flex: 1;
+      min-height: 28px;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.15em;
+      background-color: #8B5CF6;
+      margin-left: 3px;
+      vertical-align: text-bottom;
+      animation: blinkCursor 0.8s infinite;
+    }
+
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Setting Block Visibility */
+    .setting-block {
+      display: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .setting-block.active {
+      display: block;
+      animation: blockFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes blockFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Role Setting Styles */
@@ -4283,8 +4449,90 @@
     }
 
     /* -------------------------------------------------------------
-       4. RENDER TEAM DETAIL PAGES (Pages 2 ~ 6)
+       4. RENDER TEAM DETAIL PAGES (Pages 2 ~ 6) - ACCORDION EXPANDER SYSTEM
        ------------------------------------------------------------- */
+    const NARRATIVE_TEXTS = {
+      0: (tId) => "오믈렛의 2027 전사 전략 방향(Operational Intelligence Alignment)에 입각하여, 본 조직의 핵심 미션과 세부 역할을 명확히 규정하고 전사 비즈니스 가치 사슬과의 상호연동성을 확립합니다.",
+      1: (tId) => {
+        const meta = TEAM_METADATA[tId];
+        const fn = meta && meta.footnote ? ` (${meta.footnote})` : "";
+        return `결과지표는 팀 전원의 긴밀한 협업으로 완성되어 전체 구성원에게 100% 균등 귀속되는 연간 최상위 사업 결실(50점 고정)입니다. 단순 매출액은 평가에서 배제하며, 실제 현장 가치를 입증하는 유효 프로젝트 수주 및 성공 건수를 최우선으로 산정합니다. 달성도는 연간 목표 대비 100% 초과(S), 90% 이상(A), 70% 이상(B), 50% 이상(C), 50% 미만(D) 절대평가 척도로 확정됩니다.${fn}`;
+      },
+      2: (tId) => "성과지표 I은 결과지표를 단기적으로 달성하고 회사의 성장을 견인하기 위해 일상 실무에서 매일·매주 지속적으로 누적해야 하는 5대 직무 선행 실행(정량) 지표(20점 고정)입니다. 결과지표와 필연적 인과관계를 형성하는 고객 미팅, 실사 진단, 개발 배포 건수를 인당 연간 목표로 배분하여 5개 항목(각 4점)으로 공정하게 평가합니다.",
+      3: (tId) => "성과지표 II는 결과지표의 성공적 결실을 온전히 뒷받침하고 중장기적으로 회사의 지속 성장을 견인하는 5대 정성 핵심 역량(30점 고정)입니다. 주도적 업무태도, 전문 소통, 타 부서 협업, 업무 완결성, 조직 기여를 구체적인 피드백 주안점과 행동 가이드에 근거하여 5개 영역(각 6점)으로 객관적으로 평가합니다."
+    };
+
+    const typewriterTimers = {};
+    const activeSettingSection = {}; // tId -> 0, 1, 2, 3
+
+    function runTypewriter(elemId, text, speed = 14) {
+      if (typewriterTimers[elemId]) {
+        clearInterval(typewriterTimers[elemId]);
+        delete typewriterTimers[elemId];
+      }
+      const el = document.getElementById(elemId);
+      if (!el) return;
+      el.textContent = "";
+      let idx = 0;
+      typewriterTimers[elemId] = setInterval(() => {
+        if (idx < text.length) {
+          el.textContent += text.charAt(idx);
+          idx++;
+        } else {
+          clearInterval(typewriterTimers[elemId]);
+          delete typewriterTimers[elemId];
+        }
+      }, speed);
+    }
+
+    function completeTypewriter(tId, secIdx) {
+      const targetElemId = `typewriter-${tId}-${secIdx}`;
+      if (typewriterTimers[targetElemId]) {
+        clearInterval(typewriterTimers[targetElemId]);
+        delete typewriterTimers[targetElemId];
+      }
+      const el = document.getElementById(targetElemId);
+      const textFn = NARRATIVE_TEXTS[secIdx];
+      if (el && textFn) {
+        el.textContent = textFn(tId);
+      }
+    }
+
+    function activateSettingSection(tId, secIdx) {
+      activeSettingSection[tId] = secIdx;
+
+      // 1. Toggle Step Tab Buttons & Setting Blocks
+      for (let i = 0; i <= 3; i++) {
+        const btn = document.getElementById(`step-tab-btn-${tId}-${i}`);
+        if (btn) {
+          if (i === secIdx) btn.classList.add("active");
+          else btn.classList.remove("active");
+        }
+        const block = document.getElementById(`setting-block-${tId}-${i}`);
+        if (block) {
+          if (i === secIdx) {
+            block.classList.add("active");
+          } else {
+            block.classList.remove("active");
+          }
+        }
+      }
+
+      // 2. Trigger Typewriter on active block
+      const targetElemId = `typewriter-${tId}-${secIdx}`;
+      const textFn = NARRATIVE_TEXTS[secIdx];
+      if (textFn) {
+        const fullText = textFn(tId);
+        runTypewriter(targetElemId, fullText, 14);
+      }
+
+      // 3. Attach Row Height Sync on visible inputs
+      const activeBlock = document.getElementById(`setting-block-${tId}-${secIdx}`);
+      if (activeBlock) {
+        attachRowHeightSync(activeBlock);
+      }
+    }
+
     function buildTeamDetailPages() {
       const container = document.getElementById("teamDetailPagesContainer");
       container.innerHTML = "";
@@ -4293,6 +4541,9 @@
         const meta = TEAM_METADATA[tId];
         const tData = appState.teams[tId];
         const isSaved = tData.isSaved;
+        if (activeSettingSection[tId] === undefined) {
+          activeSettingSection[tId] = 0; // Default to step 0
+        }
 
         const section = document.createElement("section");
         section.id = `page-${tId}`;
@@ -4352,15 +4603,39 @@
           ` : ''}
 
           <!-- ===================================================================
-               SECTION 0: 핵심역할 및 미션 정의 (팀장 직접 작성)
+               SETTING STEP ACCORDION TABS (Click tab to expand, collapses others)
                =================================================================== -->
-          <div class="kpi-card">
-            <div class="kpi-card-header">
-              <div class="kpi-card-title">
-                0. 조직 핵심 미션 및 역할 범위
-                <span class="card-fixed-score">팀장 직접 작성</span>
-              </div>
-              <span style="font-size:13px;color:#64748B;">오믈렛 전사 전략 방향(Operational Intelligence Alignment)에 입각하여 2027년 팀의 핵심 미션과 역할 범위를 규정합니다</span>
+          <div class="setting-step-tabs" id="step-tabs-${tId}">
+            <button class="step-tab-btn ${activeSettingSection[tId] === 0 ? 'active' : ''}" id="step-tab-btn-${tId}-0" onclick="activateSettingSection('${tId}', 0)">
+              <span class="step-tab-num">0</span>
+              <span>조직 핵심 미션</span>
+              <span class="step-score-badge">직접 작성</span>
+            </button>
+            <button class="step-tab-btn ${activeSettingSection[tId] === 1 ? 'active' : ''}" id="step-tab-btn-${tId}-1" onclick="activateSettingSection('${tId}', 1)">
+              <span class="step-tab-num">1</span>
+              <span>결과지표 세팅</span>
+              <span class="step-score-badge">50점 고정</span>
+            </button>
+            <button class="step-tab-btn ${activeSettingSection[tId] === 2 ? 'active' : ''}" id="step-tab-btn-${tId}-2" onclick="activateSettingSection('${tId}', 2)">
+              <span class="step-tab-num">2</span>
+              <span>성과지표 I 세팅</span>
+              <span class="step-score-badge">20점 고정</span>
+            </button>
+            <button class="step-tab-btn ${activeSettingSection[tId] === 3 ? 'active' : ''}" id="step-tab-btn-${tId}-3" onclick="activateSettingSection('${tId}', 3)">
+              <span class="step-tab-num">3</span>
+              <span>성과지표 II 세팅</span>
+              <span class="step-score-badge">30점 고정</span>
+            </button>
+          </div>
+
+          <!-- ===================================================================
+               SECTION 0: 핵심역할 및 미션 정의 (블록 0)
+               =================================================================== -->
+          <div class="setting-block ${activeSettingSection[tId] === 0 ? 'active' : ''}" id="setting-block-${tId}-0">
+            <div class="narrative-typewriter-box" onclick="completeTypewriter('${tId}', 0)" title="클릭 시 전체 설명 즉시 펼침">
+              <span class="typewriter-sparkle">✦</span>
+              <div class="typewriter-text" id="typewriter-${tId}-0"></div>
+              <span class="typing-cursor"></span>
             </div>
 
             <div class="role-grid">
@@ -4378,36 +4653,13 @@
           </div>
 
           <!-- ===================================================================
-               SECTION 1: 결과지표 세팅 (팀 공동 50점 고정)
+               SECTION 1: 결과지표 세팅 (블록 1 - 팀 공동 50점 고정)
                =================================================================== -->
-          <div class="kpi-card">
-            <div class="kpi-card-header">
-              <div class="kpi-card-title">
-                1. 결과지표 세팅 (팀 공동 목표)
-                <span class="card-fixed-score highlight">50점 고정</span>
-              </div>
-              <span style="font-size:13px;color:#64748B;">연간 팀 목표 달성도가 전 팀원에게 동일하게 귀속되는 최상위 사업 성과</span>
-            </div>
-
-            <div class="guide-box">
-              <div class="guide-box-header">
-                <span class="guide-icon">📌</span>
-                <span class="guide-title">결과지표 (50점 고정) 설정 원칙 및 평가 척도</span>
-              </div>
-              <div class="guide-semantic-list">
-                <div class="guide-item">
-                  <span class="guide-item-tag">핵심 정의</span>
-                  <span class="guide-item-text">2027년에 팀 전체 구성원이 공동으로 달성할 최상위 비즈니스 성과 목표입니다. (연간 팀 목표 달성도가 팀원 전원에게 동일하게 귀속)</span>
-                </div>
-                <div class="guide-item">
-                  <span class="guide-item-tag">산정 원칙</span>
-                  <span class="guide-item-text"><b>단순 매출액(금액)은 평가 지표에서 배제</b>하며, 실제 현장 가치 입증 및 레퍼런스 확장을 담보하는 <b>'유효 프로젝트 수주 및 성공 건수'</b>를 최우선 핵심 지표로 설정합니다.</span>
-                </div>
-                <div class="guide-item">
-                  <span class="guide-item-tag">달성 기준표</span>
-                  <span class="guide-item-text"><b>100% 초과 (S)</b> · <b>90% 이상 (A)</b> · <b>70% 이상 (B)</b> · <b>50% 이상 (C)</b> · <b>50% 미만 (D)</b> ${meta.footnote ? `<span class="guide-footnote">${meta.footnote}</span>` : ''}</span>
-                </div>
-              </div>
+          <div class="setting-block ${activeSettingSection[tId] === 1 ? 'active' : ''}" id="setting-block-${tId}-1">
+            <div class="narrative-typewriter-box" onclick="completeTypewriter('${tId}', 1)" title="클릭 시 전체 설명 즉시 펼침">
+              <span class="typewriter-sparkle">✦</span>
+              <div class="typewriter-text" id="typewriter-${tId}-1"></div>
+              <span class="typing-cursor"></span>
             </div>
 
             <table class="kpi-table">
@@ -4450,32 +4702,13 @@
           </div>
 
           <!-- ===================================================================
-                SECTION 2: 성과지표 I 세팅 (결과지표 견인 선행 행동 20점 고정)
-                =================================================================== -->
-          <div class="kpi-card">
-            <div class="kpi-card-header">
-              <div class="kpi-card-title">
-                2. 성과지표 I 세팅 (결과지표 달성을 위한 5대 선행 행동)
-                <span class="card-fixed-score">20점 고정 (각 4점)</span>
-              </div>
-              <span style="font-size:13px;color:#64748B;">단기적으로 결과지표를 달성하고 중장기 성장을 견인하기 위해 일상 업무에서 누적하는 5대 정량 선행 지표</span>
-            </div>
-
-            <div class="guide-box">
-              <div class="guide-box-header">
-                <span class="guide-icon">⚡</span>
-                <span class="guide-title">성과지표 I (20점 고정) 설정 원칙 (결과지표 견인 선행 행동)</span>
-              </div>
-              <div class="guide-semantic-list">
-                <div class="guide-item">
-                  <span class="guide-item-tag">핵심 정의</span>
-                  <span class="guide-item-text">최상위 결과지표를 단기적으로 달성하고 중장기 성장을 견인하기 위해 일상 실무에서 지속적으로 실행하고 누적해야 하는 팀내 5대 핵심 직무 선행(정량) 지표입니다.</span>
-                </div>
-                <div class="guide-item">
-                  <span class="guide-item-tag">작성 기준</span>
-                  <span class="guide-item-text">결과지표와 명확한 인과관계가 성립하는 행동량, 고객 미팅, 실사 진단, 개발 배포 건수 등을 인당 연간 목표치로 배분합니다. (5개 항목 × 각 4점 = 20점)</span>
-                </div>
-              </div>
+               SECTION 2: 성과지표 I 세팅 (블록 2 - 결과지표 견인 선행 행동 20점 고정)
+               =================================================================== -->
+          <div class="setting-block ${activeSettingSection[tId] === 2 ? 'active' : ''}" id="setting-block-${tId}-2">
+            <div class="narrative-typewriter-box" onclick="completeTypewriter('${tId}', 2)" title="클릭 시 전체 설명 즉시 펼침">
+              <span class="typewriter-sparkle">✦</span>
+              <div class="typewriter-text" id="typewriter-${tId}-2"></div>
+              <span class="typing-cursor"></span>
             </div>
 
             <table class="kpi-table">
@@ -4494,7 +4727,7 @@
               </tbody>
               <tfoot>
                 <tr style="background:#F8FAFC;border-top:1.5px solid #E2E8F0;">
-                  <td colspan="5" style="text-align:right;font-weight:800;font-size:13.5px;color:#0F172A;padding:12px 16px;">
+                  <td colspan="5" style="text-align:right;font-weight:800;font-size:14.5px;color:#0F172A;padding:12px 16px;">
                     성과지표 I 배점 총합계 (반드시 20점 고정):
                   </td>
                   <td style="text-align:center;padding:10px 4px;">
@@ -4508,32 +4741,13 @@
           </div>
 
           <!-- ===================================================================
-               SECTION 3: 성과지표 II 세팅 (결과지표 달성을 위한 5대 정성 핵심 역량 30점 고정)
+               SECTION 3: 성과지표 II 세팅 (블록 3 - 5대 정성 핵심 역량 30점 고정)
                =================================================================== -->
-          <div class="kpi-card">
-            <div class="kpi-card-header">
-              <div class="kpi-card-title">
-                3. 성과지표 II 세팅 (결과지표 달성을 위한 5대 정성 핵심 역량)
-                <span class="card-fixed-score">30점 고정 (각 6점)</span>
-              </div>
-              <span style="font-size:13px;color:#64748B;">결과지표를 반드시 달성하고 중장기적으로 회사의 성장을 견인하기 위한 5대 핵심 공통 역량 평가</span>
-            </div>
-
-            <div class="guide-box">
-              <div class="guide-box-header">
-                <span class="guide-icon">🎯</span>
-                <span class="guide-title">성과지표 II (30점 고정) 평가 원칙 (결과지표 달성 핵심 역량)</span>
-              </div>
-              <div class="guide-semantic-list">
-                <div class="guide-item">
-                  <span class="guide-item-tag">핵심 정의</span>
-                  <span class="guide-item-text">결과지표 달성 과정에서 팀원들이 견지해야 하는 5대 공통 역량(업무 태도, 전문 소통, 조직 화합, 업무 완결성, 조직 기여)으로, 결과지표의 성공적 결실과 중장기 성장을 뒷받침합니다.</span>
-                </div>
-                <div class="guide-item">
-                  <span class="guide-item-tag">평가 원칙</span>
-                  <span class="guide-item-text">형식적인 정성 평가를 지양하고, 부서 간 시너지와 협업 태도를 구체적인 피드백 주안점에 근거하여 객관적으로 평가합니다. (5개 역량 × 각 6점 = 30점)</span>
-                </div>
-              </div>
+          <div class="setting-block ${activeSettingSection[tId] === 3 ? 'active' : ''}" id="setting-block-${tId}-3">
+            <div class="narrative-typewriter-box" onclick="completeTypewriter('${tId}', 3)" title="클릭 시 전체 설명 즉시 펼침">
+              <span class="typewriter-sparkle">✦</span>
+              <div class="typewriter-text" id="typewriter-${tId}-3"></div>
+              <span class="typing-cursor"></span>
             </div>
 
             <table class="kpi-table">
@@ -4551,7 +4765,7 @@
               </tbody>
               <tfoot>
                 <tr style="background:#F8FAFC;border-top:1.5px solid #E2E8F0;">
-                  <td colspan="4" style="text-align:right;font-weight:800;font-size:13.5px;color:#0F172A;padding:12px 16px;">
+                  <td colspan="4" style="text-align:right;font-weight:800;font-size:14.5px;color:#0F172A;padding:12px 16px;">
                     성과지표 II 배점 총합계 (반드시 30점 고정):
                   </td>
                   <td style="text-align:center;padding:10px 4px;">
@@ -4569,6 +4783,17 @@
         renderProcess1Rows(tId);
         renderProcess2Rows(tId);
         updateWeightTotalsUI(tId);
+      });
+
+      // Initialize typewriter for default active sections
+      Object.keys(TEAM_METADATA).forEach(tId => {
+        const secIdx = activeSettingSection[tId] !== undefined ? activeSettingSection[tId] : 0;
+        const targetElemId = `typewriter-${tId}-${secIdx}`;
+        const textFn = NARRATIVE_TEXTS[secIdx];
+        if (textFn) {
+          const fullText = textFn(tId);
+          runTypewriter(targetElemId, fullText, 14);
+        }
       });
     }
 
@@ -5403,6 +5628,9 @@
         renderOverview();
       } else if (targetId === "matrix") {
         renderMasterMatrix(currentMatrixFilter);
+      } else if (TEAM_METADATA[targetId]) {
+        const sec = activeSettingSection[targetId] !== undefined ? activeSettingSection[targetId] : 0;
+        activateSettingSection(targetId, sec);
       }
     }
 
